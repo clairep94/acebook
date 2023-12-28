@@ -65,4 +65,7 @@ cypress/screenshots
 cypress/videos
 
 .DS_Store
+.env
 
+#contents of uploads folder
+api/uploads/*
