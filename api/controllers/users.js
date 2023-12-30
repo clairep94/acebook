@@ -12,6 +12,7 @@ const UsersController = {
         res.status(400).json({message: 'Bad request'})
       } else {
         res.status(201).json({ message: 'OK' });
+
       }
     });
   },

@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "cypress-file-upload": "^5.0.8"
+    "cypress-file-upload": "^5.0.8",
+    "tailwindcss": "^3.4.0"
   }
 }
