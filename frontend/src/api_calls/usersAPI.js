@@ -3,6 +3,7 @@ const API_Endpoint = '/users'; //API endpoint for authenticated routes
 
 
 const signUp = async (signUpPayload) => {
+    // This call returns the response and response code, not the JSON
     try {
         const response = await fetch(`${SignUpEndpoint}`, {
             method: 'post',
