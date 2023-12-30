@@ -7,14 +7,26 @@ import {
   useNavigate,
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
+import isLoggedIn from '../../utilities/LoggedInCheck';
 
 const App = () => {
+  const navigate = useNavigate();
+
     return (
         <Routes>
-          <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
-          <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
-          <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>
+
+          {/* ====== NO AUTHENTICATION: ======== */}
+          <Route path='/login'  element={ !isLoggedIn() ?         
+            <LoginForm navigate={navigate}/> : <Navigate to='/posts'/>}/>
+          <Route path='/signup' element={ !isLoggedIn() ? 
+            <SignUpForm navigate={navigate}/> : <Navigate to='/posts'/>}/>
+
+          {/* ====== AUTHENTICATION ONLY: ======== */}
+          <Route path='/posts'  element={ isLoggedIn() ? 
+              <Feed navigate={ navigate }/> : <Navigate to="/login"/>}/>
+          
         </Routes>
     );
 }

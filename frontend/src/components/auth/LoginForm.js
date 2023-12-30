@@ -37,7 +37,7 @@ const LogInForm = ({ navigate }) => {
       
 
       // TEMP: No timeout login popup:
-      navigate('/lobby')
+      navigate('/posts')
 
       // FOR FUTURE USE IF HAVING TIMEOUT LOGIN POPUP:
       // // Check the current location and navigate accordingly
@@ -75,7 +75,7 @@ const LogInForm = ({ navigate }) => {
       <>
 
       <h2>Login</h2>
-              <img src='/images/drawkit-3d-jelly-learner.png'></img>
+              <img src='/images/drawkit-3d-jelly-pair.png'></img>
 
       
       {/* LOGIN FORM */}
@@ -105,6 +105,10 @@ const LogInForm = ({ navigate }) => {
         <font color="#505050 ">Don't have an account? </font>
         <a aria-label="Link to Register" href="/signup" font color="#003163" >Register</a>
       </p>
+
+      {/* BACKGROUND */}
+      <div 
+      ></div>
 
       </>
     );
