@@ -1,13 +1,14 @@
-# sub.d*vision
+# Acebook - Facebook Clone
 
-A social media app focused on sharing visual research.
+Acebook is a Facebook clone project, showcasing use of the MERN stack, Socket.io and Tailwind, created at Makers Academy.
+This version is a personal extension of [Acebook Team Griffins](https://github.com/clairep94/acebook-team-griffins). It adds real-time messaging and notifications through the use of websockets, as well as modern component design through Tailwind CSS.
 
-Users can sign up, log in, create text or image posts with tags, interact with posts, follow other users and tags, and create private and public collections (subdivisions) of related users, tags and posts.
+Users can sign up, log in, create posts with images and/or text, interact with posts, add friends, send messages, and receive real-time notifications.
 
 ## Installing Project Dependencies:
 
 ### Node.js
-1. Install Node Version Manager (NVM)
+1. Install Node Version Manager (nvm)
    ```
    brew install nvm
    ```
