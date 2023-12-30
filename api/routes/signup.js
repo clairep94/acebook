@@ -2,12 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const UsersController = require("../controllers/users");
-const API_Endpoint = "/users"
+const API_Endpoint = "/signup"
 
-
-router.get("/", UsersController.Index); // Index
-router.get("/:id", UsersController.FindByID); // Find by ID
-
-
+router.post("/", UsersController.Create);
 
 module.exports = router;

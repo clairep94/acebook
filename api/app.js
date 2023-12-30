@@ -7,6 +7,7 @@ const JWT = require("jsonwebtoken");
 const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
+const signupRouter = require("./routes/signup");
 
 const app = express();
 
@@ -38,10 +39,13 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
-// route setup
-app.use("/posts", tokenChecker, postsRouter);
+// ===== ROUTES =====
 app.use("/tokens", authenticationRouter);
-app.use("/users", usersRouter);
+app.use("/signup", signupRouter);
+
+app.use("/posts", tokenChecker, postsRouter);
+app.use("/users", tokenChecker, usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
