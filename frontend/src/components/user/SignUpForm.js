@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-// import styles from './SignUpForm.module.css';
-const SignUpForm = ({ navigate }) => {
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
+
+const SignUpForm = ({ navigate, switchForms }) => {
 
     // =========== STATE VARIABLES ==========================
   const [username, setUsername] = useState("");
@@ -59,9 +61,9 @@ const SignUpForm = ({ navigate }) => {
     })
       .then(response => {
         if(response.status === 201) {
-          navigate('/login')
+          navigate('/home')
         } else {
-          navigate('/signup')
+          setError("Server error")
         }
       })
   }
@@ -88,34 +90,118 @@ const SignUpForm = ({ navigate }) => {
     setRetypePassword(event.target.value)
   }
 
+  // ========= JSX FOR THE UI OF THE COMPONENT =====================
     return (
-      <>
-      <h2>Sign Up</h2>
 
-      <form onSubmit={handleSubmit}>
+    <div aria-label="Sign Up Container" 
+        class="bg-white/80 flex 
+        w-80 md:w-96 lg:w-[28rem] max-w-3xl
+        rounded-lg shadow-lg  p-5 py-10 items-center
+        dark:bg-gray-800 dark:border-gray-700 dark:border
+        ">
+      
+      <div aria-label='Signup Form' className='px-8 md:px-16 space-y-4 md:space-y-6 flex flex-col w-full'>
 
-          <input aria-label="Username input field" placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
-          <input aria-label="Email address input field" placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
-          <input aria-label="Password input field" placeholder="Password" id="password" type={passwordHidden ? 'password': 'text'} value={ password } onChange={handlePasswordChange} />
-          <input aria-label="Retype password input field" placeholder="Retype Password" id="retype-password" type={passwordHidden ? 'password': 'text'} value={retypePassword} onChange={handleRetypePasswordChange}/>
-          {/* BUTTON TO TOGGLE PW VISIBILITY */}
-          <button
-            onClick={handleSetPasswordHidden} id="toggle-pw-visibility-button" button type="button" aria-label="Toggle Password Visibility Button"> {passwordHidden ? 'Show Password' : 'Hide Password'}
-          </button>
-          <input aria-label="Submit button" id='submit' type="submit" value="Submit"/>
-      </form>
+        <h2 className='font-bold text-2xl text-black dark:text-white'>Sign Up</h2>
+
+        {/* Sign Up Form */}
+        <form class="space-y-2 md:space-y-3" onSubmit={handleSubmit}>
+
+            {/* First Name */}
+            <input aria-label="Username input field" placeholder="Username" id="username" type='text' value={ username } onChange={handleUsernameChange} 
+              className="bg-gray-100 border border-gray-300 text-gray-600 sm:text-sm rounded-lg 
+              focus:ring-1 focus:outline-none focus:ring-sky-300 focus:border-sky-300
+              block w-full p-2.5 
+              dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+            />
+
+            {/* Last Name */}
+            <input aria-label="Email address input field" placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} 
+              className="bg-gray-100 border border-gray-300 text-gray-600 sm:text-sm rounded-lg 
+                focus:ring-1 focus:outline-none focus:ring-sky-300 focus:border-sky-300
+                block w-full p-2.5 
+                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+              />
+
+            {/* Password 1 */}
+            <div className='relative'>
+              {/* Password field */}
+              <input aria-label="Password input field" placeholder="Password" id="password" type={passwordHidden ? 'password': 'text'} value={ password } onChange={handlePasswordChange} 
+                className="bg-gray-100 border border-gray-300 text-gray-600 sm:text-sm rounded-lg 
+                focus:ring-1 focus:outline-none focus:ring-sky-300 focus:border-sky-300
+                block w-full p-2.5 
+                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                />
+              
+              {/* Toggle PW Visibility */}
+              <button
+                aria-label="Toggle Password Visibility Button"
+                onClick={handleSetPasswordHidden}
+                id="toggle-pw-visibility-button"
+                button type="button"
+                className='font-medium rounded-lg text-xl p-1.5 text-center
+                  text-gray-400 hover:text-gray-500 focus:ring-2 focus:outline-none focus:ring-sky-300
+                  dark:text-gray-400 dark:hover:text-gray-500
+                  absolute bottom-[0.3rem] right-[0.3rem]'
+                >
+                  {/* {passwordHidden ? 'Show Password' : 'Hide Password'} */}
+                  {passwordHidden ? <AiOutlineEye/> : <AiOutlineEyeInvisible/>}
+              </button>
+              
+            </div>
+
+            {/* Password 2 */}
+            <div className='relative'>
+              <input aria-label="Retype password input field" placeholder="Retype Password" id="retype-password" type={passwordHidden ? 'password': 'text'} value={retypePassword} onChange={handleRetypePasswordChange}
+                className="bg-gray-100 border border-gray-300 text-gray-600 sm:text-sm rounded-lg 
+                focus:ring-1 focus:outline-none focus:ring-sky-300 focus:border-sky-300
+                block w-full p-2.5 
+                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"            
+              />
+                            {/* Toggle PW Visibility */}
+              <button
+                aria-label="Toggle Password Visibility Button"
+                onClick={handleSetPasswordHidden}
+                id="toggle-pw-visibility-button"
+                button type="button"
+                className='font-medium rounded-lg text-xl p-1.5 text-center
+                  text-gray-400 hover:text-gray-500 focus:ring-2 focus:outline-none focus:ring-sky-300
+                  dark:text-gray-400 dark:hover:text-gray-500
+                  absolute bottom-[0.3rem] right-[0.3rem]'
+                >
+                  {/* {passwordHidden ? 'Show Password' : 'Hide Password'} */}
+                  {passwordHidden ? <AiOutlineEye/> : <AiOutlineEyeInvisible/>}
+              </button>
+
+            </div>
+
+
+
+
+            <input aria-label="Submit button" id='submit' type="submit" value="Submit"
+              className='w-full font-medium rounded-lg text-sm px-5 py-2.5 text-center
+              text-white
+              bg-green-600 hover:bg-green-700
+              focus:ring-2 focus:outline-none focus:ring-sky-400
+              dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-sky-800"'
+            />
+        </form>
 
         
       
       {/* ERROR MESSAGES */}
-      {error && <p aria-label="Error Message">{error}</p>}
+      {error && <p aria-label="Signup Error Message" className='text-red-500 text-sm italic'>{error}</p>}
       
-      <br/>
+
       <p aria-label="Aready have an account? Log in">
       <font color="#505050 ">Already have an account? </font>
-      <a aria-label="Link to Log in" href="/login" font color="#003163">Log in</a>
+      <span aria-label="Link to Log in" className='text-sky-600 font-bold hover:underline' onClick={switchForms}>Log in</span>
       </p>
-      </>
+
+      </div>
+    
+    </div>
+
     
     );
 }
