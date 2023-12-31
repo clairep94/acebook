@@ -2,7 +2,8 @@ import './App.css';
 import LoginForm from '../auth/LoginForm'
 import SignUpForm from '../user/SignUpForm'
 import React, { useState } from 'react';
-import Feed from '../feed/Feed'
+import Feed from '../feed/Feed';
+import HomePage from '../../pages/HomePage';
 import {
   useNavigate,
   Routes,
@@ -30,7 +31,7 @@ const App = () => {
 
           {/* ====== AUTHENTICATION ONLY: ======== */}
           <Route path='/home'  element={ isLoggedIn() ? 
-              <Feed navigate={ navigate }/> : <Navigate to="/login"/>}/>
+              <HomePage navigate={ navigate }/> : <Navigate to="/login"/>}/>
           
         </Routes>
     );

@@ -42,7 +42,7 @@ const Feed = ({ navigate }) => {
         </>
       )
     } else {
-      navigate('/login')
+      navigate('/home')
     }
 }
 
