@@ -72,19 +72,18 @@ const LogInForm = ({ navigate }) => {
   // ========= JSX FOR THE UI OF THE COMPONENT =====================
   // for all styling: use className={styles.Button}
     return (
-      <>
+      <div aria-label='Login Form' className='px-8 md:px-16 flex flex-col'>
 
-      <h2>Login</h2>
-              <img src='/images/drawkit-3d-jelly-pair.png'></img>
+      <h2 className='font-bold text-2xl text-black'>Login</h2>
 
-      
       {/* LOGIN FORM */}
       <form onSubmit={handleSubmit}>
-        {/* <label for="Email" class="accessible_visuallyhidden">Email: </label> */}
-        <input aria-label="Email Field" placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
-        <input aria-label="Password Field" placeholder='Password' id="password" type={passwordHidden ? 'password': 'text'} value={ password } onChange={handlePasswordChange} />
+        <p>Your email</p>
+        <input aria-label="Email Field" placeholder='name@company.com' id="email" type='text' value={ email } onChange={handleEmailChange} />
+        <p>Password</p>
+        <input aria-label="Password Field" placeholder="••••••••" id="password" type={passwordHidden ? 'password': 'text'} value={ password } onChange={handlePasswordChange} />
 
-        <input aria-label="Login Button" role='login-button' id='login-button' type="submit" value="Login" />
+        <input aria-label="Login Button" id='login-button' type="submit" value="Login" />
       </form>
 
       {/* BUTTON TO TOGGLE PW VISIBILITY */}
@@ -110,7 +109,7 @@ const LogInForm = ({ navigate }) => {
       <div 
       ></div>
 
-      </>
+      </div>
     );
 }
 
