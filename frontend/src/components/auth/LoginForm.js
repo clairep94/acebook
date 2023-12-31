@@ -71,12 +71,6 @@ const LogInForm = ({ navigate, switchForms }) => {
 
   // ========= JSX FOR THE UI OF THE COMPONENT =====================
     return (
-      <div aria-label="Login Container" 
-                    class="bg-white/80 flex 
-                    w-80 md:w-96 lg:w-[28rem] max-w-3xl
-                    rounded-lg shadow-lg  p-5 py-10 items-center
-                    dark:bg-gray-800 dark:border-gray-700 dark:border
-                    ">
 
         <div aria-label='Login Form' className='px-8 md:px-16 space-y-4 md:space-y-6 flex flex-col w-full'>
 
@@ -141,7 +135,7 @@ const LogInForm = ({ navigate, switchForms }) => {
 
         </div>
 
-      </div>
+
     );
 }
 
