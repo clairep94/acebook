@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
-    {
+  
+  {
     firstName: {
       type: String,
       required: [true, 'First name is required.']
@@ -32,6 +33,13 @@ const UserSchema = new mongoose.Schema(
       type: [mongoose.Schema.Types.ObjectId],
       default: [],
       ref: 'User'
+    },
+
+    // SAVE FEATURE:
+    saved_posts: {
+      type: [mongoose.Schema.Types.ObjectId],
+      default: [],
+      // ref: 'Post'
     },
 
   },
