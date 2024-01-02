@@ -26,7 +26,7 @@ export default function LandingPage({navigate}) {
 
                 {/* IMAGE: LEFT HALF OF SCREEN, disappears for medium screens */}
                     <div aria-label="Login Hero Section"
-                        className="md:w-6/12 md:flex hidden w-6/12 flex-col items-center justify-center
+                        className="flex w-6/12 md:w-5x/12 flex-col items-center justify-center
                             p-8
                         ">
                             <h1 className='font-bold text-[3.5rem] text-[#002c74d4] text-center'>
@@ -35,7 +35,8 @@ export default function LandingPage({navigate}) {
                             <p className='text-[1.5rem] m-3 text-[#282828d3]'>
                                 Connecting friends since 2023
                             </p>
-                            <img alt='hero' src={(form ==='signup') ? '/images/drawkit-3d-jelly-pair.png' : '/images/drawkit-3d-jelly-girl.png'}/>
+                            <img className='max-w-[30rem]'
+                            alt='hero' src={(form ==='signup') ? '/images/drawkit-3d-jelly-pair.png' : '/images/drawkit-3d-jelly-girl.png'}/>
                     </div>
 
 

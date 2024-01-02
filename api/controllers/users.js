@@ -35,7 +35,7 @@ const UsersController = {
     const userID = req.params.userID;
     
     try {
-      const user = await User.find(
+      const user = await User.findOne( //changed from find so that it is not an array
         {_id: userID},
       )
       //TODO .populate... 

@@ -16,9 +16,25 @@ const signUp = async (signUpPayload) => {
         // const newUserData = await response.json();
         // return newUserData;
     } catch (error) {
-        console.error("UsersAPI.signUp Call:", error);
+        console.error("UsersAPI.signUp:", error);
         throw error;
     }
 }
 
-export { signUp };
+const findUser = async (token, userID) => {
+    try {
+        const response = await fetch(`/users/${userID}`, {
+            headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        });
+        const userData = await response.json();
+        return userData;
+        
+    } catch (error) {
+        console.error("UsersAPI.findUser:", error);
+        throw error;
+    }
+}
+
+export { signUp, findUser };

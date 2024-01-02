@@ -3,8 +3,26 @@ import { AiFillHome, AiFillMessage } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { FaUserFriends } from "react-icons/fa";
 import { IoNotifications, IoLogOut } from "react-icons/io5";
+import getSessionUserID from '../../utilities/GetSessionUserID';
+import { findUser } from '../../api_calls/usersAPI';
 
-export default function Navbar( {navigate} ) {
+export default function Navbar( {navigate, token, setToken} ) {
+    let sessionUserID = getSessionUserID(token);
+    const [userData, setUserData] = useState(null);
+
+    // ======== FIND AND SET THE USER DATA UPON COMPONENT LOAD =============
+    useEffect(() => {
+        if (token && sessionUserID) {
+            findUser(token, sessionUserID)
+            .then(userData => {
+                window.localStorage.setItem("token", userData.token)
+                setToken(window.localStorage.getItem("token"))
+                setUserData(userData.user);
+                console.log(userData.user);
+            })
+        }
+    },[])
+
 
     // ===== ICONS FOR NAV BAR ===========
     const iconFunctions = [
@@ -53,6 +71,7 @@ export default function Navbar( {navigate} ) {
             handleClick: () => {
                 window.localStorage.removeItem("token")
                 navigate('/')
+                //TODO add: disconnect from socket
             },
             icon: <IoLogOut />,
             translateY: 0,
@@ -75,14 +94,6 @@ export default function Navbar( {navigate} ) {
 
 
 
-    // ======= LOGOUT FUNCTION ===========
-    const logout = () => {
-        window.localStorage.removeItem("token")
-        navigate('/')
-        //TODO add: disconnect from socket
-        }
-
-
     // ================= JSX FOR COMPONENT ================================
     return (
     // TODO timed out popup
@@ -97,25 +108,32 @@ export default function Navbar( {navigate} ) {
                 dark:bg-gray-800 dark:border-gray-700 dark:border
                 shadow-[0px_0px_10px_0px_#d9deed] dark:shadow-lg'>
 
-            {/* LEFT SIDE NAVBAR */}
+            {/* ================= LEFT SIDE NAVBAR ================== */}
             <div className='flex flex-row'>
                 {/* FACEBOOK LOGO */}
                 <a href='/home' className='flex items-center text-[1.75rem] h-full w-[3rem] text-[#a8b5c8] mr-3'>
                     <img src='/images/acebook-logo.png' alt='facebook-logo' className='h-full w-[2.9rem]'/>
                 </a>
 
-                {/* SEARCHBAR */}
-                <div className='w-[18rem] h-[2.4rem] rounded-full bg-slate-50 mr-3 p-2 text-[#999c9f] text-sm shadow-sm flex flex-row'>
+                {/* SEARCHBAR - responsive breakpoints to the screensize */}
+                <div className='
+                    min-w-[12rem] max-w-[32rem]
+                    md:min-w-[18rem] md:max-w-[32rem]
+                    lg:min-w-[26rem] lg:max-w-[32rem]
+                    xl:min-w-[32rem] xl:max-w-[32rem]
+                    h-[2.4rem] rounded-full bg-slate-50 mr-3 p-2 text-[#999c9f] text-sm shadow-sm flex flex-row'
+                    >    
                     <FiSearch/>
                     Search placeholder...
                 </div>
             </div>
 
-            {/* RIGHT SIDE OF NAVBAR */}
+            {/* ================= RIGHT SIDE OF NAVBAR ================= */}
             <div className='flex flex-row'>
-
+            {userData && 
+                <>
                 {/* NAVBAR ICONS */}
-                <div className='flex flex-row items-center justify-between w-[16.5rem] mr-4'>
+                <div className='flex flex-row items-center justify-between w-[14rem] md:w-[16.5rem] mr-4'>
                     {/* Icons from iconFunctions list. The current page's icon will be highlighted. Hovered icons show their name */}
                     {iconFunctions.map((item, index) => (
                         <div key={index} className='group flex flex-col items-center text-center w-8'>
@@ -134,19 +152,20 @@ export default function Navbar( {navigate} ) {
                     ))}
                 </div>
 
-
-
                 {/* PROFILE PICTURE & NAME */}
                 <a href='/profile' className='flex flex-row items-center mr-3'>
                     <img className='h-12 w-12 rounded-full
                         object-cover border-[0.2rem] border-white shadow-lg mr-2' 
-                        src="https://media.licdn.com/dms/image/C4D03AQFCRdxPaFxEFw/profile-displayphoto-shrink_800_800/0/1583419992936?e=2147483647&v=beta&t=-aicjehD7GkHSo1bveZM_OVBx9hm3BBSxFegSVnEDPg"
+                        src={`https://picsum.photos/seed/${userData._id}/300`}
                         alt='profile'
                     />
-                    <p className='font-semibold text-[#494949]'>Claire Peng</p>
+                   <p className='font-semibold text-[#494949] hidden lg:block'>
+                        {`${userData.firstName} ${userData.lastName}`}
+                    </p>
                 </a>
+                </>
+            }
             </div>
-
         </div>
 
   )

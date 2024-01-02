@@ -18,8 +18,6 @@ const App = () => {
   const navigate = useNavigate();
 
     return (
-      
-
         <Routes>
 
           {/* ====== NO AUTHENTICATION - Sign Up or Login: ======== */}
@@ -29,7 +27,7 @@ const App = () => {
           {/* ====== AUTHENTICATION ONLY - Feed, Profile, Search, Messages, Friends, Notifications : ======== */}
           <Route path='/home'  element={ isLoggedIn() ? 
               <HomePage navigate={ navigate }/> : <Navigate to="/"/>}/>
-          
+
         </Routes>
     );
 }
