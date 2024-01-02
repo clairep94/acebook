@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
 import getSessionUserID from '../../utilities/GetSessionUserID';
 import { findUser } from '../../api_calls/usersAPI';
-import ProfilePicture from '../user/ProfilePicture';
+import LargeProfilePicture from '../user/LargeProfilePicture';
 
 // FOR NOW FOCUSING ON 'OTHER PROFILE'
 export default function Profile({ navigate, token, setToken }) {
@@ -50,8 +50,6 @@ export default function Profile({ navigate, token, setToken }) {
 
             })
 
-
-            
         }
     }, []);
 
@@ -80,12 +78,12 @@ export default function Profile({ navigate, token, setToken }) {
                 <div className='w-[11rem] h-[11rem] z-40 absolute
                 left-[1rem] top-[9.5rem]
                 '>
-                    <ProfilePicture id={user._id} name={`${user.firstName} ${user.lastName}`}/>
+                    <LargeProfilePicture id={user._id} name={`${user.firstName} ${user.lastName}`}/>
                 </div>
             </div>
 
             {/* PAGE OPTIONS */}
-            <div className='flex flex-row bg-white h-[3rem] shadow-lg z-20 items-center justify-between px-12'>
+            <div className='flex flex-row bg-white h-[3.3rem] shadow-lg z-20 items-center justify-between px-12 '>
                 <div className='w-14'></div>
                 <p>Timeline</p>
                 <p>About</p>
@@ -94,8 +92,34 @@ export default function Profile({ navigate, token, setToken }) {
             </div>
 
             {/* PAGE BOTTOM SECTION */}
-            <div className='mt-10 bg-slate-400 h-full w-full'>
+            <div className='mt-5 h-full w-full flex flex-row'>
+                {/* LEFT */}
+                <div className='mx-2 ml-4 h-full w-5/12 flex flex-col space-y-3'>
 
+                    {/* INTRO and ADD/UNFRIEND BUTTON */}
+                    <div className='w-full h-[14rem] bg-white rounded-xl p-2 shadow-md'>
+                        Intro OR ADD FRIEND BUTTONS
+                    </div>
+
+                    {/* FRIENDS LIST */}
+                    <div className='w-full h-[18rem] bg-white rounded-xl p-2 shadow-md'>
+                        Friends
+                    </div>
+
+                </div>
+
+                {/* RIGHT */}
+                <div className='mx-2 mr-4 h-full w-7/12 flex flex-col space-y-3'>
+
+                    <div className='w-full h-[4rem] bg-white rounded-xl p-2 shadow-md'>
+                        Write on {`${user.firstName}'s wall`}
+                    </div>
+
+                    <div className='w-full h-[4rem] bg-white rounded-xl p-2 shadow-md'>
+                        {`${user.firstName}'s posts`}
+                        <p>Change this to a map with each div as a card</p>
+                    </div>
+                </div>
             </div>
 
 
