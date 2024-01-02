@@ -9,7 +9,7 @@ export default function SearchResultList({ results, navigate }) {
             aria-label='search results list'
             className='bg-white
             flex flex-col w-full
-            box-shadow-md rounded-xl 
+            shadow-lg rounded-xl 
             mt-2 z-50
             overflow-y-scroll max-h-215'>
                 {results.map ((result, id) => (

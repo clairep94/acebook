@@ -71,11 +71,11 @@ export default function Profile({ navigate, token, setToken }) {
                 />
 
                 {/* NAME */}
-                <p className='absolute left-[13.2rem] bottom-4 z-20 font-semibold text-white text-[2rem]'
+                <p className='absolute left-[13.2rem] bottom-4 z-10 font-semibold text-white text-[2rem]'
                 >{`${user.firstName} ${user.lastName}`}</p>
 
                 {/* PROFILE PICTURE */}
-                <div className='w-[11rem] h-[11rem] z-40 absolute
+                <div className='w-[11rem] h-[11rem] z-20 absolute
                 left-[1rem] top-[9.5rem]
                 '>
                     <LargeProfilePicture id={user._id} name={`${user.firstName} ${user.lastName}`}/>
@@ -83,7 +83,7 @@ export default function Profile({ navigate, token, setToken }) {
             </div>
 
             {/* PAGE OPTIONS */}
-            <div className='flex flex-row bg-white h-[3.3rem] shadow-lg z-20 items-center justify-between px-12 '>
+            <div className='flex flex-row bg-white h-[3.3rem] shadow-lg z-10 items-center justify-between px-12 '>
                 <div className='w-14'></div>
                 <p>Timeline</p>
                 <p>About</p>
