@@ -37,4 +37,19 @@ const findUser = async (token, userID) => {
     }
 }
 
-export { signUp, findUser };
+const allUsers = async (token) => {
+    try {
+        const response = await fetch(`/users`, {
+            headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        });
+        const usersData = await response.json();
+        return usersData;
+    } catch (error) {
+        console.error("UsersAPI.allUsers:", error);
+        throw error;
+    }
+}
+
+export { signUp, findUser, allUsers };

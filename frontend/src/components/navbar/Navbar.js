@@ -5,6 +5,7 @@ import { FaUserFriends } from "react-icons/fa";
 import { IoNotifications, IoLogOut } from "react-icons/io5";
 import getSessionUserID from '../../utilities/GetSessionUserID';
 import { findUser } from '../../api_calls/usersAPI';
+import SearchBar from '../searchbar/SearchBar';
 
 export default function Navbar( {navigate, token, setToken} ) {
 
@@ -122,10 +123,9 @@ export default function Navbar( {navigate, token, setToken} ) {
                     md:min-w-[18rem] md:max-w-[32rem]
                     lg:min-w-[26rem] lg:max-w-[32rem]
                     xl:min-w-[32rem] xl:max-w-[32rem]
-                    h-[2.2rem] rounded-full bg-slate-50 mr-3 p-2 text-#placeholderGrey text-sm shadow-sm flex flex-row'
+                    flex flex-col'
                     >    
-                    <FiSearch/>
-                    Search placeholder...
+                    <SearchBar/>
                 </div>
             </div>
 
