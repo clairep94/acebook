@@ -13,28 +13,32 @@ export default function Navbar( {navigate} ) {
             path: "/home",
             icon: <AiFillHome />,
             translateY: 0,
-            size: "1.7rem"
+            size: "1.7rem",
+            textSize:"0.6rem"
         },
         {   
-            name: "Friend Requests",
+            name: "Requests",
             path: "/friend_requests",
             icon: <FaUserFriends />,
             translateY: 0,
-            size: "1.75rem"
+            size: "1.95rem",
+            textSize:"0.6rem"
         },
         {   
             name: "Notifications",
             path: "/notifications",
             icon: <IoNotifications />,
             translateY: 0,
-            size: "1.75rem"
+            size: "1.7rem",
+            textSize:"0.6rem"
         },
         {   
             name: "Messages",
             path: "/messages",
             icon: <AiFillMessage />,
             translateY: 0,
-            size: "1.75rem"
+            size: "1.63rem",
+            textSize:"0.6rem"
         },
     ]
 
@@ -90,20 +94,31 @@ export default function Navbar( {navigate} ) {
 
             {/* RIGHT SIDE OF NAVBAR */}
             <div className='flex flex-row'>
-                {/* ICONS */}
-                <div className='flex flex-row items-center justify-between w-[16rem]'>
-                    {/* Icons from iconFunctions list. The current page's icon will be highlighted */}
+
+                {/* NAVBAR ICONS */}
+                <div className='flex flex-row items-center justify-between w-[16.5rem] mr-4'>
+                    {/* Icons from iconFunctions list. The current page's icon will be highlighted. Hovered icons show their name */}
                     {iconFunctions.map((item, index) => (
-                        <a key={index} href={item.path} aria-label={`${item.name} icon`} id={`${item.name} icon`}
-                            className={`flex items-center text-[${item.size}]
-                            ${isCurrentPage(item.path) ? 'text-[#4d76b2]' : 'text-[#a8b5c8]'} hover:text-[#4d76b2]`}>
-                            {item.icon}
-                        </a>
+                        <div key={index} className='group flex flex-col items-center text-center w-8'>
+                            {/* Main Icon */}
+                            <a href={item.path} aria-label={`${item.name} icon`} id={`${item.name} icon`}
+                                className={`flex items-center text-[${item.size}]
+                                ${isCurrentPage(item.path) ? 'text-[#4d76b2]' : 'text-[#a8b5c8]'} hover:text-[#4d76b2]`}>
+                                {item.icon}
+                            </a>
+                            {/* Blue dot when on current page */}
+                            { isCurrentPage(item.path) && <div className='mt-[0.2rem] h-[0.4rem] w-[0.4rem] rounded-full bg-[#4d76b2] group-hover:hidden'></div>}
+                            {/* Label for the Icon, shows when hover */}
+                            <p className={`pt-1 font-semibold text-[${item.textSize}] text-[#4d76b2] hidden group-hover:block`}>{item.name}</p>
+                        </div>
                     ))}
-                    {/* Logout button */}
-                    <button onClick={logout} className='flex items-center text-[1.75rem] text-[#a8b5c8] hover:text-[#4d76b2] mr-3'>
-                        <IoLogOut />
-                    </button>
+                    {/* Logout button -- had to be separate due to function onClick */}
+                    <div className='group flex flex-col items-center text-center w-8'>
+                        <button onClick={logout} className='flex items-center text-[1.85rem] text-[#a8b5c8] hover:text-[#4d76b2]'>
+                            <IoLogOut />
+                        </button>
+                        <p className={`pt-1 font-semibold text-[0.65rem] hidden group-hover:block text-[#4d76b2]`}>Logout</p>
+                    </div>
                 </div>
                 
                 {/* PROFILE PICTURE & NAME */}
