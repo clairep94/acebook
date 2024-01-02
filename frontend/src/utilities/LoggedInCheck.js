@@ -1,5 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-
+import { useState, useEffect } from 'react';
 
 const isLoggedIn = () => {
     const token = localStorage.getItem('token');
@@ -27,4 +27,26 @@ const isLoggedIn = () => {
 
 }
 
-export default isLoggedIn;
+// This hook runs every 5 seconds to check if the token is valid (not timed out.)
+const useSessionTimeOutCheck = () => {
+    const [tokenValid, setTokenValid] = useState(isLoggedIn());
+
+    useEffect(() => {
+        const checkTokenValidity = () => {    
+            setTokenValid(isLoggedIn());
+        };
+
+        // Initial check when the component mounts
+        checkTokenValidity();
+
+        // Check token validity every x seconds (adjust the interval as needed)
+        const intervalId = setInterval(checkTokenValidity, 5000); // Check every 5 seconds
+
+        // Clean up the interval on component unmount
+        return () => clearInterval(intervalId);
+    }, []);
+
+    return tokenValid;
+};
+
+export { isLoggedIn, useSessionTimeOutCheck }
