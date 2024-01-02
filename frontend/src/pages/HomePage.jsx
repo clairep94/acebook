@@ -21,7 +21,7 @@ export default function HomePage({navigate}) {
   }
 
   return (
-    <div className='h-screen w-screen bg-[#fcfdff] dark:bg-gray-900 flex flex-col'>
+    <div className='h-screen w-screen bg-[#fafcff] dark:bg-gray-900 flex flex-col'>
 
       {/* LOGGED OUT POPUP */}
       {showLoginPopup && 

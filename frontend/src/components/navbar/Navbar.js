@@ -46,7 +46,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             },
             icon: <AiFillHome />,
             translateY: 0,
-            size: "1.7rem",
+            size: "1.55rem",
             textSize:"0.6rem"
         },
         {   
@@ -56,7 +56,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             },
             icon: <FaUserFriends />,
             translateY: 0,
-            size: "1.95rem",
+            size: "1.75rem",
             textSize:"0.6rem"
         },
         {   
@@ -66,7 +66,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             },
             icon: <IoNotifications />,
             translateY: 0,
-            size: "1.7rem",
+            size: "1.55rem",
             textSize:"0.55rem"
         },
         {   
@@ -76,7 +76,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             },
             icon: <AiFillMessage />,
             translateY: 0,
-            size: "1.63rem",
+            size: "1.5rem",
             textSize:"0.6rem"
         },
         {   
@@ -88,7 +88,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             },
             icon: <IoLogOut />,
             translateY: 0,
-            size: "1.85rem",
+            size: "1.7rem",
             textSize:"0.65rem"
         },
     ]
