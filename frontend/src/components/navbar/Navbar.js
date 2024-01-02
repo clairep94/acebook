@@ -9,28 +9,28 @@ export default function Navbar( {navigate} ) {
     // ===== ICONS FOR NAV BAR ===========
     const iconFunctions = [
         { 
-            name: "home",
+            name: "Home",
             path: "/home",
             icon: <AiFillHome />,
             translateY: 0,
             size: "1.7rem"
         },
         {   
-            name: "friend requests",
+            name: "Friend Requests",
             path: "/friend_requests",
             icon: <FaUserFriends />,
             translateY: 0,
             size: "1.75rem"
         },
         {   
-            name: "notifications",
+            name: "Notifications",
             path: "/notifications",
             icon: <IoNotifications />,
             translateY: 0,
             size: "1.75rem"
         },
         {   
-            name: "messages",
+            name: "Messages",
             path: "/messages",
             icon: <AiFillMessage />,
             translateY: 0,
