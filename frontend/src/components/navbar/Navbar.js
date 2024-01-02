@@ -10,7 +10,9 @@ export default function Navbar( {navigate} ) {
     const iconFunctions = [
         { 
             name: "Home",
-            path: "/home",
+            handleClick: () => {
+                navigate("/home");
+            },
             icon: <AiFillHome />,
             translateY: 0,
             size: "1.7rem",
@@ -18,27 +20,44 @@ export default function Navbar( {navigate} ) {
         },
         {   
             name: "Requests",
-            path: "/friend_requests",
+            handleClick: () => {
+                navigate("/friend_requests");
+            },
             icon: <FaUserFriends />,
             translateY: 0,
             size: "1.95rem",
             textSize:"0.6rem"
         },
         {   
-            name: "Notifications",
-            path: "/notifications",
+            name: "Notifications",            
+            handleClick: () => {
+                navigate("/notifications");
+            },
             icon: <IoNotifications />,
             translateY: 0,
             size: "1.7rem",
-            textSize:"0.6rem"
+            textSize:"0.55rem"
         },
         {   
             name: "Messages",
-            path: "/messages",
+            handleClick: () => {
+                navigate("/messages");
+            },
             icon: <AiFillMessage />,
             translateY: 0,
             size: "1.63rem",
             textSize:"0.6rem"
+        },
+        {   
+            name: "Logout",
+            handleClick: () => {
+                window.localStorage.removeItem("token")
+                navigate('/')
+            },
+            icon: <IoLogOut />,
+            translateY: 0,
+            size: "1.85rem",
+            textSize:"0.65rem"
         },
     ]
 
@@ -65,7 +84,7 @@ export default function Navbar( {navigate} ) {
 
 
     // ================= JSX FOR COMPONENT ================================
-  return (
+    return (
     // TODO timed out popup
     // Function to see what url 
     // TODO add framer motion button hover and selections
@@ -101,26 +120,22 @@ export default function Navbar( {navigate} ) {
                     {iconFunctions.map((item, index) => (
                         <div key={index} className='group flex flex-col items-center text-center w-8'>
                             {/* Main Icon */}
-                            <a href={item.path} aria-label={`${item.name} icon`} id={`${item.name} icon`}
+                            <button aria-label={`${item.name} icon`} id={`${item.name} icon`}
                                 className={`flex items-center text-[${item.size}]
-                                ${isCurrentPage(item.path) ? 'text-[#4d76b2]' : 'text-[#a8b5c8]'} hover:text-[#4d76b2]`}>
+                                ${isCurrentPage(item.path) ? 'text-[#4d76b2]' : 'text-[#a8b5c8]'} hover:text-[#4d76b2]`}
+                                onClick={item.handleClick}>
                                 {item.icon}
-                            </a>
+                            </button>
                             {/* Blue dot when on current page */}
                             { isCurrentPage(item.path) && <div className='mt-[0.2rem] h-[0.4rem] w-[0.4rem] rounded-full bg-[#4d76b2] group-hover:hidden'></div>}
                             {/* Label for the Icon, shows when hover */}
                             <p className={`pt-1 font-semibold text-[${item.textSize}] text-[#4d76b2] hidden group-hover:block`}>{item.name}</p>
                         </div>
                     ))}
-                    {/* Logout button -- had to be separate due to function onClick */}
-                    <div className='group flex flex-col items-center text-center w-8'>
-                        <button onClick={logout} className='flex items-center text-[1.85rem] text-[#a8b5c8] hover:text-[#4d76b2]'>
-                            <IoLogOut />
-                        </button>
-                        <p className={`pt-1 font-semibold text-[0.65rem] hidden group-hover:block text-[#4d76b2]`}>Logout</p>
-                    </div>
                 </div>
-                
+
+
+
                 {/* PROFILE PICTURE & NAME */}
                 <a href='/profile' className='flex flex-row items-center mr-3'>
                     <img className='h-12 w-12 rounded-full
