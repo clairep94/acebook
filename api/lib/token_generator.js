@@ -12,7 +12,7 @@ class TokenGenerator {
       iat: Math.floor(Date.now() / 1000),
       
       // Set the JWT token to expire in 30 minutes
-      exp: Math.floor(Date.now() / 1000) + (30 * 60)
+      exp: Math.floor(Date.now() / 1000) + (0.5 * 60)
     }, secret);
   }
 }

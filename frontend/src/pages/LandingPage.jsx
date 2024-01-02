@@ -4,7 +4,7 @@ import SignUpForm from '../components/user/SignUpForm';
 
 
 export default function LandingPage({navigate}) {
-    const [form, setForm] = useState('login');
+    const [form, setForm] = useState('signup');
 
     const viewLogin = () => {
         setForm('login');
