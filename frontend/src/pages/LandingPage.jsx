@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import LogInForm from '../components/auth/LoginForm';
-import SignUpForm from '../components/user/SignUpForm';
+import SignUpForm from '../components/signup/SignUpForm';
 
 
 export default function LandingPage({navigate}) {
-    const [form, setForm] = useState('login');
+    const [form, setForm] = useState('signup');
 
     const viewLogin = () => {
         setForm('login');
@@ -20,22 +20,23 @@ export default function LandingPage({navigate}) {
     return (
         <>
             {/* PAGE */}
-            <section class="bg-[#fcfcff] dark:bg-gray-900
+            <section class="bg-#bgGrey dark:bg-gray-900
             min-h-screen flex items-center justify-center relative
             md:flex-row px-4">
 
                 {/* IMAGE: LEFT HALF OF SCREEN, disappears for medium screens */}
                     <div aria-label="Login Hero Section"
-                        className="md:w-6/12 md:flex hidden w-6/12 flex-col items-center justify-center
+                        className="flex w-6/12 md:w-5x/12 flex-col items-center justify-center
                             p-8
                         ">
                             <h1 className='font-bold text-[3.5rem] text-[#002c74d4] text-center'>
                                 Welcome to Acebook.
                             </h1>
-                            <p className='text-[1.5rem] m-3 text-[#282828d3]'>
+                            <p className='text-[1.5rem] m-3 text-#textDarkGrey'>
                                 Connecting friends since 2023
                             </p>
-                            <img alt='hero' src={(form ==='signup') ? '/images/drawkit-3d-jelly-pair.png' : '/images/drawkit-3d-jelly-girl.png'}/>
+                            <img className='max-w-[30rem]'
+                            alt='hero' src={(form ==='signup') ? '/images/drawkit-3d-jelly-pair.png' : '/images/drawkit-3d-jelly-girl.png'}/>
                     </div>
 
 

@@ -1,6 +1,4 @@
 import './App.css';
-import LoginForm from '../auth/LoginForm'
-import SignUpForm from '../user/SignUpForm'
 import React, { useState } from 'react';
 import Feed from '../feed/Feed';
 import HomePage from '../../pages/HomePage';
@@ -10,8 +8,10 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import isLoggedIn from '../../utilities/LoggedInCheck';
+import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LandingPage from '../../pages/LandingPage';
+import ProfilePage from '../../pages/ProfilePage';
+import Navbar from '../navbar/Navbar';
 
 const App = () => {
   const navigate = useNavigate();
@@ -19,20 +19,24 @@ const App = () => {
     return (
         <Routes>
 
-          {/* ====== NO AUTHENTICATION: ======== */}
+          {/* ====== NO AUTHENTICATION - Sign Up or Login: ======== */}
           <Route path='/'  element={ !isLoggedIn() ?         
             <LandingPage navigate={navigate}/> : <Navigate to='/home'/>}/>
 
 
-          <Route path='/login'  element={ !isLoggedIn() ?         
-            <LoginForm navigate={navigate}/> : <Navigate to='/home'/>}/>
-          <Route path='/signup' element={ !isLoggedIn() ? 
-            <SignUpForm navigate={navigate}/> : <Navigate to='/home'/>}/>
-
-          {/* ====== AUTHENTICATION ONLY: ======== */}
+          {/* ====== AUTHENTICATION ONLY - Search, Messages, Friends, Notifications : ======== */}
+          {/* ------ FEED ------  */}
           <Route path='/home'  element={ isLoggedIn() ? 
-              <HomePage navigate={ navigate }/> : <Navigate to="/login"/>}/>
+              <HomePage navigate={ navigate }/> : <Navigate to="/"/>}/>
           
+          {/* ------  PROFILE PAGE ------  */}
+          <Route path='/users/:userID'  element={ isLoggedIn() ? 
+              <ProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+          {/* ------  SESSION USER'S PROFILE PAGE ------  */}
+          <Route path='/profile'  element={ isLoggedIn() ? 
+              <ProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+
+
         </Routes>
     );
 }

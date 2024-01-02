@@ -6,7 +6,7 @@ const API_Endpoint = "/users"
 
 
 router.get("/", UsersController.Index); // Index
-router.get("/:id", UsersController.FindByID); // Find by ID
+router.get("/:userID", UsersController.FindByID); // Find by ID
 
 
 

@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema(
       required: [true, 'Password is required.']
     },
     bio: { type: String },
+    profilePictureURL: { 
+      type: String, default: '' 
+    },
 
 
     // FRIENDS FEATURE:

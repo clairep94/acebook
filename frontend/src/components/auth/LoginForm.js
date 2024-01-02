@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { useLocation } from 'react-router-dom'; // use this for login-popup when timed-out
+import { useLocation } from 'react-router-dom'; // use this for login-popup when timed-out
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 
@@ -10,8 +10,7 @@ const LogInForm = ({ navigate, switchForms }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [passwordHidden, setPasswordHidden] = useState(true);
-
-  // const location = useLocation(); // use this for login-popup when timed-out
+  const location = useLocation(); // use this for login-popup when timed-out
 
 
 
@@ -40,13 +39,13 @@ const LogInForm = ({ navigate, switchForms }) => {
       navigate('/home')
 
       // FOR FUTURE USE IF HAVING TIMEOUT LOGIN POPUP:
-      // // Check the current location and navigate accordingly
-      // if (location.pathname === '/') {
-      //   navigate('/home');
-      // } else {
-      //   // 
-      // }
-      // window.location.reload(); // Necessary addition so that page after successful login if logging in after timed out
+      // Check the current location and navigate accordingly
+      if (location.pathname === '/') {
+        navigate('/home');
+      } else {
+        // 
+      }
+      window.location.reload(); // Necessary addition so that page after successful login if logging in after timed out
     }
   }
 
@@ -65,8 +64,6 @@ const LogInForm = ({ navigate, switchForms }) => {
   const handleSetPasswordHidden = (event) => {
     setPasswordHidden(!passwordHidden)
   }
-
-  // Enter a valid email or password
 
 
   // ========= JSX FOR THE UI OF THE COMPONENT =====================
@@ -124,14 +121,14 @@ const LogInForm = ({ navigate, switchForms }) => {
           </form>
 
 
-        {/* ERROR MESSAGES */}
-        {error && <p aria-label="Login Error Message" className='text-red-500 text-sm italic'>{error}</p>}
+          {/* ERROR MESSAGES */}
+          {error && <p aria-label="Login Error Message" className='text-red-500 text-sm italic'>{error}</p>}
 
 
-        <p aria-label="Don't have an account? Register">
-          <font color="#505050 ">Don't have an account? </font>
-          <span aria-label="Link to Register" className='text-sky-600 font-bold hover:underline' onClick={switchForms} >Register</span>
-        </p>
+          <p aria-label="Don't have an account? Register">
+            <font color="#505050 ">Don't have an account? </font>
+            <span aria-label="Link to Register" className='text-sky-600 font-bold hover:underline' onClick={switchForms} >Register</span>
+          </p>
 
         </div>
 
