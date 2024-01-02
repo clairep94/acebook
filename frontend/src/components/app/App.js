@@ -11,7 +11,8 @@ import {
 import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LandingPage from '../../pages/LandingPage';
 import ProfilePage from '../../pages/ProfilePage';
-import Navbar from '../navbar/Navbar';
+import OwnProfilePage from '../../pages/OwnProfilePage';
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const App = () => {
               <ProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
           {/* ------  SESSION USER'S PROFILE PAGE ------  */}
           <Route path='/profile'  element={ isLoggedIn() ? 
-              <ProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+              <OwnProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
 
 
         </Routes>

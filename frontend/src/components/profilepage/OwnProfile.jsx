@@ -4,12 +4,13 @@ import getSessionUserID from '../../utilities/GetSessionUserID';
 import { findUser } from '../../api_calls/usersAPI';
 import LargeProfilePicture from '../user/LargeProfilePicture';
 
-// FOR NOW FOCUSING ON 'OTHER PROFILE'
-export default function Profile({ navigate, token, setToken }) {
+export default function OwnProfile({ navigate, token, setToken }) {
+
+    // TODO change this to conditional rendering for re-factoring...
 
     // =========== STATE VARIABLES ==========================
     // PROFILE PAGE OWNER:
-    const { userID } = useParams(); //ID of the profile page owner
+    // const { userID } = useParams(); //ID of the profile page owner
     const [user, setUser] = useState(null); // State to hold user data
 
     // SESSION USER:
@@ -26,10 +27,7 @@ export default function Profile({ navigate, token, setToken }) {
     // ========= COMPONENT MOUNT: Set Profile Owner Data ===============
     useEffect(() => {
         if (token) {
-            if (sessionUserID === userID) {
-                navigate('/profile')
-            }
-            findUser(token, userID)
+            findUser(token, sessionUserID)
             .then(userData => {
                 window.localStorage.setItem("token", userData.token);
                 setToken(window.localStorage.getItem("token"));
@@ -52,7 +50,7 @@ export default function Profile({ navigate, token, setToken }) {
             <div className='w-full h-[18rem] relative'>
                 <img className='w-full h-full -z-10'
                 src={`https://picsum.photos/seed/a${user._id}/400/700?grayscale`}
-                alt={`${user.firstName} ${user.lastName} cover`}
+                alt={`Your cover`}
                 />
 
                 {/* NAME */}
@@ -99,11 +97,11 @@ export default function Profile({ navigate, token, setToken }) {
                 <div className='mx-2 mr-4 h-full w-7/12 flex flex-col space-y-3'>
 
                     <div className='w-full h-[4rem] bg-white rounded-xl p-2 shadow-md'>
-                        Write on {`${user.firstName}'s wall`}
+                        Post on your wall
                     </div>
 
                     <div className='w-full h-[4rem] bg-white rounded-xl p-2 shadow-md'>
-                        {`${user.firstName}'s posts`}
+                        {`Your posts`}
                         <p>Change this to a map with each div as a card</p>
                     </div>
                 </div>
