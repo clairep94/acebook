@@ -2,22 +2,7 @@ import React, {useState} from 'react';
 import { FiSearch } from "react-icons/fi";
 
 
-export default function SearchInput({ searchUsers }) {
-    const [input, setInput] = useState('');
-
-    // =========== GO TO SEARCH PAGE =========================
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // TODO: Search page and enter
-        console.log('Search submitted!');
-    };
-
-    // ========= CALL searchUsers AS USER IS TYPING: =====================
-    const handleChange = (value) => {
-        setInput(value);
-        searchUsers(value);
-    }
-
+export default function SearchInput({ searchUsers, input, handleChange, handleSubmit}) {
 
     // ========= JSX OF COMPONENT UI ==============================
     return (

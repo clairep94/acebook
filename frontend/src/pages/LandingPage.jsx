@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import LogInForm from '../components/auth/LoginForm';
-import SignUpForm from '../components/user/SignUpForm';
+import SignUpForm from '../components/signup/SignUpForm';
 
 
 export default function LandingPage({navigate}) {

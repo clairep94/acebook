@@ -38,6 +38,7 @@ const findUser = async (token, userID) => {
 }
 
 const allUsers = async (token) => {
+    console.log("running AllUsersMethod")
     try {
         const response = await fetch(`/users`, {
             headers: {
@@ -45,6 +46,7 @@ const allUsers = async (token) => {
         },
         });
         const usersData = await response.json();
+        console.log(usersData)
         return usersData;
     } catch (error) {
         console.error("UsersAPI.allUsers:", error);

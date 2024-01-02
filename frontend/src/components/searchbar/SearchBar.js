@@ -5,43 +5,56 @@ import { allUsers } from '../../api_calls/usersAPI';
 
 
 export default function SearchBar({navigate, token, setToken}) {
+    const [input, setInput] = useState('');
     const [results, setResults] = useState([]);
+
+    // =========== GO TO SEARCH PAGE =========================
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // TODO: Search page and enter
+        console.log('Search submitted!');
+    };
 
     // =========== GET ALL USERS AS CLIENT TYPES INTO SEARCH BAR =========================
     // currently using allUsers method -> prefilter instead?
     const searchUsers = (value) => {
-        if (token){
-            allUsers(token)
-            .then(usersData => {
-                window.localStorage.setItem("token", usersData.token)
-                setToken(window.localStorage.getItem("token"))
+        allUsers(token)
+        .then(usersData => {
+            window.localStorage.setItem("token", usersData.token)
+            setToken(window.localStorage.getItem("token"))
 
-                const results = usersData.users.filter((user) => {
-                    const fullName = `${user.firstName} ${user.lastName}`;
-                    return (
-                        value && //if user has not left the search field blank
-                        user && //user exists in the api
-                        // user.fullName && //user has a full name in the api
-                        fullName.toLowerCase().includes(value.toLowerCase()) //search value is partially included in the user.fullName
-                    )
-                });
-                console.log(results);
-                setResults(results);
+            const results = usersData.users.filter((user) => {
+                const fullName = `${user.firstName} ${user.lastName}`;
+                return (
+                    value && //if user has not left the search field blank
+                    user && //user exists in the api
+                    fullName.toLowerCase().includes(value.toLowerCase()) //search value is partially included in the user.fullName
+                )
+            });
+            setResults(results);
             })
         }
+
+    
+
+    // ========= CALL searchUsers AS USER IS TYPING: =====================
+    const handleChange = (value) => {
+        setInput(value);
+        searchUsers(value);
     }
 
+
     // ========= JSX OF COMPONENT UI ==============================
+
     return (
-        <div className=''>
+        <div className='relative'>
             <SearchInput 
                 searchUsers={searchUsers}
-                // handleSubmit={handleSubmit}
-                // value={input}
-                // handleChange={handleChange}
-                // handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                input={input}
             />
-            <div className='absolute'>
+            <div className='absolute w-full'>
                 <SearchResultList 
                     navigate={navigate} 
                     results={results}

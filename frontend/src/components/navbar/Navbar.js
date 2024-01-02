@@ -124,8 +124,8 @@ export default function Navbar( {navigate, token, setToken} ) {
                     lg:min-w-[26rem] lg:max-w-[32rem]
                     xl:min-w-[32rem] xl:max-w-[32rem]
                     flex flex-col'
-                    >    
-                    <SearchBar/>
+                    >  
+                    <SearchBar navigate={navigate} token={token} setToken={setToken}/>
                 </div>
             </div>
 
