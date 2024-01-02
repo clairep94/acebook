@@ -1,19 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import Feed from '../components/feed/Feed';
 import Navbar from '../components/navbar/Navbar';
 import { useSessionTimeOutCheck } from '../utilities/LoggedInCheck';
 import LoginPopup from '../components/auth/LoginPopup';
+import Profile from '../components/profilepage/Profile';
 
 
-export default function HomePage({navigate}) {
-// TODO: Add light/dark mode management
-// TODO: Add 2 columns - feed and messages/online friends
+export default function ProfilePage({navigate}) {
   const [token, setToken] = useState(window.localStorage.getItem("token")); 
 
   // ===== LOGIN POPUP & TIMEOUT CHECKER: COPY TO EVERY AUTHENTICATED PAGE: ==========   
   const showLoginPopup = !useSessionTimeOutCheck(); // checks every 5 seconds if token is valid and changes true/false
 
-
+  // =========== JSX FOR COMPONENT =================================== 
   return (
     <div className='h-screen w-screen bg-#bgGrey dark:bg-gray-900 flex flex-col'>
 
@@ -34,9 +32,9 @@ export default function HomePage({navigate}) {
       {/* MAIN PAGE */}
       <div className='w-screen h-screen flex flex-row'>
 
-          {/* MAIN DIV - Feed & New Post */}
+          {/* MAIN DIV - Profile Page */}
           <div className='w-full h-full'>
-            <Feed navigate={navigate} />
+            <Profile navigate={navigate} token={token} setToken={setToken} />
           </div>
 
           {/* MESSENGER DIV - Online friends */}

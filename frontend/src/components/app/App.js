@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LandingPage from '../../pages/LandingPage';
+import ProfilePage from '../../pages/ProfilePage';
 import Navbar from '../navbar/Navbar';
 
 const App = () => {
@@ -22,9 +23,19 @@ const App = () => {
           <Route path='/'  element={ !isLoggedIn() ?         
             <LandingPage navigate={navigate}/> : <Navigate to='/home'/>}/>
 
-          {/* ====== AUTHENTICATION ONLY - Feed, Profile, Search, Messages, Friends, Notifications : ======== */}
+
+          {/* ====== AUTHENTICATION ONLY - Search, Messages, Friends, Notifications : ======== */}
+          {/* ------ FEED ------  */}
           <Route path='/home'  element={ isLoggedIn() ? 
               <HomePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+          
+          {/* ------  PROFILE PAGE ------  */}
+          <Route path='/users/:userID'  element={ isLoggedIn() ? 
+              <ProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+          {/* ------  SESSION USER'S PROFILE PAGE ------  */}
+          <Route path='/profile'  element={ isLoggedIn() ? 
+              <ProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+
 
         </Routes>
     );
