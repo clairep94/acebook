@@ -66,8 +66,10 @@ const SignUpForm = ({ navigate, switchForms }) => {
         if(response.status === 201) {
           setShowSuccessful(true);
           
+        } else if (response.status === 400) {
+          setError("Email is already registered with an account")
         } else {
-          setError("Server error")
+          setError("Server error, please try again later")
         }
       })
   }

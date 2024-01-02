@@ -99,15 +99,9 @@ export default function Navbar( {navigate, token, setToken} ) {
 
     // ================= JSX FOR COMPONENT ================================
     return (
-    // TODO timed out popup
-    // Function to see what url 
-    // TODO add framer motion button hover and selections
-    // TODO add light/dark mode buttons
-    // TODO separate friend requests and notifications as separate components, with conditional red mark
-    // TODO separate profile picture as separate component with conditional green mark
         <div aria-label='navbar' id='navbar'
             className='w-screen h-[4rem] bg-white flex flex-row 
-                p-2 justify-between px-5
+                p-2 justify-between px-4
                 dark:bg-gray-800 dark:border-gray-700 dark:border
                 shadow-[0px_0px_10px_0px_#d9deed] dark:shadow-lg'>
 
@@ -115,7 +109,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             <div className='flex flex-row items-center'>
                 {/* FACEBOOK LOGO */}
                 <a href='/home' className='mr-3'>
-                    <img src='/images/acebook-logo.png' alt='facebook-logo' className='h-full w-[2.8rem] h-[2.8rem]'/>
+                    <img src='/images/acebook-logo.png' alt='facebook-logo' className='hidden sm:block w-[2.8rem] h-[2.8rem]'/>
                 </a>
 
                 {/* SEARCHBAR - responsive breakpoints to the screensize */}
@@ -124,7 +118,7 @@ export default function Navbar( {navigate, token, setToken} ) {
                     md:min-w-[18rem] md:max-w-[32rem]
                     lg:min-w-[26rem] lg:max-w-[32rem]
                     xl:min-w-[32rem] xl:max-w-[32rem]
-                    h-[2.2rem] rounded-full bg-slate-50 mr-3 p-2 text-[#999c9f] text-sm shadow-sm flex flex-row'
+                    h-[2.2rem] rounded-full bg-slate-50 mr-3 p-2 text-#placeholderGrey text-sm shadow-sm flex flex-row'
                     >    
                     <FiSearch/>
                     Search placeholder...
@@ -143,14 +137,14 @@ export default function Navbar( {navigate, token, setToken} ) {
                             {/* Main Icon */}
                             <button aria-label={`${item.name} icon`} id={`${item.name} icon`}
                                 className={`flex items-center text-[${item.size}]
-                                ${isCurrentPage(item.path) ? 'text-[#4d76b2]' : 'text-[#a8b5c8]'} hover:text-[#4d76b2]`}
+                                ${isCurrentPage(item.path) ? 'text-#iconBlue' : 'text-#iconGrey'} hover:text-#iconBlue`}
                                 onClick={item.handleClick}>
                                 {item.icon}
                             </button>
                             {/* Blue dot when on current page */}
-                            { isCurrentPage(item.path) && <div className='mt-[0.2rem] h-[0.4rem] w-[0.4rem] rounded-full bg-[#4d76b2] group-hover:hidden'></div>}
+                            { isCurrentPage(item.path) && <div className='mt-[0.2rem] h-[0.4rem] w-[0.4rem] rounded-full bg-#iconBlue group-hover:hidden'></div>}
                             {/* Label for the Icon, shows when hover */}
-                            <p className={`pt-1 font-semibold text-[${item.textSize}] text-[#4d76b2] hidden group-hover:block`}>{item.name}</p>
+                            <p className={`pt-1 font-semibold text-[${item.textSize}] text-#iconBlue hidden group-hover:block`}>{item.name}</p>
                         </div>
                     ))}
                 </div>
@@ -162,7 +156,7 @@ export default function Navbar( {navigate, token, setToken} ) {
                         src={`https://picsum.photos/seed/${userData._id}/300`}
                         alt='profile'
                     />
-                   <p className='font-semibold text-[#494949] hidden lg:block'>
+                   <p className='font-semibold text-#textDarkGrey hidden lg:block'>
                         {`${userData.firstName} ${userData.lastName}`}
                     </p>
                 </a>

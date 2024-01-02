@@ -20,7 +20,7 @@ export default function LandingPage({navigate}) {
     return (
         <>
             {/* PAGE */}
-            <section class="bg-[#fcfcff] dark:bg-gray-900
+            <section class="bg-#bgGrey dark:bg-gray-900
             min-h-screen flex items-center justify-center relative
             md:flex-row px-4">
 
@@ -32,7 +32,7 @@ export default function LandingPage({navigate}) {
                             <h1 className='font-bold text-[3.5rem] text-[#002c74d4] text-center'>
                                 Welcome to Acebook.
                             </h1>
-                            <p className='text-[1.5rem] m-3 text-[#282828d3]'>
+                            <p className='text-[1.5rem] m-3 text-#textDarkGrey'>
                                 Connecting friends since 2023
                             </p>
                             <img className='max-w-[30rem]'
