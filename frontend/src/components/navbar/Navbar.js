@@ -48,7 +48,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             icon: <AiFillHome />,
             translateY: 0,
             size: "1.55rem",
-            textSize:"0.6rem"
+            textSize:"0.55rem"
         },
         {   
             name: "Requests",
@@ -59,7 +59,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             icon: <FaUserFriends />,
             translateY: 0,
             size: "1.75rem",
-            textSize:"0.6rem"
+            textSize:"0.52rem"
         },
         {   
             name: "Notifications",            
@@ -70,7 +70,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             icon: <IoNotifications />,
             translateY: 0,
             size: "1.55rem",
-            textSize:"0.55rem"
+            textSize:"0.5rem"
         },
         {   
             name: "Messages",
@@ -81,7 +81,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             icon: <AiFillMessage />,
             translateY: 0,
             size: "1.5rem",
-            textSize:"0.6rem"
+            textSize:"0.52rem"
         },
         {   
             name: "Logout",
@@ -93,7 +93,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             icon: <IoLogOut />,
             translateY: 0,
             size: "1.7rem",
-            textSize:"0.65rem"
+            textSize:"0.55rem"
         },
     ]
 
@@ -147,7 +147,7 @@ export default function Navbar( {navigate, token, setToken} ) {
                                 {item.icon}
                             </button>
                             {/* Blue dot when on current page */}
-                            { isCurrentPage(item.path) && <div className='mt-[0.2rem] h-[0.3rem] w-[0.3rem] rounded-full bg-#iconBlue group-hover:hidden'></div>}
+                            { isCurrentPage(item.path) && <div className='mt-[0.3rem] h-[0.3rem] w-[0.3rem] rounded-full bg-#iconBlue group-hover:hidden'></div>}
                             {/* Label for the Icon, shows when hover */}
                             <p className={`pt-1 font-semibold text-[${item.textSize}] text-#iconBlue hidden group-hover:block`}>{item.name}</p>
                         </div>
