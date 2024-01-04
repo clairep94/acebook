@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { sendFriendRequest } from '../../api_calls/usersAPI';
+import { buttonInheritTW } from './buttonStyleStrings';
 
 export default function SendFriendRButton(props) {
 
@@ -27,8 +28,10 @@ export default function SendFriendRButton(props) {
 
   // ============ JSX UI ===========================================
   return (
-    <button onClick={handleClick}>
-        Send Friend Request
+    <button onClick={handleClick}
+    className={ buttonInheritTW }
+    >
+        Add Friend
     </button>
   )
 }

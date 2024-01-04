@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { unfriend } from '../../api_calls/usersAPI';
+import { buttonInheritTW } from './buttonStyleStrings';
 
 export default function UnfriendButton(props) {
 
@@ -27,7 +28,9 @@ export default function UnfriendButton(props) {
 
   // ============ JSX UI ===========================================
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick}
+    className={ buttonInheritTW }
+    >
         Unfriend
     </button>
   )
