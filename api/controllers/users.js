@@ -123,7 +123,7 @@ const UsersController = {
       )
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ message: 'Successful Friend Added in User Controllers', token: token, user: updatedUser });
+      res.status(200).json({ message: 'Successful Friend Added in User Controllers', token: token, user: updatedSessionUser });
   
     } catch (error) {
       console.log('Error in User Controllers - Friend Confirm:', error);

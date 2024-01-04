@@ -7,7 +7,7 @@ export default function AcceptFriendButton(props) {
   const token = props.token;
   const setToken = props.setToken;
   const targetUserID = props.targetUserID;
-  const setTargetUser = props.setTargetUser;
+  const setSessionUser = props.setSessionUser;
 
   // ========= BUTTON CLICK METHOD ======================
   const handleClick = async (event) => {
@@ -15,11 +15,11 @@ export default function AcceptFriendButton(props) {
       event.preventDefault();
 
       acceptFriendRequest(token, targetUserID)
-      .then(updatedTargetData => {
-        window.localStorage.setItem("token", updatedTargetData.token)
+      .then(updatedSessionUserData => {
+        window.localStorage.setItem("token", updatedSessionUserData.token)
         setToken(window.localStorage.getItem("token"))
 
-        setTargetUser(updatedTargetData.user);
+        setSessionUser(updatedSessionUserData.user);
       })
     }
   }

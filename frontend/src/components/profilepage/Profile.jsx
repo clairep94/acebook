@@ -25,29 +25,38 @@ export default function Profile({ navigate, token, setToken }) {
     const [user, setUser] = useState(null); // State to hold user data
 
     // SESSION USER:
-    const sessionUserID = getSessionUserID(token);
-    // const [sessionUser, setSessionUser] = useState(useFetchUserDataByID(sessionUserID)); // TODO this is not working.
+    let sessionUserID = getSessionUserID(token);
     const [sessionUser, setSessionUser] = useState(null); 
-
 
     // ================ FRIEND REQUEST / UNFRIEND BUTTONS ========================
     // TODO decide on whether or not user methods return .populated docs: if so, use
     // const inList = userDoc && userDoc.thisList.some(member => member._id === userID);
     const inList = (list, id) => {return (list.includes(id))}; // return true if list contains a targetID
-    const areFriends = user && inList(user.friends, sessionUserID); // if friends: UnfriendButton
+    const areFriends2 = sessionUser && inList(sessionUser.friends, userID);// if friends: UnfriendButton
     const receivedRequest = sessionUser && inList(sessionUser.requests, userID); // if received, Accept & Deny Buttons
     const sentRequest = user && inList(user.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
 
     // ---------------- LOGIC FOR DETERMINING BUTTON ---------------------
-    // TODO check syntax and update -- do I need to do in the JSX?
-    const ButtonSet = (areFriends ? (<UnfriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>) 
-                        : (receivedRequest ? (<>
-                                                <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
-                                                <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
-                                            </>) : (sentRequest ? (<UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>)
-                                                                : (<SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>))))
+    const ButtonSet = (<>
+                        {(!areFriends2 && receivedRequest) && 
+                            (<>
+                                <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
+                                <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
+                            </>)}
+                {(!areFriends2 && !receivedRequest && !sentRequest) && (<>
+                <SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+                </>)}
+                {(!areFriends2 && !receivedRequest && sentRequest) && (<>
+                <UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+                </>)}
+                {areFriends2 && <UnfriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>}
+    </>
+
+    )
+
 
     // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
+    // Profile owner
     useEffect(() => {
         if (token) {
             if (sessionUserID === userID) {
@@ -58,10 +67,11 @@ export default function Profile({ navigate, token, setToken }) {
                 window.localStorage.setItem("token", userData.token);
                 setToken(window.localStorage.getItem("token"));
                 setUser(userData.user);
+                console.log("Profile Owner ", userData.user)
             })
         }
     }, []);
-
+    // Session User
     useEffect(() => {
         if (token && sessionUserID) {
             findUser(token, sessionUserID)
@@ -69,7 +79,7 @@ export default function Profile({ navigate, token, setToken }) {
                 window.localStorage.setItem("token", userData.token)
                 setToken(window.localStorage.getItem("token"))
                 setSessionUser(userData.user);
-                console.log(userData.user);
+                console.log("SessionUser ", userData.user);
             })
         }
     },[])
@@ -121,25 +131,17 @@ export default function Profile({ navigate, token, setToken }) {
 
                     {/* INTRO and ADD/UNFRIEND BUTTON */}
                     <div className='w-full h-[14rem] bg-white rounded-xl p-2 shadow-md'>
-                         <p>Visibility tests:</p>
+                         {/* <p>Visibility tests:</p>
                          <p>{sessionUser.firstName}</p>
-                         <p>{sessionUser.friends}</p>
-                         <p>{sessionUser.requests.length}</p>
 
-                        <p>areFriends: {String(areFriends)}</p>
+                        <p>areFriends2: {String(areFriends2)}</p>
                         <p>receivedRequest: {String(receivedRequest)}</p>
                         <p>sentRequest: {String(sentRequest)}</p>
 
-                        <p>All Buttons Testing -- lift to a Friends Button component?</p>
-                        <SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
-                        <UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
-                        <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
-                        <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
-                        <UnfriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
                         
-                        <br></br>
+                        <br></br> */}
                         <div>
-                            <p>Final Button</p>
+                            <p className='font-bold'>Final Button</p>
                             {ButtonSet}
                         </div>
 
