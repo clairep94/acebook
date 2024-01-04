@@ -3,11 +3,11 @@ import LogInForm from './LoginForm';
 
 export default function LoginPopup({ navigate}) {
   const closeLoginPopup = () => {
-    navigate('/')
+    navigate('/welcome')
   }
 
   const goToRegister = () => {
-    navigate('/')
+    navigate('/welcome')
   }
 
   return (

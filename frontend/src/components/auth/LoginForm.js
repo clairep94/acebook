@@ -36,12 +36,12 @@ const LogInForm = ({ navigate, switchForms }) => {
       window.localStorage.setItem("token", data.token)
 
       // TEMP: No timeout login popup:
-      navigate('/home')
+      navigate('/')
 
       // FOR FUTURE USE IF HAVING TIMEOUT LOGIN POPUP:
       // Check the current location and navigate accordingly
-      if (location.pathname === '/') {
-        navigate('/home');
+      if (location.pathname === '/welcome') {
+        navigate('/');
       } else {
         // 
       }

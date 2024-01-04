@@ -37,7 +37,6 @@ export default function Navbar( {navigate, token, setToken} ) {
     const isCurrentPage = (path) => currentPath === path;
 
 
-
     // ===== ICONS FOR NAV BAR ===========
     const iconFunctions = [
         { 
@@ -99,6 +98,9 @@ export default function Navbar( {navigate, token, setToken} ) {
     ]
 
 
+    // ======= CHECKING IF CURRENT PAGE MATCHES THAT ICON ============
+    const friendRequests = userData && userData.requests.length ? true: false;
+    // TODO have to add a property to the map. "property" : "requests", "notifications", "unread_messages?"
 
 
 
