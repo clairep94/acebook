@@ -31,22 +31,49 @@ export default function FriendButtons(props) {
   const sentRequest = target && inList(target.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
 
 
-  // ============ JSX UI ===========================================
-  return (
-    <>
-      {(!areFriends && receivedRequest) && 
-        (<>
-            <AcceptFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
-            <DenyFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
-        </>)}
-      {(!areFriends && !receivedRequest && !sentRequest) && (<>
-      <SendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
-      </>)}
-      {(!areFriends && !receivedRequest && sentRequest) && (<>
-      <UnsendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
-      </>)}
-      {areFriends && <UnfriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>}
-    </>
+  // =============== BUTTON SETS ====================================
 
-  )
+  const MessageAndUnfriendButtons = areFriends && (
+    <>
+      <UnfriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
+    </>
+  );
+
+  const AcceptAndDenyButtons = !areFriends && receivedRequest && (
+    <>
+      <AcceptFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
+      <DenyFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
+    </>
+  );
+
+  const SendFriendRequestButton = !areFriends && !receivedRequest && !sentRequest && (
+    <SendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
+  );
+
+  const UnsendFriendRequestButton = !areFriends && !receivedRequest && sentRequest && (
+    <UnsendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
+  );
+
+// ============ JSX UI ===========================================
+return (
+  <>
+    {MessageAndUnfriendButtons}
+    {AcceptAndDenyButtons}
+    {SendFriendRequestButton}
+    {UnsendFriendRequestButton}
+  </>
+
+      // {/* {(!areFriends && receivedRequest) && 
+      //   (<>
+      //       <AcceptFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
+      //       <DenyFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
+      //   </>)}
+      // {(!areFriends && !receivedRequest && !sentRequest) && (<>
+      // <SendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
+      // </>)}
+      // {(!areFriends && !receivedRequest && sentRequest) && (<>
+      // <UnsendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
+      // </>)}
+      // {areFriends && <UnfriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>} */}
+)
 }
