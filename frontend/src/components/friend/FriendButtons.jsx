@@ -12,9 +12,9 @@ export default function FriendButtons(props) {
   const token = props.token;
   const setToken = props.setToken;
 
-  const userID = props.userID;
-  const user = props.user;
-  const setUser = props.setUser;
+  const targetID = props.targetID;
+  const target = props.target;
+  const setTarget = props.setTarget;
 
   const sessionUserID = props.sessionUserID;
   const sessionUser = props.sessionUser;
@@ -23,29 +23,29 @@ export default function FriendButtons(props) {
 
   // ================ FRIEND REQUEST / UNFRIEND BUTTONS LOGIC ========================
   // TODO decide on whether or not user methods return .populated docs: if so, use
-  // const inList = userDoc && userDoc.thisList.some(member => member._id === userID);
+  // const inList = userDoc && userDoc.thisList.some(member => member._id === targetID);
   
   const inList = (list, id) => {return (list.includes(id))}; // return true if list contains a targetID
-  const areFriends = sessionUser && inList(sessionUser.friends, userID);// if friends: UnfriendButton
-  const receivedRequest = sessionUser && inList(sessionUser.requests, userID); // if received, Accept & Deny Buttons
-  const sentRequest = user && inList(user.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
-  
+  const areFriends = sessionUser && inList(sessionUser.friends, targetID);// if friends: UnfriendButton
+  const receivedRequest = sessionUser && inList(sessionUser.requests, targetID); // if received, Accept & Deny Buttons
+  const sentRequest = target && inList(target.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
+
 
   // ============ JSX UI ===========================================
   return (
     <>
       {(!areFriends && receivedRequest) && 
         (<>
-            <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
-            <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
+            <AcceptFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
+            <DenyFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
         </>)}
       {(!areFriends && !receivedRequest && !sentRequest) && (<>
-      <SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+      <SendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
       </>)}
       {(!areFriends && !receivedRequest && sentRequest) && (<>
-      <UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+      <UnsendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
       </>)}
-      {areFriends && <UnfriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>}
+      {areFriends && <UnfriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>}
     </>
 
   )

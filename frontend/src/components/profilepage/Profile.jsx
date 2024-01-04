@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import getSessionUserID from '../../utilities/GetSessionUserID';
 import { findUser } from '../../api_calls/usersAPI';
 import LargeProfilePicture from '../user/LargeProfilePicture';
+import FriendButtons from '../friend/FriendButtons';
 
-import AcceptFriendButton from '../friend/AcceptFriendButton';
-import DenyFriendButton from '../friend/DenyFriendButton';
-import SendFriendButton from '../friend/SendFriendRequest';
-import UnsendFriendButton from '../friend/UnsendFriendRequest';
-import UnfriendButton from '../friend/UnfriendButton';
+// import AcceptFriendButton from '../friend/AcceptFriendButton';
+// import DenyFriendButton from '../friend/DenyFriendButton';
+// import SendFriendButton from '../friend/SendFriendRequest';
+// import UnsendFriendButton from '../friend/UnsendFriendRequest';
+// import UnfriendButton from '../friend/UnfriendButton';
 
 import useFetchUserDataByID from '../../utilities/GetSelectedUsersInfo';
 
@@ -22,52 +23,26 @@ export default function Profile({ navigate, token, setToken }) {
     // =========== STATE VARIABLES ==========================
     // PROFILE PAGE OWNER:
     const { userID } = useParams(); //ID of the profile page owner
-    const [user, setUser] = useState(null); // State to hold user data
+    const targetID = userID; // renamed variable for clarity
+    const [target, setTarget] = useState(null); // State to hold target data
 
     // SESSION USER:
     let sessionUserID = getSessionUserID(token);
     const [sessionUser, setSessionUser] = useState(null); 
 
-    // ================ FRIEND REQUEST / UNFRIEND BUTTONS ========================
-    // TODO decide on whether or not user methods return .populated docs: if so, use
-    // const inList = userDoc && userDoc.thisList.some(member => member._id === userID);
-    const inList = (list, id) => {return (list.includes(id))}; // return true if list contains a targetID
-    const areFriends = sessionUser && inList(sessionUser.friends, userID);// if friends: UnfriendButton
-    const receivedRequest = sessionUser && inList(sessionUser.requests, userID); // if received, Accept & Deny Buttons
-    const sentRequest = user && inList(user.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
-
-    // ---------------- LOGIC FOR DETERMINING BUTTON ---------------------
-    const ButtonSet = (<>
-                        {(!areFriends && receivedRequest) && 
-                            (<>
-                                <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
-                                <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
-                            </>)}
-                {(!areFriends && !receivedRequest && !sentRequest) && (<>
-                <SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
-                </>)}
-                {(!areFriends && !receivedRequest && sentRequest) && (<>
-                <UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
-                </>)}
-                {areFriends && <UnfriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>}
-    </>
-
-    )
-
-
     // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
     // Profile owner
     useEffect(() => {
         if (token) {
-            if (sessionUserID === userID) {
+            if (sessionUserID === targetID) {
                 navigate('/profile')
             }
-            findUser(token, userID)
-            .then(userData => {
-                window.localStorage.setItem("token", userData.token);
+            findUser(token, targetID)
+            .then(targetData => {
+                window.localStorage.setItem("token", targetData.token);
                 setToken(window.localStorage.getItem("token"));
-                setUser(userData.user);
-                console.log("Profile Owner ", userData.user)
+                setTarget(targetData.user);
+                console.log("Profile Owner ", targetData.user)
             })
         }
     }, []);
@@ -88,7 +63,7 @@ export default function Profile({ navigate, token, setToken }) {
 
 
     // ======================== JSX FOR COMPONENT ======================================
-    if (user && sessionUser) {
+    if (target && sessionUser) {
         return(
         <div className='w-10/12 h-full max-w-[60rem] min-w-[30rem] bg-slate-100 flex flex-col
         mx-auto
@@ -97,19 +72,19 @@ export default function Profile({ navigate, token, setToken }) {
             {/* COVER PHOTO */}
             <div className='w-full h-[18rem] relative'>
                 <img className='w-full h-full -z-10'
-                src={`https://picsum.photos/seed/a${user._id}/400/700?grayscale`}
-                alt={`${user.firstName} ${user.lastName} cover`}
+                src={`https://picsum.photos/seed/a${target._id}/400/700?grayscale`}
+                alt={`${target.firstName} ${target.lastName} cover`}
                 />
 
                 {/* NAME */}
                 <p className='absolute left-[13.2rem] bottom-4 z-10 font-semibold text-white text-[2rem]'
-                >{`${user.firstName} ${user.lastName}`}</p>
+                >{`${target.firstName} ${target.lastName}`}</p>
 
                 {/* PROFILE PICTURE */}
                 <div className='w-[11rem] h-[11rem] z-20 absolute
                 left-[1rem] top-[9.5rem]
                 '>
-                    <LargeProfilePicture id={user._id} name={`${user.firstName} ${user.lastName}`}/>
+                    <LargeProfilePicture id={target._id} name={`${target.firstName} ${target.lastName}`}/>
                 </div>
             </div>
 
@@ -131,26 +106,27 @@ export default function Profile({ navigate, token, setToken }) {
 
                     {/* INTRO and ADD/UNFRIEND BUTTON */}
                     <div className='w-full h-[14rem] bg-white rounded-xl p-2 shadow-md'>
-                         {/* <p>Visibility tests:</p>
-                         <p>{sessionUser.firstName}</p>
 
-                        <p>areFriends: {String(areFriends)}</p>
-                        <p>receivedRequest: {String(receivedRequest)}</p>
-                        <p>sentRequest: {String(sentRequest)}</p>
+                        {/* INTRO */}
 
-                        
-                        <br></br> */}
+                        {/* FRIEND BUTTONS */}
                         <div>
                             <p className='font-bold'>Final Button</p>
-                            {ButtonSet}
+                            <div className='flex flex-row items-center justify-between space-x-6'>
+                                <FriendButtons 
+                                token={token} setToken={setToken}
+                                targetID={targetID} target={target} setTarget={setTarget}
+                                sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}
+                                />
+                            </div>
                         </div>
 
                     </div>
 
                     {/* FRIENDS LIST */}
-                    {/* <div className='w-full h-[18rem] bg-white rounded-xl p-2 shadow-md'>
+                    <div className='w-full h-[18rem] bg-white rounded-xl p-2 shadow-md'>
                         Friends
-                    </div> */}
+                    </div>
 
                 </div>
 
@@ -158,11 +134,11 @@ export default function Profile({ navigate, token, setToken }) {
                 <div className='mx-2 mr-4 h-full w-7/12 flex flex-col space-y-3'>
 
                     <div className='w-full h-[4rem] bg-white rounded-xl p-2 shadow-md'>
-                        Write on {`${user.firstName}'s wall`}
+                        Write on {`${target.firstName}'s wall`}
                     </div>
 
                     <div className='w-full h-[4rem] bg-white rounded-xl p-2 shadow-md'>
-                        {`${user.firstName}'s posts`}
+                        {`${target.firstName}'s posts`}
                         <p>Change this to a map with each div as a card</p>
                     </div>
                 </div>
