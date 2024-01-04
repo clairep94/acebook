@@ -32,24 +32,24 @@ export default function Profile({ navigate, token, setToken }) {
     // TODO decide on whether or not user methods return .populated docs: if so, use
     // const inList = userDoc && userDoc.thisList.some(member => member._id === userID);
     const inList = (list, id) => {return (list.includes(id))}; // return true if list contains a targetID
-    const areFriends2 = sessionUser && inList(sessionUser.friends, userID);// if friends: UnfriendButton
+    const areFriends = sessionUser && inList(sessionUser.friends, userID);// if friends: UnfriendButton
     const receivedRequest = sessionUser && inList(sessionUser.requests, userID); // if received, Accept & Deny Buttons
     const sentRequest = user && inList(user.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
 
     // ---------------- LOGIC FOR DETERMINING BUTTON ---------------------
     const ButtonSet = (<>
-                        {(!areFriends2 && receivedRequest) && 
+                        {(!areFriends && receivedRequest) && 
                             (<>
                                 <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
                                 <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
                             </>)}
-                {(!areFriends2 && !receivedRequest && !sentRequest) && (<>
+                {(!areFriends && !receivedRequest && !sentRequest) && (<>
                 <SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
                 </>)}
-                {(!areFriends2 && !receivedRequest && sentRequest) && (<>
+                {(!areFriends && !receivedRequest && sentRequest) && (<>
                 <UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
                 </>)}
-                {areFriends2 && <UnfriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>}
+                {areFriends && <UnfriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>}
     </>
 
     )
@@ -134,7 +134,7 @@ export default function Profile({ navigate, token, setToken }) {
                          {/* <p>Visibility tests:</p>
                          <p>{sessionUser.firstName}</p>
 
-                        <p>areFriends2: {String(areFriends2)}</p>
+                        <p>areFriends: {String(areFriends)}</p>
                         <p>receivedRequest: {String(receivedRequest)}</p>
                         <p>sentRequest: {String(sentRequest)}</p>
 
