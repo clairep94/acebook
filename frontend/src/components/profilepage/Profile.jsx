@@ -4,8 +4,21 @@ import getSessionUserID from '../../utilities/GetSessionUserID';
 import { findUser } from '../../api_calls/usersAPI';
 import LargeProfilePicture from '../user/LargeProfilePicture';
 
-// FOR NOW FOCUSING ON 'OTHER PROFILE'
+import AcceptFriendButton from '../friend/AcceptFriendButton';
+import DenyFriendButton from '../friend/DenyFriendButton';
+import SendFriendButton from '../friend/SendFriendRequest';
+import UnsendFriendButton from '../friend/UnsendFriendRequest';
+import UnfriendButton from '../friend/UnfriendButton';
+
+import useFetchUserDataByID from '../../utilities/GetSelectedUsersInfo';
+
 export default function Profile({ navigate, token, setToken }) {
+    //TODO test with internet
+    //TODO copy to 2-space 
+    //TODO determine whether or not to use .populate.
+    //TODO if so: will need to consider .some method; whether to add .populate to friend methods OR aggregate OR manually push/pull User from the UserDoc.
+    //TODO if not: will need to do .aggregate for users where necessary... or new method where I run a list of userIDs and return userDocs.
+    //TODO eg. .aggregate only the user.firstName, user.lastName, user.profilePicURL...
 
     // =========== STATE VARIABLES ==========================
     // PROFILE PAGE OWNER:
@@ -14,14 +27,26 @@ export default function Profile({ navigate, token, setToken }) {
 
     // SESSION USER:
     const sessionUserID = getSessionUserID(token);
-    //   const sessionUser = useFetchUserDataByID(sessionUserID);
+    const [sessionUser, setSessionUser] = useState(useFetchUserDataByID(sessionUserID))
+    // const sessionUser = useFetchUserDataByID(sessionUserID);
 
-    // FRIEND REQUEST / UNFRIEND / ACCEPT or DENY FRIENDS BUTTONS ================
-    // If the profile owner and user are friends (they will be mutually friends): Unfriend Button & Message Button
-    // const areFriends = sessionUser && sessionUser.friends.some(user => user._id === userId);
-    // Else if the profile owner HAS sent the user a friend request: 
-    // const requestRecieved = sessionUser && sessionUser.requests.some(user => user._id === userId);
-    // Else neither user has sent a friend request: Friend Request / Cancel Friend Request Button
+    // ================ FRIEND REQUEST / UNFRIEND BUTTONS ========================
+    // TODO decide on whether or not user methods return .populated docs: if so, use
+    // const inList = userDoc && userDoc.thisList.some(member => member._id === userID);
+    const inList = (list, id) => {return (list.some(id))}; // return true if list contains a targetID
+    const areFriends = user && inList(user.friends, sessionUserID); // if friends: UnfriendButton
+    const receivedRequest = sessionUser && inList(sessionUser.friends, userID); // if received, Accept & Deny Buttons
+    const sentRequest = user && inList(user.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
+
+    // ---------------- LOGIC FOR DETERMINING BUTTON ---------------------
+    // TODO check syntax and update -- do I need to do in the JSX?
+    const ButtonSet = (areFriends ? (<UnfriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>) 
+                        : (receivedRequest ? (<>
+                                                <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+                                                <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
+                                            </>)
+                            : (sentRequest ? (<UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>)
+                                            :(<SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>))))
 
     // ========= COMPONENT MOUNT: Set Profile Owner Data ===============
     useEffect(() => {
@@ -40,8 +65,7 @@ export default function Profile({ navigate, token, setToken }) {
 
 
 
-
-    // ================= JSX FOR COMPONENT ================================
+    // ======================== JSX FOR COMPONENT ======================================
     if (user) {
         return(
         <div className='w-10/12 h-full max-w-[60rem] min-w-[30rem] bg-slate-100 flex flex-col
@@ -85,7 +109,22 @@ export default function Profile({ navigate, token, setToken }) {
 
                     {/* INTRO and ADD/UNFRIEND BUTTON */}
                     <div className='w-full h-[14rem] bg-white rounded-xl p-2 shadow-md'>
-                        Intro OR ADD FRIEND BUTTONS
+                        <p>Visibility tests:</p>
+                        <p>areFriends: {areFriends}</p>
+                        <p>receivedRequest: {receivedRequest}</p>
+                        <p>sentRequest: {sentRequest}</p>
+
+                        <p>All Buttons Testing -- lift to a Friends Button component?</p>
+                        <SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+                        <UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+                        <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+                        <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
+                        <UnfriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
+
+                        <div>
+                            {ButtonSet}
+                        </div>
+
                     </div>
 
                     {/* FRIENDS LIST */}

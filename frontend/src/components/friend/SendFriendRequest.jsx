@@ -7,7 +7,7 @@ export default function SendFriendRButton(props) {
   const token = props.token;
   const setToken = props.setToken;
   const targetUserID = props.targetUserID;
-  const setTargetUser = props.setTargetUserData;
+  const setTargetUser = props.setTargetUser;
 
   // ========= BUTTON CLICK METHOD ======================
   const handleClick = async (event) => {

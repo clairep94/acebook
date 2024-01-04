@@ -7,7 +7,7 @@ export default function DenyFriendButton(props) {
   const token = props.token;
   const setToken = props.setToken;
   const targetUserID = props.targetUserID;
-  const setSessionUser = props.setSessionUserData;
+  const setSessionUser = props.setSessionUser;
 
   // ========= BUTTON CLICK METHOD ======================
   const handleClick = async (event) => {
