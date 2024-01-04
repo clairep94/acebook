@@ -13,7 +13,6 @@ import UnfriendButton from '../friend/UnfriendButton';
 import useFetchUserDataByID from '../../utilities/GetSelectedUsersInfo';
 
 export default function Profile({ navigate, token, setToken }) {
-    //TODO test with internet
     //TODO copy to 2-space 
     //TODO determine whether or not to use .populate.
     //TODO if so: will need to consider .some method; whether to add .populate to friend methods OR aggregate OR manually push/pull User from the UserDoc.
@@ -27,19 +26,17 @@ export default function Profile({ navigate, token, setToken }) {
 
     // SESSION USER:
     const sessionUserID = getSessionUserID(token);
-    const [sessionUser, setSessionUser] = useState(useFetchUserDataByID(sessionUserID))
-    // const sessionUser = useFetchUserDataByID(sessionUserID);
+    // const [sessionUser, setSessionUser] = useState(useFetchUserDataByID(sessionUserID)); // TODO this is not working.
+    const [sessionUser, setSessionUser] = useState(null); 
+
 
     // ================ FRIEND REQUEST / UNFRIEND BUTTONS ========================
     // TODO decide on whether or not user methods return .populated docs: if so, use
     // const inList = userDoc && userDoc.thisList.some(member => member._id === userID);
-    // const inList = (list, id) => {return (list.includes(id))}; // return true if list contains a targetID
-    const areFriends = user && user.friends.includes(sessionUserID);
-    const receivedRequest = sessionUser && sessionUser.requests.includes(userID);
-    const sentRequest = user && user.requests.includes(sessionUserID);
-    // const areFriends = user && inList(user.friends, sessionUserID); // if friends: UnfriendButton
-    // const receivedRequest = sessionUser && inList(sessionUser.friends, userID); // if received, Accept & Deny Buttons
-    // const sentRequest = user && inList(user.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
+    const inList = (list, id) => {return (list.includes(id))}; // return true if list contains a targetID
+    const areFriends = user && inList(user.friends, sessionUserID); // if friends: UnfriendButton
+    const receivedRequest = sessionUser && inList(sessionUser.requests, userID); // if received, Accept & Deny Buttons
+    const sentRequest = user && inList(user.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
 
     // ---------------- LOGIC FOR DETERMINING BUTTON ---------------------
     // TODO check syntax and update -- do I need to do in the JSX?
@@ -47,11 +44,10 @@ export default function Profile({ navigate, token, setToken }) {
                         : (receivedRequest ? (<>
                                                 <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
                                                 <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
-                                            </>)
-                            : (sentRequest ? (<UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>)
-                                            :(<SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>))))
+                                            </>) : (sentRequest ? (<UnsendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>)
+                                                                : (<SendFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>))))
 
-    // ========= COMPONENT MOUNT: Set Profile Owner Data ===============
+    // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
     useEffect(() => {
         if (token) {
             if (sessionUserID === userID) {
@@ -66,10 +62,23 @@ export default function Profile({ navigate, token, setToken }) {
         }
     }, []);
 
+    useEffect(() => {
+        if (token && sessionUserID) {
+            findUser(token, sessionUserID)
+            .then(userData => {
+                window.localStorage.setItem("token", userData.token)
+                setToken(window.localStorage.getItem("token"))
+                setSessionUser(userData.user);
+                console.log(userData.user);
+            })
+        }
+    },[])
+
+
 
 
     // ======================== JSX FOR COMPONENT ======================================
-    if (user) {
+    if (user && sessionUser) {
         return(
         <div className='w-10/12 h-full max-w-[60rem] min-w-[30rem] bg-slate-100 flex flex-col
         mx-auto
@@ -113,6 +122,10 @@ export default function Profile({ navigate, token, setToken }) {
                     {/* INTRO and ADD/UNFRIEND BUTTON */}
                     <div className='w-full h-[14rem] bg-white rounded-xl p-2 shadow-md'>
                          <p>Visibility tests:</p>
+                         <p>{sessionUser.firstName}</p>
+                         <p>{sessionUser.friends}</p>
+                         <p>{sessionUser.requests.length}</p>
+
                         <p>areFriends: {String(areFriends)}</p>
                         <p>receivedRequest: {String(receivedRequest)}</p>
                         <p>sentRequest: {String(sentRequest)}</p>
@@ -123,7 +136,6 @@ export default function Profile({ navigate, token, setToken }) {
                         <AcceptFriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
                         <DenyFriendButton token={token} setToken={setToken} targetUserID={userID} setSessionUser={setSessionUser}/>
                         <UnfriendButton token={token} setToken={setToken} targetUserID={userID} setTargetUser={setUser}/>
-                        
                         
                         <br></br>
                         <div>
