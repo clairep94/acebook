@@ -29,7 +29,7 @@ export default function UnsendFriendButton(props) {
   // ============ JSX UI ===========================================
   return (
     <button onClick={handleClick}>
-        Send Friend Request
+        Unsend Friend Request
     </button>
   )
 }
