@@ -54,4 +54,97 @@ const allUsers = async (token) => {
     }
 }
 
-export { signUp, findUser, allUsers };
+const sendFriendRequest = async (token, userID) => {
+    try {
+        const response = await fetch(`/users/${userID}/send_request`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({})
+        });
+        const userData = await response.json();
+        return userData
+    } catch (error) {
+        console.error("UsersAPI.sendFriendRequest:", error);
+        throw error;
+    }
+}
+
+
+const unsendFriendRequest = async (token, userID) => {
+    try {
+        const response = await fetch(`/users/${userID}/unsend_request`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({})
+        });
+        const userData = await response.json();
+        return userData
+    } catch (error) {
+        console.error("UsersAPI.unsendFriendRequest:", error);
+        throw error;
+    }
+}
+
+
+const acceptFriendRequest = async (token, userID) => {
+    try {
+        const response = await fetch(`/users/${userID}/accept_request`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({})
+        });
+        const userData = await response.json();
+        return userData
+    } catch (error) {
+        console.error("UsersAPI.acceptFriendRequest:", error);
+        throw error;
+    }
+}
+
+const denyFriendRequest = async (token, userID) => {
+    try {
+        const response = await fetch(`/users/${userID}/deny_request`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({})
+        });
+        const userData = await response.json();
+        return userData;
+    } catch (error) {
+        console.error("UsersAPI.acceptFriendRequest:", error);
+        throw error;
+    }
+}
+
+const unfriend = async (token, userID) => {
+    try {
+        const response = await fetch(`/users/${userID}/unfriend`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({})
+        });
+        const userData = await response.json();
+        return userData;
+    } catch (error) {
+        console.error("UsersAPI.unfriend:", error);
+        throw error;
+    }
+}
+
+
+export { signUp, findUser, allUsers, sendFriendRequest, unsendFriendRequest, acceptFriendRequest, denyFriendRequest, unfriend };
