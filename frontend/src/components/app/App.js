@@ -10,8 +10,7 @@ import {
 } from "react-router-dom";
 import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LandingPage from '../../pages/LandingPage';
-import ProfilePage from '../../pages/ProfilePage';
-import OwnProfilePage from '../../pages/OwnProfilePage';
+import ProtectedRoutes from './ProtectedRoutes';
 
 
 const App = () => {
@@ -20,23 +19,13 @@ const App = () => {
     return (
         <Routes>
 
-          {/* ====== NO AUTHENTICATION - Sign Up or Login: ======== */}
-          <Route path='/welcome'  element={ !isLoggedIn() ?         
-            <LandingPage navigate={navigate}/> : <Navigate to='/'/>}/>
-
-
           {/* ====== AUTHENTICATION ONLY - Search, Messages, Friends, Notifications : ======== */}
-          {/* ------ FEED ------  */}
-          <Route path='/'  element={ isLoggedIn() ? 
-              <HomePage navigate={ navigate }/> : <Navigate to="/welcome"/>}/>
-          
-          {/* ------  PROFILE PAGE ------  */}
-          <Route path='/users/:userID'  element={ isLoggedIn() ? 
-              <ProfilePage navigate={ navigate }/> : <Navigate to="/welcome"/>}/>
-          {/* ------  SESSION USER'S PROFILE PAGE ------  */}
-          <Route path='/profile'  element={ isLoggedIn() ? 
-              <OwnProfilePage navigate={ navigate }/> : <Navigate to="/welcome"/>}/>
+          <Route path='/*'  element={ isLoggedIn() ?         
+            <ProtectedRoutes navigate={navigate}/> : <Navigate to='/welcome'/>}/>
 
+          {/* ====== NO AUTHENTICATION - Sign Up or Login: ======== */}
+          <Route path='/welcome' element={ !isLoggedIn() ?
+            <LandingPage navigate={navigate}/> : <Navigate to='/'/>}/>
 
         </Routes>
     );

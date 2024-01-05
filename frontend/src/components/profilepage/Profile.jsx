@@ -7,7 +7,7 @@ import FriendButtons from '../friend/FriendButtons';
 
 import useFetchUserDataByID from '../../utilities/GetSelectedUsersInfo';
 
-export default function Profile({ navigate, token, setToken }) {
+export default function Profile({ navigate, token, setToken, sessionUserID, sessionUser, setSessionUser }) {
   //TODO determine whether or not to use .populate.
   //TODO if so: will need to consider .some method; whether to add .populate to friend methods OR aggregate OR manually push/pull User from the UserDoc.
   //TODO if not: will need to do .aggregate for users where necessary... or new method where I run a list of userIDs and return userDocs.
@@ -19,9 +19,9 @@ export default function Profile({ navigate, token, setToken }) {
   const targetID = userID; // renamed variable for clarity
   const [target, setTarget] = useState(null); // State to hold target data
 
-  // SESSION USER:
-  let sessionUserID = getSessionUserID(token);
-  const [sessionUser, setSessionUser] = useState(null); 
+  // // SESSION USER:
+  // let sessionUserID = getSessionUserID(token);
+  // const [sessionUser, setSessionUser] = useState(null); 
 
   // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
   // Profile owner
@@ -39,18 +39,18 @@ export default function Profile({ navigate, token, setToken }) {
       })
     }
   }, []);
-  // Session User
-  useEffect(() => {
-    if (token && sessionUserID) {
-      findUser(token, sessionUserID)
-      .then(userData => {
-          window.localStorage.setItem("token", userData.token)
-          setToken(window.localStorage.getItem("token"))
-          setSessionUser(userData.user);
-          console.log("SessionUser ", userData.user);
-      })
-    }
-  },[])
+  // // Session User
+  // useEffect(() => {
+  //   if (token && sessionUserID) {
+  //     findUser(token, sessionUserID)
+  //     .then(userData => {
+  //         window.localStorage.setItem("token", userData.token)
+  //         setToken(window.localStorage.getItem("token"))
+  //         setSessionUser(userData.user);
+  //         console.log("SessionUser ", userData.user);
+  //     })
+  //   }
+  // },[])
 
   // ======================== JSX FOR COMPONENT =============================================
   if (target && sessionUser) {
