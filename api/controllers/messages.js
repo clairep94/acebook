@@ -2,7 +2,7 @@ const Message = require("../models/message");
 // const TokenGenerator = require("../lib/token_generator");
 
 const MessagesController = {
-    AddMessage: async (req, res) => { // returns a chat doc with author.populate
+    AddMessage: async (req, res) => { // returns a chat doc with author.populate with _id, firstName, lastName, profilePicURL
         const newMessage = new Message({
             chatID: req.body.chatID,
             author: req.body.authorID,
@@ -25,7 +25,7 @@ const MessagesController = {
             res.status(500).json(error);
         }
     },
-    GetMessages: async (req, res) => { // Returns array of Chat docs, with author.populate OR []
+    GetMessages: async (req, res) => { // Returns array of Chat docs, with author.populate with _id, firstName, lastName, profilePicURL OR []
         const chatID = req.params.chatID;
         try {
             const messages = await Message.find(

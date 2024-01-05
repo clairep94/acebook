@@ -7,7 +7,7 @@ const TokenGenerator = require("../lib/token_generator");
 // Restrict Create -- cannot create if not friends? -- import users controller.
 
 const ChatsController = {
-    Create: async (req, res) => { // returns the new Chat obj, with members.populate
+    Create: async (req, res) => { // returns the new Chat obj, with members.populate with _id, firstName, lastName, profilePicURL
         const newChat = new Chat({
             members: [req.body.senderID, req.body.receiverID]
         });
@@ -26,7 +26,7 @@ const ChatsController = {
             res.status(500).json(error);
         }
     },
-    UserInbox: async (req, res) => { // returns a list of Chat obj, with members.populate OR []
+    UserInbox: async (req, res) => { // returns a list of Chat obj, with members.populate with _id, firstName, lastName, profilePicURL OR []
         const userID = req.params.userID;        
         try {
             const chats = await Chat.find({
@@ -44,7 +44,7 @@ const ChatsController = {
             res.status(500).json(error);
         }
     },
-    FindChat: async (req, res) => { // returns a Chat obj, OR null
+    FindChat: async (req, res) => { // returns a Chat obj, with members.populate with _id, firstName, lastName, profilePicURL OR null
         const firstUserID = req.params.firstID;
         const secondUserID = req.params.secondID;
                 try {
