@@ -101,21 +101,21 @@ export default function Profile({ navigate, token, setToken }) {
         className='mx-2 ml-4 h-full w-5/12 flex flex-col space-y-3'>
 
         {/* INTRO and ADD/UNFRIEND BUTTON */}
-        <div className='w-full h-[14rem] bg-white rounded-xl p-3 
-        shadow-md flex flex-col space-y-5 items-center'>
+        <div className='w-full h-[14rem] md:h-[14.5rem] bg-white rounded-xl p-3 pb-5 
+        shadow-md flex flex-col space-y-2 items-center'>
           {/* INTRO */}
-          <div aria-label='bio' id='bio' >
+          <div aria-label='bio' id='bio'>
             <h3 aria-label='bio' id='bio-header'
-              className='font-bold text-md'>
+              className='font-bold text-lg'>
               Intro:
             </h3>
             <p aria-label='bio' id='bio-text' 
-              className='text-sm text-gray-800'>
+              className='text-sm text-gray-800 h-[7rem] md:h-[7.5rem] lg:h-[8rem] overflow-scroll'>
               {target.bio}
             </p>
           </div>
           {/* FRIEND BUTTONS */}
-          <div className='flex flex-row items-center w-full h-10 sm:w-10/12'>
+          <div className='flex flex-row items-center w-full h-10 sm:w-11/12 md:w-10/12'>
               <FriendButtons 
                 token={token} setToken={setToken}
                 targetID={targetID} target={target} setTarget={setTarget}

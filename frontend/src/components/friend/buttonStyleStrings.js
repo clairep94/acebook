@@ -1,4 +1,4 @@
-const singleSmallButtonSizing = `w-full h-full text-[0.75rem] rounded-md`
+const singleSmallButtonSizing = `w-full sm:w-11/12 h-full text-[0.75rem] py-3 rounded-md`
 const doubleSmallButtonSizing = `w-1/2 h-full text-[0.75rem] py-2 rounded-md`
 
 const positiveButtonCols = `
