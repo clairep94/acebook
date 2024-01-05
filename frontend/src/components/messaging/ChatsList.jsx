@@ -1,24 +1,25 @@
-import React, { useEffect, useState, useRef } from 'react'
-import InputEmoji from 'react-input-emoji';
+import React from 'react'
+import ChatCard from './ChatCard';
 
 
-export default function ChatWindow({ 
-  navigate, token, setToken, sessionUserID, sessionUser, setSessionUser, 
-  selectedConvo, setSendMessage, receivedMessage}) {
-
-  // =========== STATE VARIABLES ==========================
-  const conversationPartner = selectedConvo?.members?.find((user) => user._id !== sessionUserID) // Conversation model uses .populate
-
-  // Loading messages, sending messages, receiving messages:
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
-
-
-  // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
+export default function ChatsList({ sessionUserID, checkOnlineStatus, chatsList, setCurrentChat }) {
 
   // ======================== JSX FOR COMPONENT =============================================
+
   return (
-  <>CHAT WINDOW</>
+    <div className='flex flex-col'>
+      {chatsList.map((chat) => (
+        <div className='bg-red-100' key={chat._id}>
+            <ChatCard chatData={chat} sessionUserID={sessionUserID} online={checkOnlineStatus}/>
+        </div>
+      ))}
+    </div>
 )
+        // <div onClick={() => {
+        //   setCurrentChat(chat);
+        //   console.log(`Choosing chat: ${chat._id}`)
+        // }}>
+        //   <ChatCard chatData={chat} sessionUserID={sessionUserID} online={checkOnlineStatus(chat)}/>
+        // </div>
 
 }
