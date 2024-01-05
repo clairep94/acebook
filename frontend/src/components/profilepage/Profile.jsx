@@ -56,7 +56,7 @@ export default function Profile({ navigate, token, setToken }) {
   if (target && sessionUser) {
     return (
       <div 
-      className='w-10/12 h-full max-w-[60rem] min-w-[30rem] bg-slate-100 flex flex-col mx-auto'>
+      className='w-10/12 h-full max-w-[60rem] min-w-[30rem] bg-slate-100 flex flex-col mx-auto overflow-auto'>
 
       {/* ========================= UPPER PORTION ==============================  */}
         {/* COVER PHOTO */}
