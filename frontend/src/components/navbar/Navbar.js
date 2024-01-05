@@ -1,26 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import { AiFillHome, AiFillMessage } from "react-icons/ai";
-import { FiSearch } from "react-icons/fi";
 import { FaUserFriends } from "react-icons/fa";
 import { IoNotifications, IoLogOut } from "react-icons/io5";
-import getSessionUserID from '../../utilities/GetSessionUserID';
 import { findUser } from '../../api_calls/usersAPI';
 import SearchBar from '../searchbar/SearchBar';
 
-export default function Navbar( {navigate, token, setToken} ) {
+export default function Navbar( {navigate, token, setToken, sessionUserID, sessionUser, setSessionUser} ) {
 
     // ======== FIND AND SET THE USER DATA UPON COMPONENT LOAD =============
-    let sessionUserID = getSessionUserID(token);
-    const [userData, setUserData] = useState(null);
-
     useEffect(() => {
         if (token && sessionUserID) {
             findUser(token, sessionUserID)
-            .then(userData => {
-                window.localStorage.setItem("token", userData.token)
+            .then(sessionUser => {
+                window.localStorage.setItem("token", sessionUser.token)
                 setToken(window.localStorage.getItem("token"))
-                setUserData(userData.user);
-                console.log(userData.user);
+                setSessionUser(sessionUser.user);
+                console.log(sessionUser.user);
             })
         }
     },[])
@@ -99,7 +94,7 @@ export default function Navbar( {navigate, token, setToken} ) {
 
 
     // ======= CHECKING IF CURRENT PAGE MATCHES THAT ICON ============
-    const friendRequests = userData && userData.requests.length ? true: false;
+    const friendRequests = sessionUser && sessionUser.requests.length ? true: false;
     // TODO have to add a property to the map. "property" : "requests", "notifications", "unread_messages?"
 
 
@@ -134,7 +129,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             {/* ================= RIGHT SIDE OF NAVBAR ================= */}
             <div className='flex flex-row'>
 
-            {userData && 
+            {sessionUser && 
                 <>
                 {/* NAVBAR ICONS */}
                 <div className='flex flex-row items-center justify-between h-[2.8rem] w-[14rem] md:w-[16.5rem] mr-4 '>
@@ -160,11 +155,11 @@ export default function Navbar( {navigate, token, setToken} ) {
                 <a href='/profile' className='flex flex-row items-center mr-3'>
                     <img className='h-11 w-11 rounded-full
                         object-cover border-[0.2rem] border-white shadow-lg mr-2' 
-                        src={`https://picsum.photos/seed/${userData._id}/300`}
+                        src={`https://picsum.photos/seed/${sessionUser._id}/300`}
                         alt='profile'
                     />
                    <p className='font-semibold text-#textDarkGrey hidden lg:block'>
-                        {`${userData.firstName} ${userData.lastName}`}
+                        {`${sessionUser.firstName} ${sessionUser.lastName}`}
                     </p>
                 </a>
                 </>

@@ -4,17 +4,17 @@ import getSessionUserID from '../../utilities/GetSessionUserID';
 import { findUser } from '../../api_calls/usersAPI';
 import LargeProfilePicture from '../user/LargeProfilePicture';
 
-export default function OwnProfile({ navigate, token, setToken }) {
+export default function OwnProfile({navigate, token, setToken, sessionUserID, sessionUser, setSessionUser}) {
 
     // TODO change this to conditional rendering for re-factoring...
 
     // =========== STATE VARIABLES ==========================
     // PROFILE PAGE OWNER:
     // const { userID } = useParams(); //ID of the profile page owner
-    const [user, setUser] = useState(null); // State to hold user data
+    // const [user, setUser] = useState(null); // State to hold user data
 
     // SESSION USER:
-    const sessionUserID = getSessionUserID(token);
+    // const sessionUserID = getSessionUserID(token);
     //   const sessionUser = useFetchUserDataByID(sessionUserID);
 
     // FRIEND REQUEST / UNFRIEND / ACCEPT or DENY FRIENDS BUTTONS ================
@@ -25,22 +25,22 @@ export default function OwnProfile({ navigate, token, setToken }) {
     // Else neither user has sent a friend request: Friend Request / Cancel Friend Request Button
 
     // ========= COMPONENT MOUNT: Set Profile Owner Data ===============
-    useEffect(() => {
-        if (token) {
-            findUser(token, sessionUserID)
-            .then(userData => {
-                window.localStorage.setItem("token", userData.token);
-                setToken(window.localStorage.getItem("token"));
-                setUser(userData.user);
-            })
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (token) {
+    //         findUser(token, sessionUserID)
+    //         .then(userData => {
+    //             window.localStorage.setItem("token", userData.token);
+    //             setToken(window.localStorage.getItem("token"));
+    //             setUser(userData.user);
+    //         })
+    //     }
+    // }, []);
 
 
 
 
     // ================= JSX FOR COMPONENT ================================
-    if (user) {
+    if (sessionUser) {
         return(
         <div className='w-10/12 h-full max-w-[60rem] min-w-[30rem] bg-slate-100 flex flex-col
         mx-auto
@@ -49,19 +49,19 @@ export default function OwnProfile({ navigate, token, setToken }) {
             {/* COVER PHOTO */}
             <div className='w-full h-[18rem] relative'>
                 <img className='w-full h-full -z-10'
-                src={`https://picsum.photos/seed/a${user._id}/400/700?grayscale`}
+                src={`https://picsum.photos/seed/a${sessionUser._id}/400/700?grayscale`}
                 alt={`Your cover`}
                 />
 
                 {/* NAME */}
                 <p className='absolute left-[13.2rem] bottom-4 z-10 font-semibold text-white text-[2rem]'
-                >{`${user.firstName} ${user.lastName}`}</p>
+                >{`${sessionUser.firstName} ${sessionUser.lastName}`}</p>
 
                 {/* PROFILE PICTURE */}
                 <div className='w-[11rem] h-[11rem] z-20 absolute
                 left-[1rem] top-[9.5rem]
                 '>
-                    <LargeProfilePicture id={user._id} name={`${user.firstName} ${user.lastName}`}/>
+                    <LargeProfilePicture id={sessionUser._id} name={`${sessionUser.firstName} ${sessionUser.lastName}`}/>
                 </div>
             </div>
 

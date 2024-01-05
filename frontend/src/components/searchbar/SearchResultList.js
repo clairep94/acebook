@@ -11,7 +11,7 @@ export default function SearchResultList({ results, navigate }) {
             flex flex-col w-full
             shadow-lg rounded-xl 
             mt-2 z-50
-            overflow-y-scroll max-h-215'>
+            overflow-y-scroll max-h-40'>
                 {results.map ((result, id) => (
                     <div key={id}>
                         <SearchResultCard navigate={navigate} result={result}/>
