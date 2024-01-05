@@ -1,5 +1,5 @@
 const Message = require("../models/message");
-// const TokenGenerator = require("../lib/token_generator");
+const TokenGenerator = require("../lib/token_generator");
 
 const MessagesController = {
     AddMessage: async (req, res) => { // returns a chat doc with author.populate with _id, firstName, lastName, profilePicURL
@@ -10,15 +10,13 @@ const MessagesController = {
         });
         try {
             const result = await newMessage.save()
-
-            // Populate the 'author' field with user data
             const populatedMessage = await Message.populate(result, {
                 path: 'author',
                 select: '_id firstName lastName profilePictureURL', 
             });
-            // const token = TokenGenerator.jsonwebtoken(req.user_id) 
-            // res.status(201).json({ message: 'Successful New Message in Messages Controller', token:token, newMessage: populatedMessage, });
-            res.status(201).json({ message: 'Successful New Message in Messages Controller', newMessage: result });
+            const token = TokenGenerator.jsonwebtoken(req.user_id) 
+            res.status(201).json({ message: 'Successful New Message in Messages Controller', token:token, newMessage: populatedMessage, });
+            // res.status(201).json({ message: 'Successful New Message in Messages Controller', newMessage: result });
 
         } catch (error) {
             console.log('Error in Message Controller - AddMessage:', error);
@@ -34,9 +32,9 @@ const MessagesController = {
             .populate({
                 path: 'author',
                 select: '_id firstName lastName profilePictureURL'})
-            // const token = TokenGenerator.jsonwebtoken(req.user_id) 
-            // res.status(200).json({ message: 'Successful All Messages in Messages Controller', allMessages: messages, token: token }); 
-            res.status(200).json({ message: 'Successful All Messages in Messages Controller', allMessages: messages }); 
+            const token = TokenGenerator.jsonwebtoken(req.user_id) 
+            res.status(200).json({ message: 'Successful All Messages in Messages Controller', allMessages: messages, token: token }); 
+            // res.status(200).json({ message: 'Successful All Messages in Messages Controller', allMessages: messages }); 
 
         } catch (error) {
             console.log('Error in Message Controller - GetMessages:', error);

@@ -17,9 +17,12 @@ import ChatWindow from '../messaging/ChatWindow';
 
 
 const ProtectedRoutes = ({navigate}) => {
+  // =========== LIFTED STATES: SessionUser & Token ==============
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const sessionUserID = getSessionUserID(token);
   const [sessionUser, setSessionUser] = useState(null);
+
+  // =========== LIFTED STATES: Chats, Messages ==============
 
   // ===== LOGIN POPUP & TIMEOUT CHECKER: COPY TO EVERY AUTHENTICATED PAGE: ==========   
   const showLoginPopup = !useSessionTimeOutCheck(); // checks every 5 seconds if token is valid and changes true/false

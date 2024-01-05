@@ -13,13 +13,13 @@ const ChatsController = {
         });
         try {
             const result = await newChat.save();
-            // const token = TokenGenerator.jsonwebtoken(req.user_id) // TODO change back to Auth Only once all testing is done
+            const token = TokenGenerator.jsonwebtoken(req.user_id) 
             const populatedChat = await Chat.populate(result,{
                 path: 'members',
                 select: '_id firstName lastName profilePictureURL'
             })
-            // res.status(201).json({ message: 'Successful New Chat in Chats Controller', token: token, chat: result }); // TODO change back to Auth Only once all testing is done
-            res.status(201).json({ message: 'Successful New Chat in Chats Controller', chat: result });
+            res.status(201).json({ message: 'Successful New Chat in Chats Controller', token: token, chat: populatedChat }); 
+            // res.status(201).json({ message: 'Successful New Chat in Chats Controller', chat: populatedChat });
             
         } catch (error) {
             console.log('Error in Chat Controller - Create:', error);
@@ -35,9 +35,9 @@ const ChatsController = {
             .populate({
                 path: 'members',
                 select: '_id firstName lastName profilePictureURL'})
-            // const token = TokenGenerator.jsonwebtoken(req.user_id); // TODO change back to Auth Only once all testing is done
-            // res.status(201).json({ message: 'Successful Inbox In Chats Controller', token, chats: chats }); // TODO change back to Auth Only once all testing is done
-            res.status(200).json({ message: 'Successful Inbox In Chats Controller', chats: chats });
+            const token = TokenGenerator.jsonwebtoken(req.user_id); 
+            res.status(201).json({ message: 'Successful Inbox In Chats Controller', token, chats: chats }); 
+            // res.status(200).json({ message: 'Successful Inbox In Chats Controller', chats: chats });
             
         } catch (error) {
             console.log('Error in Chat Controller - UserInbox:', error);
@@ -54,9 +54,9 @@ const ChatsController = {
             .populate({
                 path: 'members',
                 select: '_id firstName lastName profilePictureURL'})
-            const token = TokenGenerator.jsonwebtoken(req.user_id); // TODO change back to Auth Only once all testing is done
-            // res.status(201).json({ message: 'Successful Chat Found In Chats Controller', token, chat: chat }); // TODO change back to Auth Only once all testing is done
-            res.status(200).json({ message: 'Successful Chat Found In Chats Controller', chat: chat });
+            const token = TokenGenerator.jsonwebtoken(req.user_id);
+            res.status(201).json({ message: 'Successful Chat Found In Chats Controller', token, chat: chat }); 
+            // res.status(200).json({ message: 'Successful Chat Found In Chats Controller', chat: chat });
             
         } catch (error) {
             console.log('Error in Chat Controller - FindChat:', error);
