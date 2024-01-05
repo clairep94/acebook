@@ -19,7 +19,7 @@ import getSessionUserID from '../../utilities/GetSessionUserID';
 import Feed from '../feed/Feed';
 
 
-const AuthenticatedRoutes = ({navigate}) => {
+const ProtectedRoutes = ({navigate}) => {
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const sessionUserID = getSessionUserID(token);
   const [sessionUser, setSessionUser] = useState(null);
@@ -43,20 +43,20 @@ const AuthenticatedRoutes = ({navigate}) => {
   
   // =========== JSX FOR COMPONENT =================================== 
   return (
-    <div className='h-screen w-screen bg-#bgGrey dark:bg-gray-900 flex flex-col'>
+  <div className='h-screen w-screen bg-#bgGrey dark:bg-gray-900 flex flex-col'>
 
-      {/* LOGGED OUT POPUP */}
-      {showLoginPopup && 
-        <div className='z-40 absolute h-full w-full'>
-          <LoginPopup navigate={navigate} />
-        </div>
-        }
-
-      {/* NAV BAR */}
-      <div className='z-30'>
-        <Navbar navigate={navigate} token={token} setToken={setToken} 
-          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={sessionUser}/>
+    {/* LOGGED OUT POPUP */}
+    {showLoginPopup && 
+      <div className='z-40 absolute h-full w-full'>
+        <LoginPopup navigate={navigate} />
       </div>
+      }
+
+    {/* NAV BAR */}
+    <div className='z-30'>
+      <Navbar navigate={navigate} token={token} setToken={setToken} 
+        sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>
+    </div>
 
     {/* MAIN PAGE */}
     <div className='w-screen h-screen flex flex-row '>
@@ -67,16 +67,16 @@ const AuthenticatedRoutes = ({navigate}) => {
           {/* ------ FEED ------  */}
           <Route path='/'  element={
             <Feed navigate={navigate} token={token} setToken={setToken} 
-          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={sessionUser}/>} />
+          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>} />
           
           {/* ------  PROFILE PAGE ------  */}
-          <Route path="/users/:userID/*"  element={ 
+          <Route path="/users/:userID"  element={ 
             <Profile navigate={navigate} token={token} setToken={setToken} 
-          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={sessionUser}/>}/>
+          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>}/>
           {/* ------  SESSION USER'S PROFILE PAGE ------  */}
           <Route path='/profile'  element={ 
             <OwnProfile navigate={navigate} token={token} setToken={setToken} 
-          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={sessionUser}/>}/>
+          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>}/>
 
           {/* ------  MESSAGES ------  */}
           {/* <Route path='/messages'  element={ 
@@ -91,10 +91,10 @@ const AuthenticatedRoutes = ({navigate}) => {
         MESSENGER
       </div>
 
-      </div>
     </div>
+  </div>
 
   );
 }
 
-export default AuthenticatedRoutes;
+export default ProtectedRoutes;

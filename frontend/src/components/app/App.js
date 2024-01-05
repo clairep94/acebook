@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LandingPage from '../../pages/LandingPage';
-import AuthenticatedRoutes from './AuthenticatedRoutes';
+import ProtectedRoutes from './ProtectedRoutes';
 
 
 const App = () => {
@@ -20,8 +20,8 @@ const App = () => {
         <Routes>
 
           {/* ====== AUTHENTICATION ONLY - Search, Messages, Friends, Notifications : ======== */}
-          <Route path='/'  element={ isLoggedIn() ?         
-            <AuthenticatedRoutes navigate={navigate}/> : <Navigate to='/welcome'/>}/>
+          <Route path='/*'  element={ isLoggedIn() ?         
+            <ProtectedRoutes navigate={navigate}/> : <Navigate to='/welcome'/>}/>
 
           {/* ====== NO AUTHENTICATION - Sign Up or Login: ======== */}
           <Route path='/welcome' element={ !isLoggedIn() ?
