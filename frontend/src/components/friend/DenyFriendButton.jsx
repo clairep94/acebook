@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { denyFriendRequest } from '../../api_calls/usersAPI';
-import { buttonInheritTW, negativeButtonTW } from './buttonStyleStrings';
 
 export default function DenyFriendButton(props) {
 
@@ -28,12 +27,10 @@ export default function DenyFriendButton(props) {
 
   // ============ JSX UI ===========================================
   return (
-    <div className={negativeButtonTW}>
       <button onClick={handleClick}
-      className={ buttonInheritTW }
+      className={ props.styling }
       >
           Deny
       </button>
-    </div>
   )
 }

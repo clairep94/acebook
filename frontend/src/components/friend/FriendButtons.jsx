@@ -4,7 +4,8 @@ import DenyFriendButton from './DenyFriendButton';
 import SendFriendButton from './SendFriendRequest';
 import UnsendFriendButton from './UnsendFriendRequest';
 import UnfriendButton from './UnfriendButton';
-import { positiveButtonTW, negativeButtonTW, buttonInheritTW } from './buttonStyleStrings';
+import { singleSmallButtonSizing, doubleSmallButtonSizing, positiveButtonCols, negativeButtonCols } from '../friend/buttonStyleStrings'
+
 
 export default function FriendButtons(props) {
   // TODO add 'message' button later on to (areFriends)
@@ -34,44 +35,41 @@ export default function FriendButtons(props) {
   // =============== BUTTON SETS ====================================
 
   const MessageAndUnfriendButtons = areFriends && (
-    <>
-      <UnfriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
-    </>
+      <UnfriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}
+      styling={singleSmallButtonSizing + negativeButtonCols}/>
   );
 
   const AcceptAndDenyButtons = !areFriends && receivedRequest && (
-    <div className='w-full '>
-      <div aria-label='Accept friend request' 
-      className={positiveButtonTW}>
-        <AcceptFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
-      </div>
+    <>
+      <AcceptFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}
+      styling={doubleSmallButtonSizing + positiveButtonCols}
+      />
+      <DenyFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}
+      styling={doubleSmallButtonSizing + negativeButtonCols}/>
+    </>
 
-      <div aria-label='Deny friend request' >
-        <DenyFriendButton token={token} setToken={setToken} targetUserID={targetID} setSessionUser={setSessionUser}/>
-      </div>
-    </div>
   );
 
   const SendFriendRequestButton = !areFriends && !receivedRequest && !sentRequest && (
-    <div aria-label='Add friend' className={positiveButtonTW}>
-      <SendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>
-    </div>
+      <SendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}
+      styling={singleSmallButtonSizing + positiveButtonCols}
+      />
+
   );
 
   const UnsendFriendRequestButton = !areFriends && !receivedRequest && sentRequest && (
-    <div aria-label='Unsend friend request' className={negativeButtonTW}>
-      <UnsendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}/>      
-    </div>
+      <UnsendFriendButton token={token} setToken={setToken} targetUserID={targetID} setTargetUser={setTarget}
+      styling={singleSmallButtonSizing + negativeButtonCols}/>      
   );
 
 
 // ============ JSX UI ===========================================
 return (
-  <>
+  <div className='flex flex-row items-center justify-between w-full space-x-1 md:space-x-2'>
     {MessageAndUnfriendButtons}
     {AcceptAndDenyButtons}
     {SendFriendRequestButton}
     {UnsendFriendRequestButton}
-  </>
+  </div>
 )
 }

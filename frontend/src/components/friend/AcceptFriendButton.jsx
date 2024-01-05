@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { acceptFriendRequest } from '../../api_calls/usersAPI';
-import { buttonInheritTW } from './buttonStyleStrings';
 
 export default function AcceptFriendButton(props) {
 
@@ -28,10 +27,10 @@ export default function AcceptFriendButton(props) {
 
   // ============ JSX UI ===========================================
   return (
-    <button onClick={handleClick}
-    className={ buttonInheritTW }
-    >
+      <button onClick={handleClick}
+      className={ props.styling }
+      >
         Confirm
-    </button>
+      </button>
   )
 }

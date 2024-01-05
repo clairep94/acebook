@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { unsendFriendRequest } from '../../api_calls/usersAPI';
-import { buttonInheritTW } from './buttonStyleStrings';
 
 export default function UnsendFriendButton(props) {
 
@@ -29,10 +28,10 @@ export default function UnsendFriendButton(props) {
 
   // ============ JSX UI ===========================================
   return (
-    <button onClick={handleClick}
-    className={ buttonInheritTW }
-    >
-        Cancel Request
-    </button>
+      <button onClick={handleClick}
+      className={ props.styling }
+      >
+        Cancel request
+      </button>
   )
 }
