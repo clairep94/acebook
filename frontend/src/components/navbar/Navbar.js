@@ -51,6 +51,17 @@ export default function Navbar( {navigate, token, setToken} ) {
             textSize:"0.55rem"
         },
         {   
+            name: "Messages",
+            handleClick: () => {
+                navigate("/messages");
+            },
+            path: '/messages',
+            icon: <AiFillMessage />,
+            translateY: 0,
+            size: "1.5rem",
+            textSize:"0.52rem"
+        },
+        {   
             name: "Requests",
             handleClick: () => {
                 navigate("/friend_requests");
@@ -71,17 +82,6 @@ export default function Navbar( {navigate, token, setToken} ) {
             translateY: 0,
             size: "1.55rem",
             textSize:"0.5rem"
-        },
-        {   
-            name: "Messages",
-            handleClick: () => {
-                navigate("/messages");
-            },
-            path: '/messages',
-            icon: <AiFillMessage />,
-            translateY: 0,
-            size: "1.5rem",
-            textSize:"0.52rem"
         },
         {   
             name: "Logout",

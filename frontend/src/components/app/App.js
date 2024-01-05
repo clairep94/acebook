@@ -12,6 +12,7 @@ import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LandingPage from '../../pages/LandingPage';
 import ProfilePage from '../../pages/ProfilePage';
 import OwnProfilePage from '../../pages/OwnProfilePage';
+import MessengerPage from '../../pages/MessengerPage';
 
 
 const App = () => {
@@ -36,6 +37,11 @@ const App = () => {
           {/* ------  SESSION USER'S PROFILE PAGE ------  */}
           <Route path='/profile'  element={ isLoggedIn() ? 
               <OwnProfilePage navigate={ navigate }/> : <Navigate to="/welcome"/>}/>
+
+          {/* ------  MESSAGES ------  */}
+          <Route path='/messages'  element={ isLoggedIn() ? 
+              <MessengerPage navigate={ navigate }/> : <Navigate to="/welcome"/>}/>
+          
 
 
         </Routes>
