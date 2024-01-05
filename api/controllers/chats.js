@@ -14,7 +14,10 @@ const ChatsController = {
         try {
             const result = await newChat.save();
             // const token = TokenGenerator.jsonwebtoken(req.user_id) // TODO change back to Auth Only once all testing is done
-            await result.populate('members', '-password').execPopulate();
+            const populatedChat = await Chat.populate(result,{
+                path: 'members',
+                select: '_id firstName lastName profilePictureURL'
+            })
             // res.status(201).json({ message: 'Successful New Chat in Chats Controller', token: token, chat: result }); // TODO change back to Auth Only once all testing is done
             res.status(201).json({ message: 'Successful New Chat in Chats Controller', chat: result });
             
@@ -29,7 +32,9 @@ const ChatsController = {
             const chats = await Chat.find({
                 members: { $in: [userID] }
             })
-            .populate('members', '-password') 
+            .populate({
+                path: 'members',
+                select: '_id firstName lastName profilePictureURL'})
             // const token = TokenGenerator.jsonwebtoken(req.user_id); // TODO change back to Auth Only once all testing is done
             // res.status(201).json({ message: 'Successful Inbox In Chats Controller', token, chats: chats }); // TODO change back to Auth Only once all testing is done
             res.status(200).json({ message: 'Successful Inbox In Chats Controller', chats: chats });
@@ -46,7 +51,9 @@ const ChatsController = {
             const chat = await Chat.findOne({
                 members: { $all: [firstUserID, secondUserID] } 
             })
-            .populate('members', '-password') 
+            .populate({
+                path: 'members',
+                select: '_id firstName lastName profilePictureURL'})
             const token = TokenGenerator.jsonwebtoken(req.user_id); // TODO change back to Auth Only once all testing is done
             // res.status(201).json({ message: 'Successful Chat Found In Chats Controller', token, chat: chat }); // TODO change back to Auth Only once all testing is done
             res.status(200).json({ message: 'Successful Chat Found In Chats Controller', chat: chat });

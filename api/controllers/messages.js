@@ -14,7 +14,7 @@ const MessagesController = {
             // Populate the 'author' field with user data
             const populatedMessage = await Message.populate(result, {
                 path: 'author',
-                select: '-password', // Exclude password field from populated user
+                select: '_id firstName lastName profilePictureURL', // Exclude password field from populated user
             });
             // const token = TokenGenerator.jsonwebtoken(req.user_id) 
             // res.status(201).json({ message: 'Successful New Message in Messages Controller', token:token, newMessage: populatedMessage, });
@@ -31,7 +31,9 @@ const MessagesController = {
             const messages = await Message.find(
                 { chatID: chatID },
             )
-            .populate('author', '-password')
+            .populate({
+                path: 'author',
+                select: '_id firstName lastName profilePictureURL'})
             // const token = TokenGenerator.jsonwebtoken(req.user_id) 
             // res.status(200).json({ message: 'Successful All Messages in Messages Controller', allMessages: messages, token: token }); 
             res.status(200).json({ message: 'Successful All Messages in Messages Controller', allMessages: messages }); 
