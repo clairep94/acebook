@@ -8,6 +8,9 @@ const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 const signupRouter = require("./routes/signup");
+const chatsRouter = require("./routes/chats");
+const messagesRouter = require("./routes/messages");
+
 
 const app = express();
 
@@ -42,9 +45,13 @@ const tokenChecker = (req, res, next) => {
 // ===== ROUTES =====
 app.use("/tokens", authenticationRouter);
 app.use("/signup", signupRouter);
+app.use("/messages", messagesRouter);
+app.use("/chats", chatsRouter);
 
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/users", tokenChecker, usersRouter);
+// app.use("/messages", tokenChecker, messagesRouter); //TODO change back after testing
+// app.use("/chats", tokenChecker, chatsRouter); //TODO change back after testing
 
 
 // catch 404 and forward to error handler

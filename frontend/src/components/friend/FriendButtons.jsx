@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import AcceptFriendButton from './AcceptFriendButton';
-import DenyFriendButton from './DenyFriendButton';
-import SendFriendButton from './SendFriendRequest';
-import UnsendFriendButton from './UnsendFriendRequest';
-import UnfriendButton from './UnfriendButton';
+import AcceptFriendButton from './friend_buttons/AcceptFriendButton';
+import DenyFriendButton from './friend_buttons/DenyFriendButton';
+import SendFriendButton from './friend_buttons/SendFriendRequest';
+import UnsendFriendButton from './friend_buttons/UnsendFriendRequest';
+import UnfriendButton from './friend_buttons/UnfriendButton';
 import { singleSmallButtonSizing, doubleSmallButtonSizing, positiveButtonCols, negativeButtonCols } from '../friend/buttonStyleStrings'
 
 

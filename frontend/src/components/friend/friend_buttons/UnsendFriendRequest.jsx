@@ -1,25 +1,26 @@
 import React, { useState } from 'react'
-import { acceptFriendRequest } from '../../api_calls/usersAPI';
+import { unsendFriendRequest } from '../../../api_calls/usersAPI';
 
-export default function AcceptFriendButton(props) {
+export default function UnsendFriendButton(props) {
 
   // =========== STATE VARIABLES =======================
   const token = props.token;
   const setToken = props.setToken;
   const targetUserID = props.targetUserID;
-  const setSessionUser = props.setSessionUser;
+  const setTargetUser = props.setTargetUser;
+  
 
   // ========= BUTTON CLICK METHOD ======================
   const handleClick = async (event) => {
     if (token) {
       event.preventDefault();
 
-      acceptFriendRequest(token, targetUserID)
-      .then(updatedSessionUserData => {
-        window.localStorage.setItem("token", updatedSessionUserData.token)
+      unsendFriendRequest(token, targetUserID)
+      .then(updatedTargetData => {
+        window.localStorage.setItem("token", updatedTargetData.token)
         setToken(window.localStorage.getItem("token"))
 
-        setSessionUser(updatedSessionUserData.user);
+        setTargetUser(updatedTargetData.user);
       })
     }
   }
@@ -30,7 +31,7 @@ export default function AcceptFriendButton(props) {
       <button onClick={handleClick}
       className={ props.styling }
       >
-        Confirm
+        Cancel request
       </button>
   )
 }

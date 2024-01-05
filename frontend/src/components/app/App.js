@@ -1,7 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
-import Feed from '../feed/Feed';
-import HomePage from '../../pages/HomePage';
+import React from 'react';
 import {
   useNavigate,
   Routes,

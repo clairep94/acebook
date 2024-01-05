@@ -7,16 +7,13 @@ import { useSessionTimeOutCheck } from '../../utilities/LoggedInCheck';
 import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LoginPopup from '../auth/LoginPopup';
 import { findUser } from '../../api_calls/usersAPI';
-import HomePage from '../../pages/HomePage';
-import ProfilePage from '../../pages/ProfilePage';
-import OwnProfilePage from '../../pages/OwnProfilePage';
-import MessengerPage from '../../pages/MessengerPage';
 
 import Profile from '../profilepage/Profile';
 import OwnProfile from '../profilepage/OwnProfile';
 import Navbar from '../navbar/Navbar';
 import getSessionUserID from '../../utilities/GetSessionUserID';
 import Feed from '../feed/Feed';
+import ChatWindow from '../messaging/ChatWindow';
 
 
 const ProtectedRoutes = ({navigate}) => {
@@ -79,9 +76,9 @@ const ProtectedRoutes = ({navigate}) => {
           sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>}/>
 
           {/* ------  MESSAGES ------  */}
-          {/* <Route path='/messages'  element={ 
-            <MessengerPage navigate={navigate} token={token} setToken={setToken} 
-            sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={sessionUser}/>}/> */}
+          <Route path='/messages'  element={ 
+            <ChatWindow navigate={navigate} token={token} setToken={setToken} 
+            sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={sessionUser}/>}/>
         </Routes>
       </div>
 
