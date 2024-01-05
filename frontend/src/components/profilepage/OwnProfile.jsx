@@ -6,38 +6,6 @@ import LargeProfilePicture from '../user/LargeProfilePicture';
 
 export default function OwnProfile({navigate, token, setToken, sessionUserID, sessionUser, setSessionUser}) {
 
-    // TODO change this to conditional rendering for re-factoring...
-
-    // =========== STATE VARIABLES ==========================
-    // PROFILE PAGE OWNER:
-    // const { userID } = useParams(); //ID of the profile page owner
-    // const [user, setUser] = useState(null); // State to hold user data
-
-    // SESSION USER:
-    // const sessionUserID = getSessionUserID(token);
-    //   const sessionUser = useFetchUserDataByID(sessionUserID);
-
-    // FRIEND REQUEST / UNFRIEND / ACCEPT or DENY FRIENDS BUTTONS ================
-    // If the profile owner and user are friends (they will be mutually friends): Unfriend Button & Message Button
-    // const areFriends = sessionUser && sessionUser.friends.some(user => user._id === userId);
-    // Else if the profile owner HAS sent the user a friend request: 
-    // const requestRecieved = sessionUser && sessionUser.requests.some(user => user._id === userId);
-    // Else neither user has sent a friend request: Friend Request / Cancel Friend Request Button
-
-    // ========= COMPONENT MOUNT: Set Profile Owner Data ===============
-    // useEffect(() => {
-    //     if (token) {
-    //         findUser(token, sessionUserID)
-    //         .then(userData => {
-    //             window.localStorage.setItem("token", userData.token);
-    //             setToken(window.localStorage.getItem("token"));
-    //             setUser(userData.user);
-    //         })
-    //     }
-    // }, []);
-
-
-
 
     // ================= JSX FOR COMPONENT ================================
     if (sessionUser) {

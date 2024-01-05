@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { denyFriendRequest } from '../../api_calls/usersAPI';
+import { denyFriendRequest } from '../../../api_calls/usersAPI';
 
 export default function DenyFriendButton(props) {
 

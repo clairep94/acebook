@@ -1,26 +1,25 @@
 import React, { useState } from 'react'
-import { unfriend } from '../../api_calls/usersAPI';
+import { sendFriendRequest } from '../../../api_calls/usersAPI';
 
-
-export default function UnfriendButton(props) {
+export default function SendFriendRButton(props) {
 
   // =========== STATE VARIABLES =======================
   const token = props.token;
   const setToken = props.setToken;
   const targetUserID = props.targetUserID;
-  const setSessionUser = props.setSessionUser;
+  const setTargetUser = props.setTargetUser;
 
   // ========= BUTTON CLICK METHOD ======================
   const handleClick = async (event) => {
     if (token) {
       event.preventDefault();
 
-      unfriend(token, targetUserID)
-      .then(updatedSessionUserData => {
-        window.localStorage.setItem("token", updatedSessionUserData.token)
+      sendFriendRequest(token, targetUserID)
+      .then(updatedTargetData => {
+        window.localStorage.setItem("token", updatedTargetData.token)
         setToken(window.localStorage.getItem("token"))
 
-        setSessionUser(updatedSessionUserData.user);
+        setTargetUser(updatedTargetData.user);
       })
     }
   }
@@ -31,7 +30,7 @@ export default function UnfriendButton(props) {
       <button onClick={handleClick}
       className={ props.styling }
       >
-          Unfriend
+        Add friend
       </button>
   )
 }
