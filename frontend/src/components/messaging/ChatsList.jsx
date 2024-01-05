@@ -8,11 +8,16 @@ export default function ChatsList({ sessionUserID, checkOnlineStatus, chatsList,
 
   return (
     <div className='flex flex-col'>
-      {chatsList.map((chat) => (
-        <div className='bg-red-100' key={chat._id}>
-            <ChatCard chatData={chat} sessionUserID={sessionUserID} online={checkOnlineStatus}/>
-        </div>
-      ))}
+      <h3 className='text-[1.2rem] font-bold translate-x-2'>
+        Contacts
+      </h3>
+      <div className='flex flex-col overflow-auto'>
+        {chatsList.map((chat) => (
+          <div key={chat._id}>
+              <ChatCard chatData={chat} sessionUserID={sessionUserID} online={checkOnlineStatus} setCurrentChat={setCurrentChat}/>
+          </div>
+        ))}
+      </div>
     </div>
 )
         // <div onClick={() => {

@@ -86,10 +86,10 @@ export default function Profile({ navigate, token, setToken, sessionUserID, sess
         <div aria-label='page options' id='options'
           className='flex flex-row bg-white h-[3.3rem] shadow-lg z-10 items-center justify-between px-12 '>
           <div className='w-14'></div>
-          <p>Timeline</p>
+          {/* <p>Timeline</p>
           <p>About</p>
           <p>Friends</p>
-          <p>Photos</p>
+          <p>Photos</p> */}
         </div>
 
     {/* ========================= LOWER PORTION ====================================== */}

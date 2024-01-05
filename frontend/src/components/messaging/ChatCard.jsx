@@ -1,37 +1,44 @@
 import React, { useEffect, useState, useRef } from 'react'
+import ProfilePicture from '../user/ProfilePicture';
 
 
-export default function ChatCard({chatData, sessionUserID, online}) {
+export default function ChatCard({chatData, sessionUserID, online, setCurrentChat}) {
+
+  const handleClick = () => {
+    console.log(chatData._id)
+    setCurrentChat(chatData)
+  }
+  
+
   // =========== STATE VARIABLES ==========================
-  // const chatData = props.chatData;
-  // const sessionUserID = props.sessionUserID;
   const conversationPartner = chatData.members.find((user) => user._id !== sessionUserID);
-  // const online = props.online;
-
 
 
   // ======================== JSX FOR COMPONENT =============================================
   return (
     <>
-        <div className="bg-red-100 hover:curser-pointer hover:bg-[#80808038]" >
-            <div>
-                {online && <div style={{backgroundColor: "greenyellow", borderRadius: "50%",
-                  position: "absolute", left: "2rem", width: "1rem", height:"1rem"
-                }}></div>}
-
-                <img alt='small pfp' 
-                    src={`https://picsum.photos/seed/${conversationPartner?._id}/300`} 
-                    className='followerImage'
-                    style={{width:'50px', height:'50px'}}
-                />
-                <div className='name' style={{fontSize: "0.8rem", fontFamily: "'Arial', sans-serif"}}>
-                    <span>{`${conversationPartner.firstName} ${conversationPartner.lastName}`}</span>
-                    <span style={{color: "grey"}}>{online? "Online" : "Offline"}</span>
+        <div className="flex flex-col items-center " >
+            <div className='flex flex-row w-full rounded-2xl p-2 pr-6 my-2 hover:curser-pointer hover:bg-[#80808038] group'
+            onClick={handleClick}
+            >
+                <div className='w-[3.3rem] h-[3.3rem] mr-3 relative'>
+                  {online && 
+                  <div className='bg-lime-400 w-4 h-4 rounded-full absolute left-9 bottom-0 '
+                  />}
+                  <ProfilePicture id={conversationPartner._id} name={conversationPartner.firstName + ` ` + conversationPartner.lastName}/>
                 </div>
-            
+                <div className='flex flex-col justify-center'>
+                    <span className='text-md font-medium translate-y-[0.35rem]'>
+                      {`${conversationPartner.firstName} ${conversationPartner.lastName}`}
+                    </span>
+                    <span className='text-[13px]'
+                      style={{color: "grey"}}>
+                      {online? "Online" : "Offline"}
+                    </span>
+                </div>
             </div>
-        </div>
         <hr style={{width: '85%', border: '0.1px solid #ececec'}}/>
+        </div>
     </>
 )
 

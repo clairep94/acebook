@@ -21,6 +21,11 @@ import ChatWindow from '../messaging/ChatWindow';
 
 const ProtectedRoutes = ({navigate}) => {
 
+  const nav = (path) => {
+    navigate(path);
+    setCurrentChat(null);
+  }
+
   // =========== TOKEN & SESSION USER DATA =======================
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const sessionUserID = getSessionUserID(token);
@@ -87,7 +92,7 @@ const ProtectedRoutes = ({navigate}) => {
   
   // =================== JSX FOR COMPONENT =================================== 
   return (
-  <div className='h-screen w-screen bg-#bgGrey dark:bg-gray-900 flex flex-col'>
+  <div className='h-screen w-screen bg-slate-100 dark:bg-gray-900 flex flex-col'>
 
     {/* LOGGED OUT POPUP */}
     {showLoginPopup && 
@@ -103,10 +108,10 @@ const ProtectedRoutes = ({navigate}) => {
     </div>
 
     {/* MAIN PAGE */}
-    <div className='w-screen h-screen flex flex-row '>
+    <div className='w-screen h-screen flex flex-row'>
     
       {/* MAIN DIV */}
-      <div className='w-full h-full'>
+      <div className='w-full h-full '>
         <Routes>
           {/* ------ FEED ------  */}
           <Route path='/'  element={
@@ -125,25 +130,16 @@ const ProtectedRoutes = ({navigate}) => {
           {/* ------  MESSAGES ------  */}
           <Route path='/messages'  element={ 
             <ChatWindow navigate={navigate} token={token} setToken={setToken} 
-            sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={sessionUser}/>}/>
+            sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={sessionUser}
+            currentChat={currentChat}
+            />}/>
         </Routes>
       </div>
 
       {/* CHATSLIST DIV - Search Friends and See list of chats, see which friends are online */}
-      {/* <div className='flex flex-row h-full sm:w-[28rem]  md:w-[30.5rem] lg:w-[34.5rem] px-4
-      border-l-2'> */}
-      <div className='flex flex-col h-full bg-slate-300 w-[20rem]'>
-      sessionUserID: {sessionUserID}
-      {/* {chatsList.map((chat) => (
-        <div className='bg-red-100' key={chat._id}>
-          <div className='text-sm text-black'>
-            {chat._id}
-          </div>
-        </div>
-      ))} */}
-  <ChatsList sessionUserID={sessionUserID} checkOnlineStatus={checkOnlineStatus} chatsList={chatsList} setCurrentChat={setCurrentChat} />
-</div>
-
+      <div className='flex flex-col h-11/12 w-[25rem] m-4 px-8 bg-white pt-10 rounded-2xl shadow-md'>
+        <ChatsList sessionUserID={sessionUserID} checkOnlineStatus={checkOnlineStatus} chatsList={chatsList} setCurrentChat={setCurrentChat} />
+      </div>
 
     </div>
   </div>
