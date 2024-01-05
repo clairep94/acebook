@@ -2,9 +2,9 @@ const Message = require("../models/message");
 // const TokenGenerator = require("../lib/token_generator");
 
 const MessagesController = {
-    AddMessage: async (req, res) => {
+    AddMessage: async (req, res) => { // returns a chat doc with author.populate
         const newMessage = new Message({
-            chat_id: req.body.chatID,
+            chatID: req.body.chatID,
             author: req.body.authorID,
             body: req.body.body
         });
@@ -25,11 +25,11 @@ const MessagesController = {
             res.status(500).json(error);
         }
     },
-    GetMessages: async (req, res) => {
+    GetMessages: async (req, res) => { // Returns array of Chat docs, with author.populate OR []
         const chatID = req.params.chatID;
         try {
             const messages = await Message.find(
-                { chat_id: chatID },
+                { chatID: chatID },
             )
             .populate('author', '-password')
             // const token = TokenGenerator.jsonwebtoken(req.user_id) 
@@ -40,7 +40,13 @@ const MessagesController = {
             console.log('Error in Message Controller - GetMessages:', error);
             res.status(500).json(error);
         }
-    }
+    },
+    // MarkAsRead: async (req, res) => {
+    //     const messageID = req.params.messageID;
+    //     try {
+
+    //     }
+    // }
 
 }
 

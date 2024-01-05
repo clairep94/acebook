@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const MessageSchema = new mongoose.Schema({
   chatID: {
-    type: [mongoose.Schema.Types.ObjectId],
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Chat'
   },
   author: {
@@ -11,6 +11,10 @@ const MessageSchema = new mongoose.Schema({
   },
   body: {
     type: String,
+  },
+  read: {
+    type: Boolean,
+    default: false,
   }
 },
 {
