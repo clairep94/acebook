@@ -21,21 +21,21 @@ const App = () => {
         <Routes>
 
           {/* ====== NO AUTHENTICATION - Sign Up or Login: ======== */}
-          <Route path='/'  element={ !isLoggedIn() ?         
-            <LandingPage navigate={navigate}/> : <Navigate to='/home'/>}/>
+          <Route path='/welcome'  element={ !isLoggedIn() ?         
+            <LandingPage navigate={navigate}/> : <Navigate to='/'/>}/>
 
 
           {/* ====== AUTHENTICATION ONLY - Search, Messages, Friends, Notifications : ======== */}
           {/* ------ FEED ------  */}
-          <Route path='/home'  element={ isLoggedIn() ? 
-              <HomePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+          <Route path='/'  element={ isLoggedIn() ? 
+              <HomePage navigate={ navigate }/> : <Navigate to="/welcome"/>}/>
           
           {/* ------  PROFILE PAGE ------  */}
           <Route path='/users/:userID'  element={ isLoggedIn() ? 
-              <ProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+              <ProfilePage navigate={ navigate }/> : <Navigate to="/welcome"/>}/>
           {/* ------  SESSION USER'S PROFILE PAGE ------  */}
           <Route path='/profile'  element={ isLoggedIn() ? 
-              <OwnProfilePage navigate={ navigate }/> : <Navigate to="/"/>}/>
+              <OwnProfilePage navigate={ navigate }/> : <Navigate to="/welcome"/>}/>
 
 
         </Routes>

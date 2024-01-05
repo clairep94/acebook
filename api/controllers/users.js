@@ -36,7 +36,11 @@ const UsersController = {
       const user = await User.findOne( //changed from find so that it is not an array
         {_id: userID},
       )
-      //TODO .populate... 
+      //TODO .populate? or aggregate? figure out asap.
+      // .populate('user_id', '-password')
+      // .populate('friends', '-password')
+      // .populate('requests', '-password')
+
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({user: user, token: token, message: "UsersController.FindByID successful"})
 
@@ -53,6 +57,8 @@ const UsersController = {
 
 
   // ======== FRIENDS FEATURE ================================
+  // TODO need to add .populate to each of these, or figure out another way to update.
+
   // -------- FRIEND REQUEST - SEND/UNSEND --------------------
   // checking if a friend request has already been sent happens in the frontend, rather than the backend (vs with Likes in the backend)
   SendFriendRequest: async (req, res) => {
@@ -117,7 +123,7 @@ const UsersController = {
       )
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ message: 'Successful Friend Added in User Controllers', token: token, user: updatedUser });
+      res.status(200).json({ message: 'Successful Friend Added in User Controllers', token: token, user: updatedSessionUser });
   
     } catch (error) {
       console.log('Error in User Controllers - Friend Confirm:', error);

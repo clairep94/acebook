@@ -30,7 +30,7 @@ export default function ProfilePage({navigate}) {
       </div>
 
       {/* MAIN PAGE */}
-      <div className='w-screen h-screen flex flex-row'>
+      <div className='w-screen h-screen flex flex-row '>
 
           {/* MAIN DIV - Profile Page */}
           <div className='w-full h-full'>
@@ -38,7 +38,7 @@ export default function ProfilePage({navigate}) {
           </div>
 
           {/* MESSENGER DIV - Online friends */}
-          <div className='flex flex-row items-center justify-between h-full w-[36rem]  md:w-[38.5rem] lg:w-[42.5rem] px-4
+          <div className='flex flex-row items-center justify-between h-full sm:w-[28rem]  md:w-[30.5rem] lg:w-[34.5rem] px-4
           border-l-2'>
             MESSENGER
           </div>

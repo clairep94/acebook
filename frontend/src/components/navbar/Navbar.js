@@ -37,15 +37,14 @@ export default function Navbar( {navigate, token, setToken} ) {
     const isCurrentPage = (path) => currentPath === path;
 
 
-
     // ===== ICONS FOR NAV BAR ===========
     const iconFunctions = [
         { 
             name: "Home",
             handleClick: () => {
-                navigate("/home");
+                navigate("/");
             },
-            path: '/home',
+            path: '/',
             icon: <AiFillHome />,
             translateY: 0,
             size: "1.55rem",
@@ -88,7 +87,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             name: "Logout",
             handleClick: () => {
                 window.localStorage.removeItem("token")
-                navigate('/')
+                navigate('/welcome')
                 //TODO add: disconnect from socket
             },
             icon: <IoLogOut />,
@@ -99,6 +98,9 @@ export default function Navbar( {navigate, token, setToken} ) {
     ]
 
 
+    // ======= CHECKING IF CURRENT PAGE MATCHES THAT ICON ============
+    const friendRequests = userData && userData.requests.length ? true: false;
+    // TODO have to add a property to the map. "property" : "requests", "notifications", "unread_messages?"
 
 
 
@@ -113,7 +115,7 @@ export default function Navbar( {navigate, token, setToken} ) {
             {/* ================= LEFT SIDE NAVBAR ================== */}
             <div className='flex flex-row items-center'>
                 {/* FACEBOOK LOGO */}
-                <a href='/home' className='mr-3'>
+                <a href='/' className='mr-3'>
                     <img src='/images/acebook-logo.png' alt='facebook-logo' className='hidden sm:block w-[2.8rem] h-[2.8rem]'/>
                 </a>
 
