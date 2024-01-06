@@ -78,7 +78,64 @@ const ProtectedRoutes = ({navigate}) => {
   const [receivedMessage, setReceivedMessage] = useState(null);
   // const [receivedChat, setReceivedChat] = useState(null);
 
-  // TODO socket stuff
+  // // ----------- SOCKET ---------------------------------
+  // // Connect to socket.io when users visit the messages page //TODO lift this to app after login?
+  // useEffect(()=> {
+  //     socket.current = io('http://localhost:8800'); // this is the socket port
+  //     socket.current.emit("new-user-add", sessionUserID); // send the sessionUserID to the socket server
+  //     socket.current.on('get-users', (users)=>{
+  //         setOnlineUsers(users)}) // get the onlineUsers, which should now include the sessionUserID
+  // }, [sessionUserID])
+
+
+    //   // Send messages to the socket server;
+    // // Listens to ChatBox to see if it setSendMessage something new
+    // useEffect(() => {
+    //     if(sendMessage!==null){
+    //         socket.current.emit("send-message", sendMessage);
+    //     }
+    // },[sendMessage])
+    // useEffect(() => { //TODO UNTESTED
+    //     if(sendNewConversation !== null) {
+    //         console.log("newConversationSet")
+    //         socket.current.emit("send-new-conversation", sendNewConversation);
+    //     }
+    // },[sendNewConversation])
+
+    // // Get new messages & conversations from the socket server;
+    // // Listens to the socket server to see if there are "receive-message" or "recieve-new-conversation" signals
+    // useEffect(() => {
+    //     socket.current.on("receive-message", (data) => {
+    //         console.log("recieved data in chats.jsx:", data);
+            
+    //         setReceivedMessage(data);
+    //         console.log("current received message: ", receivedMessage);
+    //     })
+    // }, [])
+
+    // useEffect(() => {
+    //     socket.current.on("receive-new-conversation", (data) => {
+    //         console.log("received new conversation in chats.jsx", data);
+
+    //         const newConvo = {
+    //             _id: data._id,
+    //             members: data.members,
+    //             createdAt: data.createdAt,
+    //             updatedAt: data.updatedAt
+    //         }
+    //         setChats([...chats, newConvo]);
+    //     })
+    // })
+
+
+    // // Checks if a certain user in a chat is online (connected to socket.io)
+    // const checkOnlineStatus = (chat) => {
+    //     if (chat) {
+    //         const chatMember = chat.members.find((member) => member._id !== sessionUserID); // find the chatMember
+    //         const online = onlineUsers.find((user) => user.userID === chatMember._id); // check if the chatMember is in the onlineUsers array
+    //         return online ? true : false;
+    //     }
+    // };
 
 
 

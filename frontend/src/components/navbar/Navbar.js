@@ -28,7 +28,7 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
         // Update currentPath whenever the route changes
         const pathname = window.location.pathname;
         setCurrentPath(pathname);
-    }, []);
+    }, [navigate]);
 
     const isCurrentPage = (path) => currentPath === path;
 
@@ -94,10 +94,8 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
     ]
 
 
-    // ======= CHECKING IF CURRENT PAGE MATCHES THAT ICON ============
+    // ======= CHECKING IF THERE ARE ALERTS ============
     const friendRequests = sessionUser && sessionUser.requests.length ? true: false;
-    // TODO have to add a property to the map. "property" : "requests", "notifications", "unread_messages?"
-
 
 
     // ================= JSX FOR COMPONENT ================================================
@@ -128,29 +126,16 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
                 <>
                 {/* NAVBAR ICONS */}
                 <div className='flex flex-row items-center justify-between h-[2.8rem] mr-2 '>
-                    {/* Icons from iconFunctions list. The current page's icon will be highlighted. Hovered icons show their name */}
                     {iconFunctions.map((item, index) => (
                         <div key={index} className='group flex flex-col items-center text-center '>
-                            {/* Main Icon */}
                             <NavBarIcons icon={item} isCurrentPage={isCurrentPage(item.path)} index={index}/>
-
-                            {/* <button aria-label={`${item.name} icon`} id={`${item.name} icon`}
-                                className={`flex items-center text-[${item.size}]
-                                ${isCurrentPage(item.path) ? 'text-#iconBlue' : 'text-#iconGrey'} hover:text-#iconBlue`}
-                                onClick={item.handleClick}>
-                                {item.icon}
-                            </button> */}
-                            {/* Blue dot when on current page */}
-                            {/* { isCurrentPage(item.path) && <div className='mt-[0.3rem] h-[0.3rem] w-[0.3rem] rounded-full bg-#iconBlue group-hover:hidden'></div>} */}
-                            {/* Label for the Icon, shows when hover */}
-                            {/* <p className={`pt-1 font-semibold text-[${item.textSize}] text-#iconBlue hidden group-hover:block`}>{item.name}</p> */}
                         </div>
                     ))}
                 </div>
 
                 {/* PROFILE PICTURE & NAME */}
-                <a href='/profile' className='flex flex-row items-center mr-3'>
-                    <img className='h-11 w-11 rounded-full
+                <a href='/profile' className='flex flex-row items-center h-11 mr-3'>
+                    <img className='h-11 min-w-11 rounded-full
                         object-cover border-[0.2rem] border-white shadow-lg mr-2' 
                         src={`https://picsum.photos/seed/${sessionUser._id}/300`}
                         alt='profile'
