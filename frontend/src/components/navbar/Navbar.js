@@ -102,26 +102,20 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
     // ================= JSX FOR COMPONENT ================================
     return (
         <div aria-label='navbar' id='navbar'
-            className='w-screen h-[4rem] bg-white flex flex-row 
-                p-2 justify-between px-4
-                dark:bg-gray-800 dark:border-gray-700 dark:border
-                shadow-[0px_0px_10px_0px_#d9deed] dark:shadow-lg'>
+            className='w-full h-[4rem] bg-white p-2 px-4
+                flex flex-row 
+                justify-between
+                shadow-[0px_0px_10px_0px_#d9deed]'>
 
             {/* ================= LEFT SIDE NAVBAR ================== */}
             <div className='flex flex-row items-center'>
                 {/* FACEBOOK LOGO */}
                 <a href='/' className='mr-3'>
-                    <img src='/images/facebook-logo.png' alt='facebook-logo' className='hidden sm:block w-[2.8rem] h-[2.8rem]'/>
+                    <img src='/images/facebook-logo.png' alt='facebook-logo' className='hidden md:block w-[2.8rem] h-[2.8rem]'/>
                 </a>
 
                 {/* SEARCHBAR - responsive breakpoints to the screensize */}
-                <div className='
-                    min-w-[12rem] max-w-[32rem]
-                    md:min-w-[18rem] md:max-w-[32rem]
-                    lg:min-w-[26rem] lg:max-w-[32rem]
-                    xl:min-w-[32rem] xl:max-w-[32rem]
-                    flex flex-col'
-                    >  
+                <div className='sm:w-[20rem] w-[12rem] flex flex-col mr-3'>  
                     <SearchBar navigate={navigate} token={token} setToken={setToken}/>
                 </div>
             </div>
