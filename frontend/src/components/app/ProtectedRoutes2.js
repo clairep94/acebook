@@ -18,7 +18,7 @@ import getSessionUserID from '../../utilities/GetSessionUserID';
 // import Feed from '../feed/Feed';
 // import ChatWindow from '../messaging/ChatWindow';
 
-
+import ProfilePage from '../../pages/ProfilePage'
 const ProtectedRoutes = ({navigate}) => {
 
 
@@ -75,6 +75,11 @@ const ProtectedRoutes = ({navigate}) => {
           <Feed navigate={navigate} token={token} setToken={setToken} 
         sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>} /> */}
         
+        {/* ------  PROFILE PAGE ------  */}
+        <Route path="/users/:userID"  element={ 
+            <ProfilePage navigate={navigate} token={token} setToken={setToken} 
+          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>}/>
+
       </Routes>
 
     </div>
