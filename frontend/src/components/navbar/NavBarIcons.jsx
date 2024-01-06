@@ -5,7 +5,7 @@ export default function NavbarIcons({ icon, isCurrentPage, index }) {
 
   const allIcons = `
     flex items-center justify-center
-    h-[3.5rem] w-[4.5rem] rounded-lg text-[${icon.size}] mr-2 
+    h-[3.5rem] w-[4.5rem] rounded-lg text-[${icon.size}] mr-2 relative
   `;
 
   const notOnPage = 'text-#iconGrey hover:bg-gray-100 ';
@@ -18,6 +18,10 @@ export default function NavbarIcons({ icon, isCurrentPage, index }) {
 
   const currentPageLine = `
     absolute -bottom-[0.3rem] w-[4.5rem] bg-#iconBlue h-[2px]
+  `;
+
+  const notificationDot = `
+    absolute top-4 right-[1.8rem] w-[0.7rem] h-[0.7rem] bg-red-500 rounded-full
   `;
 
   return (
@@ -34,6 +38,8 @@ export default function NavbarIcons({ icon, isCurrentPage, index }) {
           {icon.icon}
         </button>
       )}
+      {icon.notifications && <div className={notificationDot}/>}
+{/* <div className={notificationDot}/> */}
       <div className={hoverLabel}>
         {icon.name}
       </div>

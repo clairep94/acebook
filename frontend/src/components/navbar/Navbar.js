@@ -32,6 +32,10 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
 
     const isCurrentPage = (path) => currentPath === path;
 
+    // ======= CHECKING IF THERE ARE ALERTS ============
+    const friendRequests = sessionUser && sessionUser.requests.length ? true: false;
+    //TODO add message alerts and game invites
+    //TODO implement socket upon login
 
     // ===== ICONS FOR NAV BAR ===========
     const iconFunctions = [
@@ -42,9 +46,7 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
             },
             path: '/',
             icon: <AiFillHome />,
-            translateY: 0,
             size: "1.55rem",
-            textSize:"0.55rem"
         },
         {   
             name: "Messages",
@@ -53,9 +55,7 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
             },
             path: '/messages',
             icon: <AiFillMessage />,
-            translateY: 0,
             size: "1.5rem",
-            textSize:"0.52rem"
         },
         {   
             name: "Friends",
@@ -64,9 +64,8 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
             },
             path: '/friends',
             icon: <FaUserFriends />,
-            translateY: 0,
-            size: "1.75rem",
-            textSize:"0.52rem"
+            size: "1.7rem",
+            notifications: friendRequests,
         },
         {   
             name: "Games",            
@@ -75,9 +74,7 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
             },
             path: '/games',
             icon: <CgGames />,
-            translateY: 0,
-            size: "1.55rem",
-            textSize:"0.5rem"
+            size: "1.8rem",
         },
         {   
             name: "Logout",
@@ -87,15 +84,11 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
                 //TODO add: disconnect from socket
             },
             icon: <IoLogOut />,
-            translateY: 0,
             size: "1.7rem",
-            textSize:"0.55rem"
         },
     ]
 
 
-    // ======= CHECKING IF THERE ARE ALERTS ============
-    const friendRequests = sessionUser && sessionUser.requests.length ? true: false;
 
 
     // ================= JSX FOR COMPONENT ================================================
@@ -110,7 +103,7 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
             <div className='flex flex-row items-center'>
                 {/* ============= FACEBOOK LOGO ============= */}
                 <a href='/' className='mr-3'>
-                    <img src='/images/facebook-logo.png' alt='facebook-logo' className='hidden md:block w-[2.8rem] h-[2.8rem]'/>
+                    <img src='/images/facebook-logo.png' alt='facebook-logo' className='hidden md:block min-w-[2.8rem] h-[2.8rem]'/>
                 </a>
 
                 {/* ============ SEARCHBAR ==================== */}
