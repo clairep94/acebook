@@ -95,7 +95,7 @@ export default function ChatWindow({ token, setToken, sessionUserID,
       </>) : (<>
         
         {/* CONTAINER CONTENT */}
-        <div className='w-full h-full  flex flex-col'>
+        <div className='w-full h-full flex flex-col'>
           {/* ============ HEADER ======================== */}
           <div className='h-21 w-full flex flex-col items-center px-6'>
               <div className='h-20 w-full flex flex-row justify-between items-center'>

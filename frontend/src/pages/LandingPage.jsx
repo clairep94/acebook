@@ -30,7 +30,7 @@ export default function LandingPage({navigate}) {
                             p-8
                         ">
                             <h1 className='font-bold text-[3.5rem] text-[#002c74d4] text-center'>
-                                Welcome to Acebook.
+                                Welcome to Facebook.
                             </h1>
                             <p className='text-[1.5rem] m-3 text-#textDarkGrey'>
                                 Connecting friends since 2023

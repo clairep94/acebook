@@ -1,6 +1,7 @@
 // ------------ '19 Nov 2023 at 5:45PM' -------------
 
-const formatFullDateString = (dateObject) => {
+const formatFullDateString = (dateString) => {
+    const dateObject = new Date(dateString)
 
     const options = {
         day: 'numeric',
@@ -15,10 +16,11 @@ const formatFullDateString = (dateObject) => {
 }
 
 
-
 // ------------ 'X seconds ago / X minutes ago / X hours ago / X days ago / fullDateTime --------------
 
-const convertRelativeDateTimeString = (postedDateTime) => {
+const convertRelativeDateTimeString = (postedDateTimeString) => {
+    const postedDateTime = new Date(postedDateTimeString)
+    
     // get current dateTime object
     const currentDateTime = new Date();
 

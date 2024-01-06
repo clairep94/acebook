@@ -27,6 +27,7 @@ export default function MessageCard({message, sessionUserID}) {
   // ======================== JSX FOR COMPONENT =============================================
   return (
     <div className='flex flex-row p-0 mb-2 relative group'>
+      {/* PROFILE PICTURE - OTHER */}
       {!isOwn && (
         <div className={profilePicStyle + 'left-0 bottom-0'}>
           <ProfilePicture id={message.author._id} name={`${message.author.firstName} ${message.author.lastName}`} />
@@ -35,14 +36,16 @@ export default function MessageCard({message, sessionUserID}) {
       <div aria-label='message' className={allMessagesStyle + (isOwn ? ownMessageStyle : otherMessageStyle)}>
         {message.body}
       </div>
+      {/* PROFILE PICTURE - OWN */}
       {isOwn && (
         <div className={profilePicStyle + 'right-0 bottom-0'}>
           <ProfilePicture id={message.author._id} name={`${message.author.firstName} ${message.author.lastName}`} />
         </div>
       )}
-        <div className={timestampStyle}>
-          {(message.createdAt)}
-        </div>
+      {/* TIMESTAMP - WIP */}
+      <div className={timestampStyle}>
+        {formatFullDateString(message.createdAt)}
+      </div>
     </div>
   );
 }
