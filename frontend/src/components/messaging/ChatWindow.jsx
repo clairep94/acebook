@@ -4,6 +4,7 @@ import { fetchMessages, sendMessage } from '../../api_calls/messagesAPI';
 import { BsPersonCircle } from "react-icons/bs";
 
 import ProfilePicture from '../user/ProfilePicture';
+import MessageCard from './MessageCard';
 
 
 export default function ChatWindow({ token, setToken, sessionUserID,  
@@ -135,17 +136,10 @@ export default function ChatWindow({ token, setToken, sessionUserID,
 
           {/* =================== MESSAGES SECTION ======================== */}
           <div className='flex flex-col pt-5 px-3 overflow-auto' style={{ height: '100%' }}>
-  {messages.map((message) => (
-    <div
-      key={message.id}
-      className={`font-light text-[15px] py-[0.5rem] px-[0.7rem] max-w-[15rem] mb-1 rounded-[1.2rem] ${
-        message.author._id === sessionUserID ? 'bg-[#5acad2] text-white' : 'bg-[#f0eded] text-gray-800'
-      } inline-block`}
-    >
-      {message.body}
-    </div>
-  ))}
-</div>
+          {messages.map((message) => (
+            <MessageCard message={message} sessionUserID={sessionUserID}/>
+          ))}
+        </div>
 
 
           {/* =================== WRITE A MESSAGE SECTION ======================== */}

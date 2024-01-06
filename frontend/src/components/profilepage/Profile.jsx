@@ -8,10 +8,6 @@ import FriendButtons from '../friend/FriendButtons';
 import useFetchUserDataByID from '../../utilities/GetSelectedUsersInfo';
 
 export default function Profile({ navigate, token, setToken, sessionUserID, sessionUser, setSessionUser }) {
-  //TODO determine whether or not to use .populate.
-  //TODO if so: will need to consider .some method; whether to add .populate to friend methods OR aggregate OR manually push/pull User from the UserDoc.
-  //TODO if not: will need to do .aggregate for users where necessary... or new method where I run a list of userIDs and return userDocs.
-  //TODO eg. .aggregate only the user.firstName, user.lastName, user.profilePicURL...
 
   // =========== STATE VARIABLES ==========================
   // PROFILE PAGE OWNER:
@@ -19,9 +15,6 @@ export default function Profile({ navigate, token, setToken, sessionUserID, sess
   const targetID = userID; // renamed variable for clarity
   const [target, setTarget] = useState(null); // State to hold target data
 
-  // // SESSION USER:
-  // let sessionUserID = getSessionUserID(token);
-  // const [sessionUser, setSessionUser] = useState(null); 
 
   // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
   // Profile owner
@@ -39,18 +32,6 @@ export default function Profile({ navigate, token, setToken, sessionUserID, sess
       })
     }
   }, []);
-  // // Session User
-  // useEffect(() => {
-  //   if (token && sessionUserID) {
-  //     findUser(token, sessionUserID)
-  //     .then(userData => {
-  //         window.localStorage.setItem("token", userData.token)
-  //         setToken(window.localStorage.getItem("token"))
-  //         setSessionUser(userData.user);
-  //         console.log("SessionUser ", userData.user);
-  //     })
-  //   }
-  // },[])
 
   // ======================== JSX FOR COMPONENT =============================================
   if (target && sessionUser) {
@@ -61,10 +42,10 @@ export default function Profile({ navigate, token, setToken, sessionUserID, sess
       {/* ========================= UPPER PORTION ==============================  */}
         {/* COVER PHOTO */}
         <div aria-label='header section' id='header-section'
-          className='w-full h-[18rem] relative'>
+          className='w-full h-1/3 relative bg-white'>
 
           <img aria-label='cover photo' id='cover-photo'
-            className='w-full h-full -z-10'
+            className='w-full h-full -z-10 rounded-b-xl'
             src={`https://picsum.photos/seed/a${target._id}/400/700?grayscale`}
             alt={`${target.firstName} ${target.lastName} cover`}
           />
@@ -77,19 +58,19 @@ export default function Profile({ navigate, token, setToken, sessionUserID, sess
 
           {/* PROFILE PICTURE */}
           <div aria-label='profile pic' id='profile pic' 
-            className='w-[11rem] h-[11rem] z-20 absolute left-[1rem] top-[9.5rem]'>
+            className='w-[11rem] h-[11rem] z-20 absolute left-[1rem] -bottom-[1.5rem]'>
             <LargeProfilePicture id={target._id} name={`${target.firstName} ${target.lastName}`}/>
           </div>
         </div>
 
         {/* PAGE OPTIONS */}
         <div aria-label='page options' id='options'
-          className='flex flex-row bg-white h-[3.3rem] shadow-lg z-10 items-center justify-between px-12 '>
+          className='flex flex-row bg-white h-[5rem] shadow-lg z-10 items-center justify-between px-12 border-b'>
           <div className='w-14'></div>
-          {/* <p>Timeline</p>
+          <p>Timeline</p>
           <p>About</p>
           <p>Friends</p>
-          <p>Photos</p> */}
+          <p>Photos</p>
         </div>
 
     {/* ========================= LOWER PORTION ====================================== */}
