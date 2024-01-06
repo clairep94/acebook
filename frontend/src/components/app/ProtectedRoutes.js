@@ -21,10 +21,6 @@ import ChatWindow from '../messaging/ChatWindow';
 
 const ProtectedRoutes = ({navigate}) => {
 
-  const nav = (path) => {
-    navigate(path);
-    setCurrentChat(null);
-  }
 
   // =========== TOKEN & SESSION USER DATA =======================
   const [token, setToken] = useState(window.localStorage.getItem('token'));
@@ -79,7 +75,7 @@ const ProtectedRoutes = ({navigate}) => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [sendStartChat, setSendStartChat] = useState(null);
-  // const [receivedMessage, setReceivedMessage] = useState(null);
+  const [receivedMessage, setReceivedMessage] = useState(null);
   // const [receivedChat, setReceivedChat] = useState(null);
 
   // TODO socket stuff

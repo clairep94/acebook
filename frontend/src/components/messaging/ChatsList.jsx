@@ -8,7 +8,7 @@ export default function ChatsList({ sessionUserID, checkOnlineStatus, chatsList,
 
   return (
     <div className='flex flex-col'>
-      <h3 className='text-[1.2rem] font-bold translate-x-2'>
+      <h3 className='text-[1.2rem] font-semibold translate-x-2'>
         Contacts
       </h3>
       <div className='flex flex-col overflow-auto'>
