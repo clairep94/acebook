@@ -97,7 +97,7 @@ export default function ChatWindow({ token, setToken, sessionUserID,
         {/* CONTAINER CONTENT */}
         <div className='w-full h-full  flex flex-col'>
           {/* ============ HEADER ======================== */}
-          <div className='h-20 w-full flex flex-col items-center px-6'>
+          <div className='h-21 w-full flex flex-col items-center px-6'>
               <div className='h-20 w-full flex flex-row justify-between items-center'>
                 <div className='flex flex-row'>
                   {/* PROFILE PICTURE */}
@@ -125,7 +125,7 @@ export default function ChatWindow({ token, setToken, sessionUserID,
                     <BsPersonCircle />
                   </div>
                   <div className='hidden group-hover:block absolute w-[6rem] text-sm font-light bg-black/60 text-white p-2 rounded-md 
-                  translate-y-2 -translate-x-5'>
+                  translate-y-1 -translate-x-5 z-50'>
                     Go to profile
                   </div>
                 </div>

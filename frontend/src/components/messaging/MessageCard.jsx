@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import ProfilePicture from '../user/ProfilePicture';
+import { convertRelativeDateTimeString, formatFullDateString } from '../../utilities/GetTimestamp';
 
 
 export default function MessageCard({message, sessionUserID}) {
@@ -19,13 +20,15 @@ export default function MessageCard({message, sessionUserID}) {
   bg-[#f0eded] text-gray-800 mr-auto ml-[2.7rem]
   `
 
-  const profilePictStyle = `h-[2.3rem] w-[2.3rem] absolute `
+  const profilePicStyle = `h-[2.3rem] w-[2.3rem] absolute `
+
+  const timestampStyle = `hidden group-hover:block text-sm font-light  bg-black/60 text-white p-2 rounded-md z-50 absolute bottom-0`
 
   // ======================== JSX FOR COMPONENT =============================================
   return (
-    <div className='flex flex-row p-0 mb-2 relative'>
+    <div className='flex flex-row p-0 mb-2 relative group'>
       {!isOwn && (
-        <div className={profilePictStyle + 'left-0 bottom-0'}>
+        <div className={profilePicStyle + 'left-0 bottom-0'}>
           <ProfilePicture id={message.author._id} name={`${message.author.firstName} ${message.author.lastName}`} />
         </div>
       )}
@@ -33,10 +36,13 @@ export default function MessageCard({message, sessionUserID}) {
         {message.body}
       </div>
       {isOwn && (
-        <div className={profilePictStyle + 'right-0 bottom-0'}>
+        <div className={profilePicStyle + 'right-0 bottom-0'}>
           <ProfilePicture id={message.author._id} name={`${message.author.firstName} ${message.author.lastName}`} />
         </div>
       )}
+        <div className={timestampStyle}>
+          {(message.createdAt)}
+        </div>
     </div>
   );
 }
