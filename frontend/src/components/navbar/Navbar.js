@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { AiFillHome, AiFillMessage } from "react-icons/ai";
 import { FaUserFriends } from "react-icons/fa";
+import { CgGames } from "react-icons/cg";
 import { IoNotifications, IoLogOut } from "react-icons/io5";
 import { findUser } from '../../api_calls/usersAPI';
 import SearchBar from '../searchbar/SearchBar';
+import NavBarIcons from './NavBarIcons';
 
 export default function Navbar( {navigate, token, setToken, sessionUserID, sessionUser, setSessionUser} ) {
 
@@ -15,7 +17,6 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
                 window.localStorage.setItem("token", sessionUser.token)
                 setToken(window.localStorage.getItem("token"))
                 setSessionUser(sessionUser.user);
-                console.log(sessionUser.user);
             })
         }
     },[])
@@ -57,23 +58,23 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
             textSize:"0.52rem"
         },
         {   
-            name: "Requests",
+            name: "Friends",
             handleClick: () => {
-                navigate("/friend_requests");
+                navigate("/friends");
             },
-            path: '/friend_requests',
+            path: '/friends',
             icon: <FaUserFriends />,
             translateY: 0,
             size: "1.75rem",
             textSize:"0.52rem"
         },
         {   
-            name: "Notifications",            
+            name: "Games",            
             handleClick: () => {
-                navigate("/notifications");
+                navigate("/games");
             },
-            path: '/notifications',
-            icon: <IoNotifications />,
+            path: '/games',
+            icon: <CgGames />,
             translateY: 0,
             size: "1.55rem",
             textSize:"0.5rem"
@@ -99,7 +100,7 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
 
 
 
-    // ================= JSX FOR COMPONENT ================================
+    // ================= JSX FOR COMPONENT ================================================
     return (
         <div aria-label='navbar' id='navbar'
             className='w-full h-[4rem] bg-white p-2 px-4
@@ -107,40 +108,42 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
                 justify-between
                 shadow-[0px_0px_10px_0px_#d9deed]'>
 
-            {/* ================= LEFT SIDE NAVBAR ================== */}
+            {/* ================= LEFT SIDE NAVBAR ============================================== */}
             <div className='flex flex-row items-center'>
-                {/* FACEBOOK LOGO */}
+                {/* ============= FACEBOOK LOGO ============= */}
                 <a href='/' className='mr-3'>
                     <img src='/images/facebook-logo.png' alt='facebook-logo' className='hidden md:block w-[2.8rem] h-[2.8rem]'/>
                 </a>
 
-                {/* SEARCHBAR - responsive breakpoints to the screensize */}
+                {/* ============ SEARCHBAR ==================== */}
                 <div className='sm:w-[20rem] w-[12rem] flex flex-col mr-3'>  
                     <SearchBar navigate={navigate} token={token} setToken={setToken}/>
                 </div>
             </div>
 
-            {/* ================= RIGHT SIDE OF NAVBAR ================= */}
+            {/* ================= RIGHT SIDE OF NAVBAR ========================================== */}
             <div className='flex flex-row'>
 
             {sessionUser && 
                 <>
                 {/* NAVBAR ICONS */}
-                <div className='flex flex-row items-center justify-between h-[2.8rem] w-[14rem] md:w-[16.5rem] mr-4 '>
+                <div className='flex flex-row items-center justify-between h-[2.8rem] mr-2 '>
                     {/* Icons from iconFunctions list. The current page's icon will be highlighted. Hovered icons show their name */}
                     {iconFunctions.map((item, index) => (
                         <div key={index} className='group flex flex-col items-center text-center '>
                             {/* Main Icon */}
-                            <button aria-label={`${item.name} icon`} id={`${item.name} icon`}
+                            <NavBarIcons icon={item} isCurrentPage={isCurrentPage(item.path)} index={index}/>
+
+                            {/* <button aria-label={`${item.name} icon`} id={`${item.name} icon`}
                                 className={`flex items-center text-[${item.size}]
                                 ${isCurrentPage(item.path) ? 'text-#iconBlue' : 'text-#iconGrey'} hover:text-#iconBlue`}
                                 onClick={item.handleClick}>
                                 {item.icon}
-                            </button>
+                            </button> */}
                             {/* Blue dot when on current page */}
-                            { isCurrentPage(item.path) && <div className='mt-[0.3rem] h-[0.3rem] w-[0.3rem] rounded-full bg-#iconBlue group-hover:hidden'></div>}
+                            {/* { isCurrentPage(item.path) && <div className='mt-[0.3rem] h-[0.3rem] w-[0.3rem] rounded-full bg-#iconBlue group-hover:hidden'></div>} */}
                             {/* Label for the Icon, shows when hover */}
-                            <p className={`pt-1 font-semibold text-[${item.textSize}] text-#iconBlue hidden group-hover:block`}>{item.name}</p>
+                            {/* <p className={`pt-1 font-semibold text-[${item.textSize}] text-#iconBlue hidden group-hover:block`}>{item.name}</p> */}
                         </div>
                     ))}
                 </div>
