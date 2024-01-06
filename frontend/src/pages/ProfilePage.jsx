@@ -42,19 +42,28 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
 
         {/*  ================= HEADER SECTION ================= */}
         <div aria-label='header container' 
-          className='w-full bg-white h-[35rem] md:h-[40rem] lg:h-[45rem] flex flex-col items-center relative
+          className='w-full bg-white h-[35rem] md:h-[40rem] lg:h-[45rem] flex flex-col items-center
           shadow-md
           '>
-          {/* COVER PHOTO */}
-          <div aria-label='cover photo'
-          className='w-full h-2/3 max-w-[100rem] bg-yellow-400 z-10 xl:rounded-b-2xl absolute'>
-          </div>
-          {/* PROFILE PICTURE */}
+          <div className='max-w-[100rem] w-full bg-red-50 h-full z-10 relative'>
+            {/* COVER PHOTO */}
+            <div aria-label='cover photo'
+            className='w-full h-2/3 max-w-[100rem] bg-yellow-400 z-10 xl:rounded-b-2xl'>
+            </div>
+            {/* PROFILE PICTURE */}
+            <div aria-label='profile picture'
+            className='rounded-full h-[18rem] w-[18rem] bg-slate-600 absolute 
+            top-[14rem] md:top-[18rem] lg:top-[21rem] left-8'
+            >
+
+            </div>
 
             {/* NAME */}
             {/* NUM FRIENDS  & FRIEND BUTTONS */}
 
           {/* PAGE OPTIONS - Posts & Friends */}
+
+          </div>
 
         </div>
 
