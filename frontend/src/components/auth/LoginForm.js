@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom'; // use this for login-popup when timed-out
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import {io} from 'socket.io-client'
+import getSessionUserID from '../../utilities/GetSessionUserID';
 
 
 const LogInForm = ({ navigate, switchForms }) => {
@@ -12,6 +14,7 @@ const LogInForm = ({ navigate, switchForms }) => {
   const [passwordHidden, setPasswordHidden] = useState(true);
   const location = useLocation(); // use this for login-popup when timed-out
 
+  const socket = useRef()
 
 
   // ============ FORM SUBMISSION FOR LOGIN ====================
@@ -35,10 +38,6 @@ const LogInForm = ({ navigate, switchForms }) => {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
 
-      // TEMP: No timeout login popup:
-      navigate('/')
-
-      // FOR FUTURE USE IF HAVING TIMEOUT LOGIN POPUP:
       // Check the current location and navigate accordingly
       if (location.pathname === '/welcome') {
         navigate('/');
