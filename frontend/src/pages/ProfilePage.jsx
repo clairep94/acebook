@@ -47,13 +47,13 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
 
         {/*  ================= HEADER SECTION ================= */}
         <div aria-label='header container' 
-          className='w-full bg-white h-[35rem] lg:h-[40rem] xl:h-[45rem] flex flex-col items-center
+          className='w-full bg-white h-[32rem] lg:h-[35rem] xl:h-[38rem] flex flex-col items-center
           shadow-md
           '>
           <div className='max-w-[100rem] w-full bg-red-50 h-full z-10 relative'>
             {/* COVER PHOTO */}
             <div aria-label='cover photo'
-            className='w-full h-[60%] max-w-[100rem] bg-yellow-400 z-10 xl:rounded-b-2xl'>
+            className='w-full h-[21rem] lg:h-[24rem] xl:h-[27rem] max-w-[100rem] bg-yellow-400 z-10 xl:rounded-b-2xl'>
             </div>
             {/* PROFILE PICTURE */}
             <div aria-label='profile picture'
@@ -63,20 +63,20 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
             </div>
             {/* NAME & FRIENDS */}
             <div aria-label='name and friends container'
-              className='ml-[19rem] py-[1.8rem] h-[22%] bg-yellow-300 flex flex-col'>
+              className='ml-[19rem] py-[0.8rem] h-[7.5rem] bg-yellow-300 flex flex-col'>
               {/* NAME */}
               <p aria-label='name'
-              className='text-[2.3rem] font-bold translate-y-4'>
+              className='text-[2.3rem] font-bold translate-y-7'>
               John Doe
               </p>
               {/* NUM FRIENDS & FRIENDS BUTTONS */}
-              {/* <div className='flex flex-row justify-between bg-red-400 items-center pr-4'>
+              <div className='flex flex-row justify-between items-end pr-4'>
                 <p className='text-[1.1rem] font-semibold text-gray-600'>
                   2 friends
                 </p>
-                <div className='flex flex-row space-x-2'> */}
+                <div className='flex flex-row space-x-2'>
                   {/* FRIEND BUTTONS */}
-                  {/* <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 rounded-md'>
+                  <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 rounded-md'>
                     Add Friend
                   </button>
                   <button className='text-[0.9rem] font-semibold text-gray-800 bg-gray-300 h-12 px-6 rounded-md'>
@@ -84,7 +84,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
                   </button>
               </div>
                   
-              </div> */}
+              </div>
             </div>
 
           {/* PAGE OPTIONS - Posts & Friends */}
