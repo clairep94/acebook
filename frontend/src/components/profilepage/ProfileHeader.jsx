@@ -82,7 +82,7 @@ const sectionSelectorButtonsContainer = `mx-[2rem]
     <>
 <div
   aria-label='friend request container'
-  className='hidden lg:block items-center border-2 pl-7 w-[35.3rem] py-[0.8rem] border-gray-300 rounded-lg -translate-y-[0.3rem] absolute z-10 -translate-x-[20rem]'
+  className='hidden lg:block items-center border-2 pl-7 w-[35.3rem] py-[0.8rem] border-gray-300 rounded-lg -translate-y-[0.3rem] absolute -z-10 -translate-x-[20rem]'
 >
   <p
     aria-label='friend request alert'
@@ -108,7 +108,7 @@ const sectionSelectorButtonsContainer = `mx-[2rem]
       styling={allFriendButtons + primaryFriendButtonCols}
       />
       <ProfileMessageButton
-      styling={allFriendButtons + primaryFriendButtonCols}/>
+      styling={allFriendButtons + secondaryFriendButtonCols}/>
     </>
   );
 
