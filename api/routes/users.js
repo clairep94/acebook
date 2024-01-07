@@ -7,7 +7,8 @@ const API_Endpoint = "/users"
 
 
 router.get("/", UsersController.Index); // Index
-router.get("/:userID", UsersController.FindByID); // Find by ID
+router.get("/:userID", UsersController.FindByID); // Find by ID simple
+router.get("/full_profile/:userID", UsersController.FindByIDDetailed); //Find by ID full, .populate on friends and requests
 
 // ----- FRIEND FEATURE ------ //
 router.put("/:userID/send_request", UsersController.SendFriendRequest);

@@ -37,6 +37,22 @@ const findUser = async (token, userID) => {
     }
 }
 
+const findUserFullProfile = async (token, userID) => {
+    try {
+        const response = await fetch(`/users/full_profile/${userID}`, {
+            headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        });
+        const userData = await response.json();
+        return userData;
+        
+    } catch (error) {
+        console.error("UsersAPI.findUser:", error);
+        throw error;
+    }
+}
+
 const allUsers = async (token) => {
     console.log("running AllUsersMethod")
     try {
@@ -147,4 +163,4 @@ const unfriend = async (token, userID) => {
 }
 
 
-export { signUp, findUser, allUsers, sendFriendRequest, unsendFriendRequest, acceptFriendRequest, denyFriendRequest, unfriend };
+export { signUp, findUser, findUserFullProfile, allUsers, sendFriendRequest, unsendFriendRequest, acceptFriendRequest, denyFriendRequest, unfriend };

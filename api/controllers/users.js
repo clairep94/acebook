@@ -28,18 +28,14 @@ const UsersController = {
   },
 
   // ======== FIND BY ID ====================================
-  // Takes from params: users/:id
+  // Takes from params: users/:userID
   FindByID: async (req, res) => {
     const userID = req.params.userID;
     
     try {
-      const user = await User.findOne( //changed from find so that it is not an array
+      const user = await User.findOne(
         {_id: userID},
       )
-      //TODO .populate? or aggregate? figure out asap.
-      // .populate('user_id', '-password')
-      // .populate('friends', '-password')
-      // .populate('requests', '-password')
 
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({user: user, token: token, message: "UsersController.FindByID successful"})
@@ -49,6 +45,36 @@ const UsersController = {
       res.status(400).json(error);
     }
   },
+
+  // ======== FIND BY ID - Fuller details ====================================
+  // Takes from params: users/fullsearch/:userID
+  // Used for sessionUser in the navbar and for user profile pages
+
+  FindByIDDetailed: async (req, res) => {
+    const userID = req.params.userID;
+
+    try {
+      const user = await User.findOne(
+        {_id: userID},
+      )
+      .populate({
+        path: 'friends',
+        select: '_id firstName lastName profilePictureURL friends'})
+      .populate({
+        path: 'requests',
+        select: '_id firstName lastName profilePictureURL friends'})
+
+      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({user: user, token: token, message: "UsersController.FindByID successful"})
+
+    } catch (error) {
+      console.log("UsersController.FindByIDFull", error);
+      res.status(400).json(error);
+    }
+  },
+
+
+
 
   // ======== UPDATE PROFILE ================================
 
@@ -69,7 +95,14 @@ const UsersController = {
         {_id: targetUser},
         { $push: { requests: sessionUser } },
         { new: true }
-      );
+      )
+      .populate({
+        path: 'friends',
+        select: '_id firstName lastName profilePictureURL friends'})
+      .populate({
+        path: 'requests',
+        select: '_id firstName lastName profilePictureURL friends'})
+
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ message: 'Successful Friend Request Send in User Controllers', token: token, user: updatedUser });
   
@@ -87,7 +120,14 @@ const UsersController = {
         {_id: targetUser},
         { $pull: { requests: sessionUser } },
         { new: true }
-      );
+      )
+      .populate({
+        path: 'friends',
+        select: '_id firstName lastName profilePictureURL friends'})
+      .populate({
+        path: 'requests',
+        select: '_id firstName lastName profilePictureURL friends'})
+
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ message: 'Successful Friend Request Unsend in User Controllers', token: token, user: updatedUser });
 
@@ -113,17 +153,31 @@ const UsersController = {
           $pull: { requests: targetUser }
         },
         { new: true }
-      );
-      
+      )
+      .populate({
+        path: 'friends',
+        select: '_id firstName lastName profilePictureURL friends'})
+      .populate({
+        path: 'requests',
+        select: '_id firstName lastName profilePictureURL friends'})
+
+
       // add sessionUser to targetUser's friends list
       const updatedUser = await User.findOneAndUpdate(
         {_id: targetUser},
         { $push: { friends: sessionUser} },
         { new: true }
       )
+      .populate({
+        path: 'friends',
+        select: '_id firstName lastName profilePictureURL friends'})
+      .populate({
+        path: 'requests',
+        select: '_id firstName lastName profilePictureURL friends'})
+
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ message: 'Successful Friend Added in User Controllers', token: token, user: updatedSessionUser });
+      res.status(200).json({ message: 'Successful Friend Added in User Controllers', token: token, sessionUser: updatedSessionUser, targetUser: updatedUser });
   
     } catch (error) {
       console.log('Error in User Controllers - Friend Confirm:', error);
@@ -140,7 +194,14 @@ const UsersController = {
         {_id: sessionUser},
         { $pull: { requests: targetUser } },
         { new: true }
-      );
+      )
+      .populate({
+        path: 'friends',
+        select: '_id firstName lastName profilePictureURL friends'})
+      .populate({
+        path: 'requests',
+        select: '_id firstName lastName profilePictureURL friends'})
+
       const token = TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ message: 'Successful Friend Request Deleted in User Controllers', token, user: updatedSessionUser });
 
@@ -164,7 +225,14 @@ const UsersController = {
         {_id: sessionUser},
         { $pull: { friends: targetUser } },
         { new: true }
-      );
+      )
+      .populate({
+        path: 'friends',
+        select: '_id firstName lastName profilePictureURL friends'})
+      .populate({
+        path: 'requests',
+        select: '_id firstName lastName profilePictureURL friends'})
+
       
       // delete sessionUser from targetUser's friends list
       const updatedUser = await User.findOneAndUpdate(
@@ -174,7 +242,7 @@ const UsersController = {
       );
 
       const token = TokenGenerator.jsonwebtoken(req.user_id);
-      res.status(200).json({ message: 'Successful Friend Deleted in User Controllers', token, user: updatedUser });
+      res.status(200).json({ message: 'Successful Friend Deleted in User Controllers', token, sessionUser: updatedSessionUser, targetUser: updatedUser });
 
     } catch (error) {
       console.log('Error in User Controllers - Friend Delete:', error);

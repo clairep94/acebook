@@ -103,8 +103,6 @@ const sectionSelectorButtonsContainer = `mx-[2rem]
           {onFriends && (<div className={currentHighlight}/>)}
           </button>
 
-
-
         </div>
 
       </div>

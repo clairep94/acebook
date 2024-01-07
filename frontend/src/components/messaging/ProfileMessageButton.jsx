@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 export default function ProfileMessageButton(props) {
 
+  //TODO ADD MESSAGE BUTTON FUNCTION
   // =========== STATE VARIABLES =======================
   // const token = props.token;
   // const setToken = props.setToken;

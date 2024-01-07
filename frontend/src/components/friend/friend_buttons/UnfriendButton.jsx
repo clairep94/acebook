@@ -9,6 +9,8 @@ export default function UnfriendButton(props) {
   const setToken = props.setToken;
   const targetUserID = props.targetUserID;
   const setSessionUser = props.setSessionUser;
+  const setTargetUser = props.setTargetUser
+
 
   // ========= BUTTON CLICK METHOD ======================
   const handleClick = async (event) => {
@@ -16,12 +18,13 @@ export default function UnfriendButton(props) {
       event.preventDefault();
 
       unfriend(token, targetUserID)
-      .then(updatedSessionUserData => {
-        window.localStorage.setItem("token", updatedSessionUserData.token)
+      .then(data => {
+        window.localStorage.setItem("token", data.token)
         setToken(window.localStorage.getItem("token"))
 
-        setSessionUser(updatedSessionUserData.user);
-      })
+        setSessionUser(data.sessionUser);
+        setTargetUser(data.targetUser);
+        })
     }
   }
 

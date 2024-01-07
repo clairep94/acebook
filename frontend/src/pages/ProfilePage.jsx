@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
-import { findUser } from '../api_calls/usersAPI';
+import { findUserFullProfile } from '../api_calls/usersAPI';
 import ProfileHeader from '../components/profilepage/ProfileHeader';
 
 
@@ -22,7 +22,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
       if (sessionUserID === targetID) {
         navigate('/profile')
       }
-      findUser(token, targetID)
+      findUserFullProfile(token, targetID)
       .then(targetData => {
         window.localStorage.setItem("token", targetData.token);
         setToken(window.localStorage.getItem("token"));
