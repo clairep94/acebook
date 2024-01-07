@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LandingPage from '../../pages/LandingPage';
-import ProtectedRoutes from './ProtectedRoutes';
+import ProtectedRoutes from './ProtectedRoutes2';
 
 
 const App = () => {
