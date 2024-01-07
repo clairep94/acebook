@@ -16,7 +16,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
   const targetID = userID; // renamed variable for clarity
   const [target, setTarget] = useState(null); // State to hold target data
 
-  const [section, setSection] = useState('Profile'); // holds what view the user is current on
+  const [section, setSection] = useState('Posts'); // holds what view the user is current on
 
   // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
   // Profile owner
@@ -35,26 +35,30 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
     }
   }, []);
 
+  const viewPosts = () => {setSection('Posts')}
+  const viewFriends = () => {setSection('Friends')}
+
+
   // ======================== JSX FOR COMPONENT =============================================
   if (target && sessionUser) {
     return (
-      <div className='w-full overflow-scroll bg-red-100 mt-2 mb-2 '>
+      <div className='w-full overflow-scroll bg-green-100 mt-2 mb-2 '>
         {/* MAIN PAGE */}
 
         {/*  ================= HEADER SECTION ================= */}
         <div aria-label='header container' 
-          className='w-full bg-white h-[35rem] md:h-[40rem] lg:h-[45rem] flex flex-col items-center
+          className='w-full bg-white h-[35rem] lg:h-[40rem] xl:h-[45rem] flex flex-col items-center
           shadow-md
           '>
           <div className='max-w-[100rem] w-full bg-red-50 h-full z-10 relative'>
             {/* COVER PHOTO */}
             <div aria-label='cover photo'
-            className='w-full h-2/3 max-w-[100rem] bg-yellow-400 z-10 xl:rounded-b-2xl'>
+            className='w-full h-[60%] max-w-[100rem] bg-yellow-400 z-10 xl:rounded-b-2xl'>
             </div>
             {/* PROFILE PICTURE */}
             <div aria-label='profile picture'
             className='rounded-full h-[16rem] w-[16rem] bg-slate-600 absolute 
-            top-[17rem] md:top-[21rem] lg:top-[22rem] left-6 border-[0.35rem] border-white' 
+            top-[13rem] md:top-[13rem] lg:top-[16rem] xl:top-[19rem] left-6 border-[0.35rem] border-white' 
             >
             </div>
             {/* NAME & FRIENDS */}
@@ -66,13 +70,13 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
               John Doe
               </p>
               {/* NUM FRIENDS & FRIENDS BUTTONS */}
-              <div className='flex flex-row justify-between bg-red-400 items-center pr-4'>
+              {/* <div className='flex flex-row justify-between bg-red-400 items-center pr-4'>
                 <p className='text-[1.1rem] font-semibold text-gray-600'>
                   2 friends
                 </p>
-                <div className='flex flex-row space-x-2'>
+                <div className='flex flex-row space-x-2'> */}
                   {/* FRIEND BUTTONS */}
-                  <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 rounded-md'>
+                  {/* <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 rounded-md'>
                     Add Friend
                   </button>
                   <button className='text-[0.9rem] font-semibold text-gray-800 bg-gray-300 h-12 px-6 rounded-md'>
@@ -80,12 +84,12 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
                   </button>
               </div>
                   
-              </div>
+              </div> */}
             </div>
 
           {/* PAGE OPTIONS - Posts & Friends */}
-            <div className='h-[11%] flex flex-row items-center justify-center space-x-2'>
-              <div className={'flex items-center justify-center h-[4rem] w-[6rem] rounded-lg text-[1rem] relative hover:bg-gray-100' + 
+            {/* <div className='h-[11%] flex flex-row items-center justify-center space-x-2'>
+              <div className={'flex items-center justify-center  h-[4rem] w-[6rem] rounded-lg text-[1rem] relative hover:bg-gray-100' + 
                               (section === 'Profile') ? ('text-#iconBlue hover:bg-gray-100') 
                               : ('text-#iconGrey hover:bg-gray-100')
               } >
@@ -99,7 +103,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
                 Friends
               </div>
 
-            </div>
+            </div> */}
 
           </div>
 
