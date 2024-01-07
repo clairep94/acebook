@@ -41,7 +41,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
 
         {/*  ================= HEADER SECTION ================= */}
         <div aria-label='header container' 
-          className='w-full bg-white h-[32rem] lg:h-[35rem] xl:h-[38rem] flex flex-col items-center
+          className='w-full bg-white h-[33.5rem] lg:h-[36.5rem] xl:h-[39.5rem] flex flex-col items-center
           shadow-md
           '>
           <ProfileHeader target={target} setTarget={setTarget} 

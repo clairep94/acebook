@@ -17,7 +17,7 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
   const profilePicture = `rounded-full h-[16rem] w-[16rem] bg-slate-600 absolute 
     top-[13rem] md:top-[13rem] lg:top-[16rem] xl:top-[19rem] left-7 border-[0.35rem] border-white`
 
-  const nameFriendsContainer = `ml-[19rem] py-[0.8rem] h-[7rem] flex flex-col`
+  const nameFriendsContainer = `ml-[19rem] py-[0.8rem] h-[8.5rem] flex flex-col`
   const name = `text-[2.3rem] font-bold translate-y-6`
   const numFriendsAndFriendsButtonsContainer = `flex flex-row justify-between items-end pr-4 -translate-y-1`
   const numFriends = `text-[1.2rem] font-semibold text-gray-600 translate-y-1 hover:cursor-pointer hover:underline`
@@ -38,8 +38,8 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
   const onFriends = section === 'Friends'
 
   // Style strings:
-const sectionSelectorButtonsContainer = `
-  h-[3.8rem] flex items-center lg:justify-center justify-end mr-[2rem] lg:mr-0 space-x-3
+const sectionSelectorButtonsContainer = `mx-[2rem]
+  h-[3.8rem] flex items-center lg:justify-center justify-end space-x-3
   border-t-[2px] border-gray-300
 `;  
   const allSectionSelectorButtons = `
