@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { sendFriendRequest } from '../../../api_calls/usersAPI';
 
-export default function SendFriendRButton(props) {
+export default function SendFriendButton(props) {
 
   // =========== STATE VARIABLES =======================
   const token = props.token;

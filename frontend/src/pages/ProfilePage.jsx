@@ -36,7 +36,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
   // ======================== JSX FOR COMPONENT =============================================
   if (target && sessionUser) {
     return (
-      <div className='w-full overflow-scroll bg-green-100 mt-2 mb-2 '>
+      <div className='w-full overflow-scroll bg-green-100 mb-2 '>
         {/* MAIN PAGE */}
 
         {/*  ================= HEADER SECTION ================= */}
@@ -48,7 +48,6 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
             sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}
             section={section} setSection={setSection} token={token} setToken={setToken}
           />
-
         </div>
 
         {/*  ================= BOTTOM SECTION -- depends on page section: Main or Friends ================= */}
