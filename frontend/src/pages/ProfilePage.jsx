@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
-
-import getSessionUserID from '../utilities/GetSessionUserID';
 import { findUser } from '../api_calls/usersAPI';
-import LargeProfilePicture from '../components/user/LargeProfilePicture';
-import FriendButtons from '../components/friend/FriendButtons';
+import ProfileHeader from '../components/profilepage/ProfileHeader';
 
-import useFetchUserDataByID from '../utilities/GetSelectedUsersInfo';
+
 
 export default function ProfilePage({ navigate, token, setToken, sessionUserID, sessionUser, setSessionUser }) {
 
@@ -47,68 +44,10 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
           className='w-full bg-white h-[32rem] lg:h-[35rem] xl:h-[38rem] flex flex-col items-center
           shadow-md
           '>
-          <div className='max-w-[100rem] w-full bg-red-50 h-full z-10 relative'>
-            {/* COVER PHOTO */}
-            <div aria-label='cover photo'
-            className='w-full h-[21rem] lg:h-[24rem] xl:h-[27rem] max-w-[100rem] bg-yellow-400 z-10 xl:rounded-b-2xl'>
-            </div>
-            {/* PROFILE PICTURE */}
-            <div aria-label='profile picture'
-            className='rounded-full h-[16rem] w-[16rem] bg-slate-600 absolute 
-            top-[13rem] md:top-[13rem] lg:top-[16rem] xl:top-[19rem] left-6 border-[0.35rem] border-white' 
-            >
-            </div>
-            {/* NAME & FRIENDS */}
-            <div aria-label='name and friends container'
-              className='ml-[19rem] py-[0.8rem] h-[7rem] bg-yellow-300 flex flex-col'>
-              {/* NAME */}
-              <p aria-label='name'
-              className='text-[2.3rem] font-bold translate-y-6'>
-              John Doe
-              </p>
-              {/* NUM FRIENDS & FRIENDS BUTTONS */}
-              <div className='flex flex-row justify-between items-end pr-4 -translate-y-1'>
-                <p className='text-[1.2rem] font-semibold text-gray-600 translate-y-1'>
-                  2 friends
-                </p>
-                  {/* FRIEND BUTTONS */}
-                <div className='flex flex-row space-x-2'>
-                  <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 min-w-[7rem] rounded-md'>
-                    Accept
-                  </button>
-                  <button className='text-[0.9rem] font-semibold text-gray-800 bg-gray-300 h-12 px-6 min-w-[7rem] rounded-md'>
-                    Deny
-                  </button>
-                  <button className='text-[0.9rem] font-semibold text-gray-800 bg-gray-300 h-12 px-6 min-w-[7rem] rounded-md'>
-                    Message
-                  </button>
-              </div>
-            </div>
-          </div>
-
-          {/* PAGE OPTIONS - Posts & Friends */}
-          <div>
-
-          </div>
-
-            <div className='h-[3.8rem] bg-gray-50 flex items-center lg:justify-center justify-end mr-10 lg:mr-0 space-x-3'>
-              <div className={'flex items-center justify-center  h-[4rem] w-[10rem] rounded-lg text-[2rem] relative hover:bg-gray-100' + 
-                              (section === 'Profile') ? ('text-#iconBlue') 
-                              : ('text-#iconGrey')
-              } >
-                Posts
-              </div>
-              {(section === 'Profile') && <div className='absolute -bottom-[0.1rem] w-[4.5rem] bg-#iconBlue h-[2px]'/>}
-              <div className='flex items-center justify-center h-[4rem] w-[10rem] rounded-lg text-[1.2rem]
-
-              text-#iconGrey hover:bg-gray-100
-              ' >
-                Friends
-              </div>
-
-            </div>
-
-          </div>
+          <ProfileHeader target={target} setTarget={setTarget} 
+            sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}
+            section={section} setSection={setSection} token={token} setToken={setToken}
+          />
 
         </div>
 
