@@ -6,7 +6,7 @@ import {
 import { useSessionTimeOutCheck } from '../../utilities/LoggedInCheck';
 import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LoginPopup from '../auth/LoginPopup';
-import { findUser } from '../../api_calls/usersAPI';
+import { findUserFullProfile } from '../../api_calls/usersAPI';
 import {io} from 'socket.io-client';
 // import { fetchChats } from "../../api_calls/chatsAPI";
 // import ChatsList from '../messaging/ChatsList';
@@ -30,7 +30,7 @@ const ProtectedRoutes = ({navigate}) => {
   // On component mount, get sessionUser Data
   useEffect(() => {
     if (token && sessionUserID) {
-      findUser(token, sessionUserID)
+      findUserFullProfile(token, sessionUserID)
       .then(userData => {
         window.localStorage.setItem("token", userData.token)
         setToken(window.localStorage.getItem("token"))

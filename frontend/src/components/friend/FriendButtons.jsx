@@ -38,19 +38,19 @@ export default function FriendButtons(props) {
 
 
   // ================ FRIEND REQUEST / UNFRIEND BUTTONS LOGIC ========================
-  // TODO decide on whether or not user methods return .populated docs: if so, use
-  // const inList = userDoc && userDoc.thisList.some(member => member._id === targetID);
-  
-  const inList = (list, id) => {return (list.includes(id))}; // return true if list contains a targetID
-  const areFriends = sessionUser && inList(sessionUser.friends, target._id);// if friends: UnfriendButton
-  const receivedRequest = sessionUser && inList(sessionUser.requests, target._id); // if received, Accept & Deny Buttons
-  const sentRequest = target && inList(target.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
+  const areFriends = sessionUser && sessionUser.friends.some(friend => friend._id === target._id);
+  const receivedRequest = sessionUser && sessionUser.requests.some(user => user._id === target._id);
+  const sentRequest = target && target.requests.some(user => user._id === sessionUserID);
+  // const inList = (list, id) => {return (list.includes(id))}; // return true if list contains a targetID
+  // const areFriends = sessionUser && inList(sessionUser.friends, target._id);// if friends: UnfriendButton
+  // const receivedRequest = sessionUser && inList(sessionUser.requests, target._id); // if received, Accept & Deny Buttons
+  // const sentRequest = target && inList(target.requests, sessionUserID); // if none of these: Send or Unsend Buttons depending if sent
 
   // =============== BUTTON SETS ====================================
 
   const areFriendsButtons = areFriends && (
     <>
-      <UnfriendButton token={token} setToken={setToken} targetUserID={target._id} setSessionUser={setSessionUser}
+      <UnfriendButton token={token} setToken={setToken} targetUserID={target._id} setSessionUser={setSessionUser} setTargetUser={setTarget} 
       styling={allFriendButtons + secondaryFriendButtonCols}/>
       <ProfileMessageButton
       styling={allFriendButtons + primaryFriendButtonCols}/>
@@ -70,7 +70,7 @@ export default function FriendButtons(props) {
           {target.firstName} sent you a friend request
         </p>
       </div>
-      <AcceptFriendButton token={token} setToken={setToken} targetUserID={target._id} setSessionUser={setSessionUser}
+      <AcceptFriendButton token={token} setToken={setToken} targetUserID={target._id} setSessionUser={setSessionUser} setTargetUser={setTarget}
       styling={allFriendButtons + primaryFriendButtonCols + ' relative'}
       />
       <DenyFriendButton token={token} setToken={setToken} targetUserID={target._id} setSessionUser={setSessionUser}
@@ -93,7 +93,7 @@ export default function FriendButtons(props) {
 
   const UnsendFriendRequestButton = !areFriends && !receivedRequest && sentRequest && (
     <>
-      <UnsendFriendButton token={token} setToken={setToken} targetUserID={target._id} setTargetUser={setTarget}
+      <UnsendFriendButton token={token} setToken={setToken} targetUserID={target._id} setTargetUser={setTarget} 
       styling={allFriendButtons + secondaryFriendButtonCols}/>
       <ProfileMessageButton
         styling={allFriendButtons + primaryFriendButtonCols}/>

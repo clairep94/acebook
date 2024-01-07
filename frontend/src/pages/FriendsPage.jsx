@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
-import { findUserFullProfile } from '../api_calls/usersAPI';
-import ProfileHeader from '../components/profilepage/ProfileHeader';
+import { findUser } from '../api_calls/usersAPI';
 
 
-
-export default function ProfilePage({ navigate, token, setToken, sessionUserID, sessionUser, setSessionUser }) {
+export default function FriendsPage({ navigate, token, setToken, sessionUserID, sessionUser, setSessionUser }) {
 
   // =========== STATE VARIABLES ==========================
   // PROFILE PAGE OWNER:
@@ -22,7 +20,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
       if (sessionUserID === targetID) {
         navigate('/profile')
       }
-      findUserFullProfile(token, targetID)
+      findUser(token, targetID)
       .then(targetData => {
         window.localStorage.setItem("token", targetData.token);
         setToken(window.localStorage.getItem("token"));
