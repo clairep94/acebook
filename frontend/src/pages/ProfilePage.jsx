@@ -52,13 +52,37 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
             </div>
             {/* PROFILE PICTURE */}
             <div aria-label='profile picture'
-            className='rounded-full h-[18rem] w-[18rem] bg-slate-600 absolute 
-            top-[14rem] md:top-[18rem] lg:top-[21rem] left-8'
+            className='rounded-full h-[16rem] w-[16rem] bg-slate-600 absolute 
+            top-[17rem] md:top-[21rem] lg:top-[22rem] left-6 border-[0.35rem] border-white' 
             >
+            </div>
+            {/* NAME & FRIENDS */}
+            <div aria-label='name and friends container'
+              className='ml-[19rem] py-[1.8rem] h-[22%] bg-yellow-300 flex flex-col'>
+              {/* NAME */}
+              <p aria-label='name'
+              className='text-[2.3rem] font-bold translate-y-4'>
+              John Doe
+              </p>
+              {/* NUM FRIENDS & FRIENDS BUTTONS */}
+              <div className='flex flex-row justify-between bg-red-400 items-center pr-4'>
+                <p className='text-[1.1rem] font-semibold text-gray-600'>
+                  2 mutual friends
+                </p>
+                <div className='flex flex-row space-x-2'>
+                  {/* FRIEND BUTTONS */}
+                  <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 rounded-md'>
+                    Add Friend
+                  </button>
+                  <button className='text-[0.9rem] font-semibold text-gray-800 bg-gray-300 h-12 px-6 rounded-md'>
+                    Message
+                  </button>
+              </div>
+                  
+              </div>
+
 
             </div>
-
-            {/* NAME */}
             {/* NUM FRIENDS  & FRIEND BUTTONS */}
 
           {/* PAGE OPTIONS - Posts & Friends */}
