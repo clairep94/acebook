@@ -103,7 +103,7 @@ export default function Navbar( {navigate, token, setToken, sessionUserID, sessi
             <div className='flex flex-row items-center'>
                 {/* ============= FACEBOOK LOGO ============= */}
                 <a href='/' className='mr-3'>
-                    <img src='/images/facebook-logo.png' alt='facebook-logo' className='hidden md:block min-w-[2.8rem] h-[2.8rem]'/>
+                    <img src='/images/facebook-logo.png' alt='facebook-logo' className='hidden md:block min-w-[2.9rem] h-[2.8rem]'/>
                 </a>
 
                 {/* ============ SEARCHBAR ==================== */}
