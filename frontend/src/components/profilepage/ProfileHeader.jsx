@@ -37,10 +37,13 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
   const onFriends = section === 'Friends'
 
   // Style strings:
-  const allSectionSelectorButtons = ''
-  const currentSection = ''
-  const notCurrentSection = ''
-  const currentHighlight = ''
+  const sectionSelectorButtonsContainer = `h-[3.8rem] bg-gray-50 flex items-center lg:justify-center justify-end mr-10 lg:mr-0 space-x-3` 
+  
+  const allSectionSelectorButtons = `
+  flex items-center justify-center h-[3rem] w-[9rem] rounded-lg text-[1.2rem] font-medium hover:cursor-pointer 
+  `
+
+  const currentHighlight = `absolute -bottom-[0rem] w-[9rem] bg-[#4d76b2] h-[3.5px]`
 
 
   // ======================== JSX FOR COMPONENT =============================================
@@ -65,10 +68,10 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
           </h1>
 
           {/* NUM FRIENDS & FRIENDS BUTTONS */}
-          <div className={numFriendsAndFriendsButtonsContainer}>
+          <div aria-label='num friends and friends buttons container' className={numFriendsAndFriendsButtonsContainer}>
 
             {/* NUM FRIENDS */}
-            <div className={numFriends} onClick={viewFriends}>
+            <div aria-label='num friends' className={numFriends} onClick={viewFriends}>
               {target.friends.length === 0
                 ? 'No friends yet'
                 : target.friends.length === 1
@@ -77,7 +80,7 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
             </div>
 
             {/* FRIEND BUTTONS */}
-            <div className={friendButtonsContainer}>
+            <div aria-label='friends buttons container' className={friendButtonsContainer}>
               <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 min-w-[7rem] rounded-md'>
                 Accept
               </button>
@@ -93,20 +96,20 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
 
         {/* PAGE OPTIONS - Posts & Friends */}
 
-        <div className='h-[3.8rem] bg-gray-50 flex items-center lg:justify-center justify-end mr-10 lg:mr-0 space-x-3'>
-          <div className={'flex items-center justify-center  h-[4rem] w-[10rem] rounded-lg text-[2rem] relative hover:bg-gray-100' + 
-                          (section === 'Profile') ? ('text-#iconBlue') 
-                          : ('text-#iconGrey')
-          } >
+        <div aria-label='section selector buttons container' className={sectionSelectorButtonsContainer}>
+          <div className={allSectionSelectorButtons + (onPosts ? ('text-[#4d76b2]'):('text-[#7c7c7c] hover:bg-gray-100'))
+          } onClick={viewPosts}>
             Posts
+          {onPosts && (<div className={currentHighlight}/>)}
           </div>
-          {(section === 'Profile') && <div className='absolute -bottom-[0.1rem] w-[4.5rem] bg-#iconBlue h-[2px]'/>}
-          <div className='flex items-center justify-center h-[4rem] w-[10rem] rounded-lg text-[1.2rem]
 
-          text-#iconGrey hover:bg-gray-100
-          ' >
+          <div className={allSectionSelectorButtons + (onFriends ? ('text-[#4d76b2]'):('text-[#7c7c7c] hover:bg-gray-100'))
+          } onClick={viewFriends}>
             Friends
+          {onFriends && (<div className={currentHighlight}/>)}
           </div>
+
+
 
         </div>
 
