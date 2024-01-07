@@ -8,17 +8,18 @@ import { isLoggedIn } from '../../utilities/LoggedInCheck';
 import LoginPopup from '../auth/LoginPopup';
 import { findUserFullProfile } from '../../api_calls/usersAPI';
 import {io} from 'socket.io-client';
-// import { fetchChats } from "../../api_calls/chatsAPI";
-// import ChatsList from '../messaging/ChatsList';
 
-// import Profile from '../profilepage/Profile';
-// import OwnProfile from '../profilepage/OwnProfile';
+// import { fetchChats } from "../../api_calls/chatsAPI";
+
 import Navbar from '../navbar/Navbar';
 import getSessionUserID from '../../utilities/GetSessionUserID';
-// import Feed from '../feed/Feed';
-// import ChatWindow from '../messaging/ChatWindow';
 
 import ProfilePage from '../../pages/ProfilePage'
+import FriendsPage from '../../pages/FriendsPage';
+
+
+
+
 const ProtectedRoutes = ({navigate}) => {
 
 
@@ -79,6 +80,12 @@ const ProtectedRoutes = ({navigate}) => {
         <Route path="/users/:userID"  element={ 
             <ProfilePage navigate={navigate} token={token} setToken={setToken} 
           sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>}/>
+
+        {/* ------  FRIENDS PAGE ------  */}
+        <Route path="/friends"  element={ 
+            <FriendsPage />}/>
+
+
 
       </Routes>
 
