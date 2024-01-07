@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
+
 import getSessionUserID from '../utilities/GetSessionUserID';
 import { findUser } from '../api_calls/usersAPI';
 import LargeProfilePicture from '../components/user/LargeProfilePicture';
@@ -15,7 +16,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
   const targetID = userID; // renamed variable for clarity
   const [target, setTarget] = useState(null); // State to hold target data
 
-  const [profileSection, setProfileSection] = useState(''); // holds what view the user is current on
+  const [section, setSection] = useState('Profile'); // holds what view the user is current on
 
   // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
   // Profile owner
@@ -67,7 +68,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
               {/* NUM FRIENDS & FRIENDS BUTTONS */}
               <div className='flex flex-row justify-between bg-red-400 items-center pr-4'>
                 <p className='text-[1.1rem] font-semibold text-gray-600'>
-                  2 mutual friends
+                  2 friends
                 </p>
                 <div className='flex flex-row space-x-2'>
                   {/* FRIEND BUTTONS */}
@@ -80,12 +81,25 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
               </div>
                   
               </div>
-
-
             </div>
-            {/* NUM FRIENDS  & FRIEND BUTTONS */}
 
           {/* PAGE OPTIONS - Posts & Friends */}
+            <div className='h-[11%] flex flex-row items-center justify-center space-x-2'>
+              <div className={'flex items-center justify-center h-[4rem] w-[6rem] rounded-lg text-[1rem] relative hover:bg-gray-100' + 
+                              (section === 'Profile') ? ('text-#iconBlue hover:bg-gray-100') 
+                              : ('text-#iconGrey hover:bg-gray-100')
+              } >
+                Posts
+              </div>
+              {(section === 'Profile') && <div className='absolute -bottom-[0.1rem] w-[4.5rem] bg-#iconBlue h-[2px]'/>}
+              <div className='flex items-center justify-center h-[4rem] w-[6rem] rounded-lg text-[1rem]
+
+              text-#iconGrey hover:bg-gray-100
+              ' >
+                Friends
+              </div>
+
+            </div>
 
           </div>
 
