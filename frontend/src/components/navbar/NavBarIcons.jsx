@@ -17,7 +17,7 @@ export default function NavbarIcons({ icon, isCurrentPage, index }) {
   `;
 
   const currentPageLine = `
-    absolute -bottom-[0.3rem] w-[4.5rem] bg-[#4d76b2] h-[2px]
+    absolute -bottom-[0.4rem] w-[4.5rem] bg-[#4d76b2] h-[3px]
   `;
 
   const notificationDot = `

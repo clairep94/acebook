@@ -56,7 +56,7 @@ const sectionSelectorButtonsContainer = `mx-[2rem]
 
         {/* COVER PHOTO */}
         <img aria-label='cover photo' className={coverPhoto}
-          src={`https://picsum.photos/seed/a${target._id}/400/700?grayscale`}
+          src={`https://picsum.photos/seed/a${target._id}/300/700?grayscale`}
           alt='cover'>
         </img>
 
