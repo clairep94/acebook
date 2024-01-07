@@ -23,6 +23,7 @@ export default function MessagingPage({ navigate, token, setToken, sessionUserID
 
 
     {/* MAIN - overflow scroll */}
+    {/* MAIN - NO CHAT SELECTED */}
     <div className='w-full items-center justify-center flex flex-col'>
       <img src='/images/pickChat.png'
         alt='pick a chat'>
