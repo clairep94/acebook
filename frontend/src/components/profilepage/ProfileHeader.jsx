@@ -9,20 +9,21 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
 
   // ============== TW Style Strings - separated from jsx for readability: ============
 
-  const headerMainContainer = `max-w-[100rem] w-full bg-red-400 h-full z-10 relative`
+  const headerMainContainer = `max-w-[100rem] w-full h-full z-10 relative`
 
-  const coverPhoto = `w-full h-[21rem] lg:h-[24rem] xl:h-[27rem] max-w-[100rem] bg-yellow-400 z-10 xl:rounded-b-2xl`
+  const coverPhoto = `w-full h-[21rem] lg:h-[24rem] xl:h-[27rem] max-w-[100rem] z-10 xl:rounded-b-2xl
+  object-fill`
 
   const profilePicture = `rounded-full h-[16rem] w-[16rem] bg-slate-600 absolute 
-    top-[13rem] md:top-[13rem] lg:top-[16rem] xl:top-[19rem] left-6 border-[0.35rem] border-white`
+    top-[13rem] md:top-[13rem] lg:top-[16rem] xl:top-[19rem] left-7 border-[0.35rem] border-white`
 
-  const nameFriendsContainer = `ml-[19rem] py-[0.8rem] h-[7rem] bg-yellow-300 flex flex-col`
+  const nameFriendsContainer = `ml-[19rem] py-[0.8rem] h-[7rem] flex flex-col`
   const name = `text-[2.3rem] font-bold translate-y-6`
   const numFriendsAndFriendsButtonsContainer = `flex flex-row justify-between items-end pr-4 -translate-y-1`
   const numFriends = `text-[1.2rem] font-semibold text-gray-600 translate-y-1 hover:cursor-pointer hover:underline`
 
   // ---------- FRIEND BUTTONS ---------------------
-  const friendButtonsContainer = `flex flex-row space-x-2`
+  const friendButtonsContainer = `flex flex-row space-x-2 -translate-y-1`
   const allFriendButtons = ''
   const primaryFriendButton = ''
   const secondaryFriendButton = ''
@@ -37,13 +38,15 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
   const onFriends = section === 'Friends'
 
   // Style strings:
-  const sectionSelectorButtonsContainer = `h-[3.8rem] bg-gray-50 flex items-center lg:justify-center justify-end mr-10 lg:mr-0 space-x-3` 
-  
+const sectionSelectorButtonsContainer = `
+  h-[3.8rem] flex items-center lg:justify-center justify-end mr-[2rem] lg:mr-0 space-x-3
+  border-t-[2px] border-gray-300
+`;  
   const allSectionSelectorButtons = `
-  flex items-center justify-center h-[3rem] w-[9rem] rounded-lg text-[1.2rem] font-medium hover:cursor-pointer 
+  flex items-center justify-center h-[3.4rem] w-[9rem] rounded-lg text-[1.2rem] font-medium hover:cursor-pointer 
   `
 
-  const currentHighlight = `absolute -bottom-[0rem] w-[9rem] bg-[#4d76b2] h-[3.5px]`
+  const currentHighlight = `absolute -bottom-[0.05rem] w-[9rem] bg-[#4d76b2] h-[3.5px]`
 
 
   // ======================== JSX FOR COMPONENT =============================================
@@ -52,12 +55,16 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
       <div aria-label='header main container' className={headerMainContainer}>
 
         {/* COVER PHOTO */}
-        <div aria-label='cover photo' className={coverPhoto}>
-        </div>
+        <img aria-label='cover photo' className={coverPhoto}
+          src={`https://picsum.photos/seed/a${target._id}/400/700?grayscale`}
+          alt='cover'>
+        </img>
 
         {/* PROFILE PICTURE */}
-        <div aria-label='profile picture' className={profilePicture} >
-        </div>
+        <img aria-label='profile picture' className={profilePicture} 
+          src={`https://picsum.photos/seed/${target._id}/300`}
+          alt='cover'>
+        </img>
 
         {/* NAME & FRIENDS */}
         <div aria-label='name and friends container' className={nameFriendsContainer}>
@@ -97,17 +104,17 @@ export default function ProfileHeader({ target, setTarget, sessionUserID, sessio
         {/* PAGE OPTIONS - Posts & Friends */}
 
         <div aria-label='section selector buttons container' className={sectionSelectorButtonsContainer}>
-          <div className={allSectionSelectorButtons + (onPosts ? ('text-[#4d76b2]'):('text-[#7c7c7c] hover:bg-gray-100'))
+          <button className={allSectionSelectorButtons + (onPosts ? ('text-[#4d76b2]'):('text-[#7c7c7c] hover:bg-gray-100'))
           } onClick={viewPosts}>
             Posts
           {onPosts && (<div className={currentHighlight}/>)}
-          </div>
+          </button>
 
-          <div className={allSectionSelectorButtons + (onFriends ? ('text-[#4d76b2]'):('text-[#7c7c7c] hover:bg-gray-100'))
+          <button className={allSectionSelectorButtons + (onFriends ? ('text-[#4d76b2]'):('text-[#7c7c7c] hover:bg-gray-100'))
           } onClick={viewFriends}>
             Friends
           {onFriends && (<div className={currentHighlight}/>)}
-          </div>
+          </button>
 
 
 
