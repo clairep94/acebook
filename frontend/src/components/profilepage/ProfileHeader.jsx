@@ -81,17 +81,22 @@ const sectionSelectorButtonsContainer = `mx-[2rem]
   const receivedRequestButtons = !areFriends && receivedRequest && (
     <>
 <div
-  aria-label='friend request alert'
-  className='text-gray-400 font-bold text-xl flex items-center border-4 px-10 py-3 border-gray-300 rounded-lg'
+  aria-label='friend request container'
+  className='hidden lg:block items-center border-2 pl-7 w-[35.3rem] py-[0.8rem] border-gray-300 rounded-lg -translate-y-[0.3rem] absolute z-10 -translate-x-[20rem]'
 >
-  {target.firstName} sent you a friend request
+  <p
+    aria-label='friend request alert'
+    className='text-gray-400 font-semibold text-lg mr-10'
+  >
+    {target.firstName} sent you a friend request
+  </p>
 </div>
-
       <AcceptFriendButton token={token} setToken={setToken} targetUserID={target._id} setSessionUser={setSessionUser}
-      styling={allFriendButtons + primaryFriendButtonCols}
+      styling={allFriendButtons + primaryFriendButtonCols + ' relative'}
       />
       <DenyFriendButton token={token} setToken={setToken} targetUserID={target._id} setSessionUser={setSessionUser}
       styling={allFriendButtons + secondaryFriendButtonCols}/>
+
       <ProfileMessageButton
       styling={allFriendButtons + secondaryFriendButtonCols}/>
     </>
