@@ -98,7 +98,7 @@ export default function MessagingPage({ navigate, token, setToken, sessionUserID
     </div> */}
 
     {/* MAIN - CHAT SELECTED */}
-    <div className='w-full bg-white/50'>
+    <div className='w-full flex flex-col bg-green-50'>
       {/* HEADER */}
       <div className='bg-white h-[6rem] p-4 pl-5 shadow-[0px_0px_7px_0px_#d9deed]
       flex flex-row items-center'>
@@ -113,16 +113,19 @@ export default function MessagingPage({ navigate, token, setToken, sessionUserID
             Active Now
           </p>
         </div>
-
-
-
+    
       </div>
 
-
-        <div>
-          INPUT
-        </div>
+      {/* MESSAGES */}
+      <div className='flex flex-grow flex-col bg-red-50 w-full overflow-scroll px-5'>
+        HOW DO I DO THIS PART
       </div>
+
+      {/* INPUT FIELD */}
+      <div className='flex flex-row bg-green-200 h-[5rem] items-center px-4'>
+        INPUT
+      </div>
+    </div>
 
   
 
