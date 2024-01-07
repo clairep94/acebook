@@ -16,7 +16,7 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
   const targetID = userID; // renamed variable for clarity
   const [target, setTarget] = useState(null); // State to hold target data
 
-  const [section, setSection] = useState('Posts'); // holds what view the user is current on
+  const [section, setSection] = useState('Posts'); // holds what view the user is current on, default is Posts
 
   // ========= COMPONENT MOUNT: Set Profile Owner Data & Session User Data ===============
   // Profile owner
@@ -34,9 +34,6 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
       })
     }
   }, []);
-
-  const viewPosts = () => {setSection('Posts')}
-  const viewFriends = () => {setSection('Friends')}
 
 
   // ======================== JSX FOR COMPONENT =============================================
@@ -63,47 +60,53 @@ export default function ProfilePage({ navigate, token, setToken, sessionUserID, 
             </div>
             {/* NAME & FRIENDS */}
             <div aria-label='name and friends container'
-              className='ml-[19rem] py-[0.8rem] h-[7.5rem] bg-yellow-300 flex flex-col'>
+              className='ml-[19rem] py-[0.8rem] h-[7rem] bg-yellow-300 flex flex-col'>
               {/* NAME */}
               <p aria-label='name'
-              className='text-[2.3rem] font-bold translate-y-7'>
+              className='text-[2.3rem] font-bold translate-y-6'>
               John Doe
               </p>
               {/* NUM FRIENDS & FRIENDS BUTTONS */}
-              <div className='flex flex-row justify-between items-end pr-4'>
-                <p className='text-[1.1rem] font-semibold text-gray-600'>
+              <div className='flex flex-row justify-between items-end pr-4 -translate-y-1'>
+                <p className='text-[1.2rem] font-semibold text-gray-600 translate-y-1'>
                   2 friends
                 </p>
-                <div className='flex flex-row space-x-2'>
                   {/* FRIEND BUTTONS */}
-                  <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 rounded-md'>
-                    Add Friend
+                <div className='flex flex-row space-x-2'>
+                  <button className='text-[0.9rem] font-semibold text-white bg-blue-600 h-12 px-6 min-w-[7rem] rounded-md'>
+                    Accept
                   </button>
-                  <button className='text-[0.9rem] font-semibold text-gray-800 bg-gray-300 h-12 px-6 rounded-md'>
+                  <button className='text-[0.9rem] font-semibold text-gray-800 bg-gray-300 h-12 px-6 min-w-[7rem] rounded-md'>
+                    Deny
+                  </button>
+                  <button className='text-[0.9rem] font-semibold text-gray-800 bg-gray-300 h-12 px-6 min-w-[7rem] rounded-md'>
                     Message
                   </button>
               </div>
-                  
-              </div>
             </div>
+          </div>
 
           {/* PAGE OPTIONS - Posts & Friends */}
-            {/* <div className='h-[11%] flex flex-row items-center justify-center space-x-2'>
-              <div className={'flex items-center justify-center  h-[4rem] w-[6rem] rounded-lg text-[1rem] relative hover:bg-gray-100' + 
-                              (section === 'Profile') ? ('text-#iconBlue hover:bg-gray-100') 
-                              : ('text-#iconGrey hover:bg-gray-100')
+          <div>
+
+          </div>
+
+            <div className='h-[3.8rem] bg-gray-50 flex items-center lg:justify-center justify-end mr-10 lg:mr-0 space-x-3'>
+              <div className={'flex items-center justify-center  h-[4rem] w-[10rem] rounded-lg text-[2rem] relative hover:bg-gray-100' + 
+                              (section === 'Profile') ? ('text-#iconBlue') 
+                              : ('text-#iconGrey')
               } >
                 Posts
               </div>
               {(section === 'Profile') && <div className='absolute -bottom-[0.1rem] w-[4.5rem] bg-#iconBlue h-[2px]'/>}
-              <div className='flex items-center justify-center h-[4rem] w-[6rem] rounded-lg text-[1rem]
+              <div className='flex items-center justify-center h-[4rem] w-[10rem] rounded-lg text-[1.2rem]
 
               text-#iconGrey hover:bg-gray-100
               ' >
                 Friends
               </div>
 
-            </div> */}
+            </div>
 
           </div>
 

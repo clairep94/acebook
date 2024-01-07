@@ -8,8 +8,8 @@ export default function NavbarIcons({ icon, isCurrentPage, index }) {
     h-[3.5rem] w-[4.5rem] rounded-lg text-[${icon.size}] mr-2 relative
   `;
 
-  const notOnPage = 'text-#iconGrey hover:bg-gray-100 ';
-  const onPage = 'text-#iconBlue ';
+  const notOnPage = 'text-[#a8b5c8] hover:bg-gray-100 ';
+  const onPage = 'text-[#4d76b2] ';
   
   const hoverLabel = `
     hidden group-hover:flex absolute text-[12px] font-light bg-black/60 text-white p-2 rounded-md 
@@ -39,7 +39,6 @@ export default function NavbarIcons({ icon, isCurrentPage, index }) {
         </button>
       )}
       {icon.notifications && <div className={notificationDot}/>}
-{/* <div className={notificationDot}/> */}
       <div className={hoverLabel}>
         {icon.name}
       </div>
