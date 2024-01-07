@@ -83,7 +83,8 @@ const ProtectedRoutes = ({navigate}) => {
 
         {/* ------  FRIENDS PAGE ------  */}
         <Route path="/friends"  element={ 
-            <FriendsPage />}/>
+            <FriendsPage navigate={navigate} token={token} setToken={setToken} 
+          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>}/>
 
 
 
