@@ -29,7 +29,7 @@ export default function FriendsPage({ navigate, token, setToken, sessionUserID, 
     return (
       <div className='w-full flex  mb-2 '>
         {/* MENU - no overflow? */}
-        <div className='w-[35rem] shadow-lg  flex flex-col z-10 bg-white py-4 px-4 space-y-2'>
+        <div className='min-w-[26rem] max-w-[26rem] shadow-lg  flex flex-col z-10 bg-white py-4 px-4 space-y-2'>
           <h1 className='text-[2rem] font-bold pb-4'>
             Friends
           </h1>

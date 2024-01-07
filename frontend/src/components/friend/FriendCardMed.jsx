@@ -18,7 +18,7 @@ export default function FriendCardMed(props) {
   // ============ STYLE STRINGS: =====================
 
   const allFriendButtons = `
-    text-[1rem] font-semibold h-11 w-full rounded-md hidden lg:block
+    text-[1rem] font-semibold h-11 w-full rounded-md 
     `
 
   const primaryFriendButtonCols = `
@@ -37,7 +37,7 @@ export default function FriendCardMed(props) {
 // ============ JSX UI ===========================================
 if(friend){
   return (
-      <div className='w-[16rem] h-[24rem] bg-white shadow-lg rounded-xl mr-3 mb-3 overflow-clip'>
+      <div className='min-w-[16rem] max-w-[16rem] h-[24rem] bg-white shadow-lg rounded-xl mr-3 mb-3 overflow-clip'>
         <img className='w-full h-[13rem] bg-gray-200'
           src={`https://picsum.photos/seed/${friend._id}/300`}
           alt='cover'
