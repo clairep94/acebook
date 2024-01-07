@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import AcceptFriendButton from './friend_buttons/AcceptFriendButton';
-import DenyFriendButton from './friend_buttons/DenyFriendButton';
+import UnfriendButton from './friend_buttons/UnfriendButton';
+import ProfileMessageButton from '../messaging/ProfileMessageButton';
 
-export default function FriendRequestCardMed(props) {
+
+export default function FriendCardMed(props) {
 
   // =========== STATE VARIABLES =======================
   const token = props.token;
   const setToken = props.setToken;
 
-  const requester = props.requester;
+  const friend = props.friend;
 
+  const sessionUserID = props.sessionUserID;
+  const sessionUser = props.sessionUser;
   const setSessionUser = props.setSessionUser;
 
   // ============ STYLE STRINGS: =====================
@@ -32,33 +35,31 @@ export default function FriendRequestCardMed(props) {
 
 
 // ============ JSX UI ===========================================
-if(requester){
+if(friend){
   return (
       <div className='w-[16rem] h-[24rem] bg-white shadow-lg rounded-xl mr-3 mb-3 overflow-clip'>
         <img className='w-full h-[13rem] bg-gray-200'
-          src={`https://picsum.photos/seed/${requester._id}/300`}
+          src={`https://picsum.photos/seed/${friend._id}/300`}
           alt='cover'
         >
         </img>
         
         <div className='p-4'>
           <h3 className='text-lg font-bold'>
-            {requester.firstName}{' '}{requester.lastName}
+            {friend.firstName}{' '}{friend.lastName}
           </h3>
           <p className='text-gray-500'>
-  {requester.friends && Array.isArray(requester.friends)
-    ? requester.friends.length === 0
-      ? 'No friends yet'
-      : requester.friends.length === 1
-      ? '1 friend'
-      : `${requester.friends.length} friends`
-    : 'No friends yet'}
-</p>
+            {friend.friends.length === 0
+              ? 'No friends yet'
+              : friend.friends.length === 1
+              ? '1 friend'
+              : `${friend.friends.length} friends`}        
+          </p>
           <div className='space-y-1 translate-y-1'>
-            <AcceptFriendButton token={token} setToken={setToken} targetUserID={requester._id} setSessionUser={setSessionUser} setTargetUser={null}
+            <ProfileMessageButton token={token} setToken={setToken} targetUserID={friend._id} setSessionUser={setSessionUser} setTargetUser={null}
             styling={allFriendButtons + primaryFriendButtonCols + ' relative'}
             />
-            <DenyFriendButton token={token} setToken={setToken} targetUserID={requester._id} setSessionUser={setSessionUser}
+            <UnfriendButton token={token} setToken={setToken} targetUserID={friend._id} setSessionUser={setSessionUser}
             styling={allFriendButtons + secondaryFriendButtonCols}/>
           </div>
   
@@ -66,6 +67,5 @@ if(requester){
   
       </div>
     )
-
 }
 }
