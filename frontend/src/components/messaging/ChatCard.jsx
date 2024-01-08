@@ -7,7 +7,6 @@ export default function ChatCard({chat, sessionUserID, online, isCurrentChat, se
   // This component shows the full name, profile picture, and whether the user is online
   // This component gets highlighted if it is the current chat
   
-  // =========== STATE VARIABLES ==========================
   const conversationPartner = chat.members.find((user) => user._id !== sessionUserID);
   
   // =========== FUNCTION TO SET CURRENT CHAT =================
@@ -15,61 +14,72 @@ export default function ChatCard({chat, sessionUserID, online, isCurrentChat, se
     console.log(chat._id)
     setCurrentChat(chat)
   }
-  
   // TODO this component gets a blue mark and is bolded if there is an unread message
   // TODO show last message & time ago
-  
+  // function for determining relative time ago
+  // function for determining if lastMessage is read -> blue dot & bold
 
-  // ========== TW Styling =======================
+  const lastMessage = chat.lastMessage
+  
+  // ============== TW Styling ====================================
 
   const allCards = `
-    h-[5rem] w-full rounded-lg p-3 flex flex-row items-center
+    h-[5.5rem] w-full rounded-lg p-3 flex flex-row items-center
     `
   const currentChatCols = `
     bg-blue-50`
 
   const notCurrentChatCols = `
-    hover:bg-gray-50`
+    hover:bg-gray-100`
 
+  const profilePicture = `w-[4rem] h-[4rem] bg-zinc-300 rounded-full mr-3 
+  border border-white border-[0.2rem] shadow-md `
+
+  const notificationDot = `
+    absolute bottom-0 right-3 w-[1.2rem] h-[1.2rem] bg-lime-500 rounded-full border-white border-[0.2rem]
+  `;
+
+  const unreadMessageDot =`w-[0.8rem] h-[0.8rem] bg-blue-500 rounded-full translate-x-[21.8rem] absolute `
+  const lastMessageStyle = `text-[#8a8a8a]`
+  const unreadLastMessageStyle = `font-bold text-black`
+  const relDate = `text-[#8a8a8a]`
   
 
   // ======================== JSX FOR COMPONENT =============================================
   return (
     <>
-    {/* MAIN CONTAINER */}
-    <div id={index} aria-label={`chat card for ${conversationPartner}`}
-    className={allCards + (isCurrentChat ? currentChatCols : notCurrentChatCols)}>
-      
-      {/* PROFILE PICTURE */}
-      <div className='w-[4.5rem'>
-
-
+      {/* MAIN CONTAINER */}
+      <div id={index} onClick={() => {setCurrentChat(chat)}}
+      className={allCards + (isCurrentChat ? currentChatCols : notCurrentChatCols)}>
+        
+        <div className='relative'>
+          {/* ONLINE DOT */}
+          {online &&
+          <div className={notificationDot}/>
+          }
+          {/* PROFILE PICTURE */}
+          <img aria-label='profile picture' alt='profile'
+          src={`https://picsum.photos/seed/${conversationPartner._id}/300`}
+          className={profilePicture}>
+          </img>
+        </div>
+        
+        {/* CONVERSATION PARTNER & LAST MESSAGE */}
+        <div aria-label='partner and last message'>
+          <h4 className='font-semibold text-lg'>
+            {conversationPartner.firstName} {conversationPartner.lastName}
+          </h4>
+          <p className='text-sm'>
+            <span className={(lastMessage && (lastMessage.read === false)) ? unreadLastMessageStyle : lastMessageStyle}>
+              {lastMessage ? (lastMessage.body) : ('Placeholder: Last message shorten...')}
+            </span>
+            <span className={relDate}>
+              {' · 1d'}
+            </span>
+          </p>
+        </div>
+        <div className={unreadMessageDot}></div>
       </div>
-      test
-
-    </div>
-        {/* <div className="flex flex-col items-center " >
-          <div className='flex flex-row w-full rounded-2xl p-2 pr-6 my-2 hover:curser-pointer hover:bg-[#80808038] group'
-            onClick={handleClick}
-            >
-                <div className='w-[3.3rem] h-[3.3rem] mr-3 relative'>
-                  {online && 
-                  <div className='bg-lime-400 w-4 h-4 rounded-full absolute left-9 bottom-0 '
-                  />}
-                  <ProfilePicture id={conversationPartner._id} name={conversationPartner.firstName + ` ` + conversationPartner.lastName}/>
-                </div>
-                <div className='flex flex-col justify-center'>
-                    <span className='text-md font-medium translate-y-[0.35rem] text-#textDarkGrey'>
-                      {`${conversationPartner.firstName} ${conversationPartner.lastName}`}
-                    </span>
-                    <span className='text-[13px]'
-                      style={{color: "grey"}}>
-                      {online? "Active Now" : "Offline"}
-                    </span>
-                </div>
-            </div>
-        <hr style={{width: '85%', border: '0.1px solid #ececec'}}/>
-        </div> */}
     </>
 )
 
