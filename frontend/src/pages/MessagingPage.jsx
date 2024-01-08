@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {io} from 'socket.io-client';
 import { fetchChats } from "../api_calls/chatsAPI";
+import ChatSearchBar from '../components/messaging/chat_searchbar/ChatSearchBar';
 
 
 export default function MessagingPage({ navigate, token, setToken, sessionUserID, sessionUser, setSessionUser }) {
@@ -58,8 +59,17 @@ export default function MessagingPage({ navigate, token, setToken, sessionUserID
           Chats
         </h1>
         {/* CHAT SEARCHBAR */}
-        <div>
-          Chat search bar & search results
+        <div className='flex flex-row h-[2.8rem]'>
+          {/* <ChatSearchBar 
+            token={token}
+            setToken={setToken}
+            sessionUserID={sessionUserID}
+            setChats={setChats}
+            chats={chats}
+            setCurrentChat={setCurrentChat}
+            setSendNewConversation={setSendNewConversation}
+            results={chatSearchResults}
+          /> */}
         </div>
 
         {/* CHAT CARDS */}
@@ -86,54 +96,61 @@ export default function MessagingPage({ navigate, token, setToken, sessionUserID
           ))}
         </div>
       </div>
-
-    {/* MAIN - NO CHAT SELECTED */}
-    {/* <div className='w-full items-center justify-center flex flex-col'>
-      <img src='/images/pickChat.png'
-        alt='pick a chat'>
-      </img>
-      <h3 className='font-bold text-[1.5rem] mt-9 text-slate-600'>
-        Pick a chat!
-      </h3>
-    </div> */}
-
-    {/* MAIN - CHAT SELECTED */}
-    <div className='w-full flex flex-col bg-green-50'>
-      {/* HEADER */}
-      <div className='bg-white h-[6rem] p-4 pl-5 shadow-[0px_0px_7px_0px_#d9deed]
-      flex flex-row items-center'>
-        <div className='w-[4rem] h-[4rem] bg-zinc-300 rounded-full mr-3'>
-              dot if online
-        </div>
-        <div aria-label='partner and online status' className='translate-y-1'>
-          <h4 className='font-semibold text-[1.2rem] '>
-            {currentChat.members[1].firstName} {currentChat.members[1].lastName}
-          </h4>
-          <p className='text-[#8a8a8a] text-sm -translate-y-1'>
-            Active Now
-          </p>
-        </div>
     
-      </div>
+    {/* ===================== MAIN SECTION ======================== */}
+    {currentChat ? (<>
+      {/* ============ CHAT SELECTED ======================= */}
+      <div className='w-full flex flex-col bg-green-50'>
+        {/* HEADER */}
+        <div className='bg-white h-[6rem] p-4 pl-5 shadow-[0px_0px_7px_0px_#d9deed]
+        flex flex-row items-center'>
+          <div className='w-[4rem] h-[4rem] bg-zinc-300 rounded-full mr-3'>
+                dot if online
+          </div>
+          <div aria-label='partner and online status' className='translate-y-1'>
+            <h4 className='font-semibold text-[1.2rem] '>
+              {currentChat.members[1].firstName} {currentChat.members[1].lastName}
+            </h4>
+            <p className='text-[#8a8a8a] text-sm -translate-y-1'>
+              Active Now
+            </p>
+          </div>
+        </div>
 
-      {/* MESSAGES */}
-      <div className='flex flex-grow flex-col bg-red-50 w-full overflow-scroll px-5'>
-        HOW DO I DO THIS PART
-        <div className='h-[2rem]'>Message 1</div>
-        <div className='h-[2rem]'>Message 1</div>
-        <div className='h-[2rem]'>Message 1</div>
-                <div className='h-[2rem]'>Message 1</div>
-        <div className='h-[2rem]'>Message 1</div>
-        <div className='h-[2rem]'>Message 1</div>
-        <div className='h-[2rem]'>Message 1</div>
+        {/* MESSAGES */}
+        <div className='flex flex-grow flex-col bg-red-50 w-full overflow-scroll px-5'>
+          HOW DO I DO THIS PART
+          <div className='h-[2rem]'>Message 1</div>
+          <div className='h-[2rem]'>Message 1</div>
+          <div className='h-[2rem]'>Message 1</div>
+                  <div className='h-[2rem]'>Message 1</div>
+          <div className='h-[2rem]'>Message 1</div>
+          <div className='h-[2rem]'>Message 1</div>
+          <div className='h-[2rem]'>Message 1</div>
 
-      </div>
+        </div>
 
-      {/* INPUT FIELD */}
-      <div className='flex flex-row bg-green-200 h-[5rem] min-h-[5rem] items-center px-4'>
-        INPUT
+        {/* INPUT FIELD */}
+        <div className='flex flex-row bg-green-200 h-[5rem] min-h-[5rem] items-center px-4'>
+          INPUT
+        </div>
       </div>
-    </div>
+    </>
+    ):(
+      <>
+        {/* =============== NO CHAT SELECTED =================== */}
+        <div className='w-full items-center justify-center flex flex-col'>
+          <img src='/images/pickChat.png'
+            alt='pick a chat'>
+          </img>
+          <h3 className='font-bold text-[1.5rem] mt-9 text-slate-600'>
+            Pick a chat!
+          </h3>
+        </div>
+      </>
+      )
+    }
+
 
   
 
