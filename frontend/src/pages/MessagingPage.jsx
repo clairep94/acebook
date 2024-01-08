@@ -119,10 +119,18 @@ export default function MessagingPage({ navigate, token, setToken, sessionUserID
       {/* MESSAGES */}
       <div className='flex flex-grow flex-col bg-red-50 w-full overflow-scroll px-5'>
         HOW DO I DO THIS PART
+        <div className='h-[2rem]'>Message 1</div>
+        <div className='h-[2rem]'>Message 1</div>
+        <div className='h-[2rem]'>Message 1</div>
+                <div className='h-[2rem]'>Message 1</div>
+        <div className='h-[2rem]'>Message 1</div>
+        <div className='h-[2rem]'>Message 1</div>
+        <div className='h-[2rem]'>Message 1</div>
+
       </div>
 
       {/* INPUT FIELD */}
-      <div className='flex flex-row bg-green-200 h-[5rem] items-center px-4'>
+      <div className='flex flex-row bg-green-200 h-[5rem] min-h-[5rem] items-center px-4'>
         INPUT
       </div>
     </div>
