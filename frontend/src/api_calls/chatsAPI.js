@@ -11,6 +11,7 @@ const fetchChats = async (token, sessionUserID) => {
         })
 
         const chatsData = await response.json();
+        console.log('chats', chatsData)
         return chatsData;
 
     } catch (error) {

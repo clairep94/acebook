@@ -2,18 +2,17 @@ import React, {useEffect, useState, useRef} from 'react'
 import {io} from 'socket.io-client';
 import { fetchChats } from "../api_calls/chatsAPI";
 import ChatSearchBar from '../components/messaging/chat_searchbar/ChatSearchBar';
+import ChatsMenu from '../components/messaging/ChatsMenu';
 
 
 export default function MessagingPage({ navigate, token, setToken, sessionUserID, sessionUser, setSessionUser }) {
 
-  // ============= SESSION USER & TOKEN ====================
+  // ============================= SESSION USER & TOKEN =========================================
+  // see props
 
-
-
-  // ============= CHATS & CURRENT CHAT ==========================
+  // ============================== CHATS & CURRENT CHAT =============================================
   const [chats, setChats] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
-
 
   // ---------- COMPONENT MOUNT: Get SessionUser's chats ------------
   useEffect(() => {
@@ -30,74 +29,49 @@ export default function MessagingPage({ navigate, token, setToken, sessionUserID
   },[])
 
 
-  // ============ CHATSEARCH BAR ==========================
-  const [chatSearchResults, setChatSearchResults] = useState([]);
+  // ====================== SOCKET: Realtime messages, conversations, online users ===============================
+
+  // ------------ Socket setup: -------------------------------
+  const socket = useRef() //menu, chatwindow
+  const [onlineUsers, setOnlineUsers] = useState([]); //menu
+  const [sendMessage, setSendMessage] = useState(null); //chatwindow
+  const [receivedMessage, setReceivedMessage] = useState(null); //chatwindow, menu
+  const [sendNewConversation, setSendNewConversation] = useState(null); //menu
+
+  // Connect to socket.io when users visit the messages page //TODO lift this to app after login?
+  useEffect(()=> {
+      socket.current = io('http://localhost:8800'); // this is the socket port
+      socket.current.emit("new-user-add", sessionUserID); // send the sessionUserID to the socket server
+      socket.current.on('get-users', (users)=>{
+          setOnlineUsers(users)}) // get the onlineUsers, which should now include the sessionUserID
+  }, [sessionUserID])
+
+  // Checks if a certain user in a chat is online (connected to socket.io)
+  // const checkOnlineStatus = (chat) => {
+  //   if (chat) {
+  //     const chatMember = chat.members.find((member) => member._id !== sessionUserID); // find the chatMember
+  //     const online = onlineUsers.find((user) => user.userID === chatMember._id); // check if the chatMember is in the onlineUsers array
+  //     return online ? true : false;
+  //   }
+  // };
+  const checkOnlineStatus = (chat) => {return true}
 
 
-
-  // ============ SOCKET ===========================
-  // Socket setup:
-  const socket = useRef()
-  const [onlineUsers, setOnlineUsers] = useState([]);
-  const [sendMessage, setSendMessage] = useState(null);
-  const [receivedMessage, setReceivedMessage] = useState(null);
-  const [sendNewConversation, setSendNewConversation] = useState(null);
-
-
-  // TODO: After formatting messages non-realtime + checkonlineStatus
-
-
-
-
-  // ======================== JSX FOR COMPONENT =============================================
+  // =============================== JSX FOR COMPONENT ===============================================================
 
   return (
     <div className='w-full flex mb-2 '>
-      {/* MENU - no overflow? */}
-      <div className='min-w-[26rem] max-w-[26rem] shadow-xl border-r-gray-900 flex flex-col z-10 bg-white py-4 px-4 space-y-2'>
-        <h1 className='text-[2rem] font-bold pb-4'>
-          Chats
-        </h1>
-        {/* CHAT SEARCHBAR */}
-        <div className='flex flex-row h-[2.8rem]'>
-          {/* <ChatSearchBar 
-            token={token}
-            setToken={setToken}
-            sessionUserID={sessionUserID}
-            setChats={setChats}
-            chats={chats}
-            setCurrentChat={setCurrentChat}
-            setSendNewConversation={setSendNewConversation}
-            results={chatSearchResults}
-          /> */}
-        </div>
 
-        {/* CHAT CARDS */}
-        <div className='space-y-1 overflow-auto'>
-          {chats.map((chat, index) => (
-            <div id={index} onClick={() => {setCurrentChat(chat)}}
-            className='h-[6rem] w-full rounded-lg bg-blue-50 p-3
-            flex flex-row items-center
-            '
-            >
-              <div className='w-[4.5rem] h-[4.5rem] bg-zinc-300 rounded-full mr-3'>
-                dot if online
-              </div>
-              <div aria-label='partner and last message'>
-                <h4 className='font-semibold text-lg'>
-                  {chat.members[1].firstName} {chat.members[1].lastName}
-                </h4>
-                <p className='text-[#8a8a8a] text-sm'
-                >
-                  Last message shorten a number of ... · 1d
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* ================ LEFT SIDE CHATS MENU ============================== */}
+      <div aria-label='chats menu container' id='chats-menu-container'
+      className='min-w-[26rem] max-w-[26rem] shadow-xl border-r-gray-900 flex flex-col z-10 bg-white py-4 px-4 space-y-2'>
+        <ChatsMenu sessionUserID={sessionUserID} chats={chats} setChats={setChats} currentChat={currentChat} setCurrentChat={setCurrentChat}
+        socket={socket} checkOnlineStatus={checkOnlineStatus} receivedMessage={receivedMessage} 
+        sendMessage={sendMessage} setSendNewConversation={setSendNewConversation}
+        />
       </div>
     
-    {/* ===================== MAIN SECTION ======================== */}
+    {/* ===================== RIGHT CHAT WINDOW ============================== */}
     {currentChat ? (<>
       {/* ============ CHAT SELECTED ======================= */}
       <div className='w-full flex flex-col bg-green-50'>
@@ -139,7 +113,8 @@ export default function MessagingPage({ navigate, token, setToken, sessionUserID
     ):(
       <>
         {/* =============== NO CHAT SELECTED =================== */}
-        <div className='w-full items-center justify-center flex flex-col'>
+        <div aria-label='no chat selected' id='no-chat-window'
+        className='w-full items-center justify-center flex flex-col'>
           <img src='/images/pickChat.png'
             alt='pick a chat'>
           </img>

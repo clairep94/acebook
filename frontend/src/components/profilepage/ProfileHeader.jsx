@@ -57,7 +57,7 @@ const sectionSelectorButtonsContainer = `mx-[2rem]
         {/* PROFILE PICTURE */}
         <img aria-label='profile picture' className={profilePicture} 
           src={`https://picsum.photos/seed/${target._id}/300`}
-          alt='cover'>
+          alt='profile'>
         </img>
 
         {/* NAME & FRIENDS */}

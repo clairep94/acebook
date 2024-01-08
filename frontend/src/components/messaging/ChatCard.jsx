@@ -2,22 +2,53 @@ import React, { useEffect, useState, useRef } from 'react'
 import ProfilePicture from '../user/ProfilePicture';
 
 
-export default function ChatCard({chatData, sessionUserID, online, setCurrentChat}) {
+export default function ChatCard({chat, sessionUserID, online, isCurrentChat, setCurrentChat, index}) {
 
+  // This component shows the full name, profile picture, and whether the user is online
+  // This component gets highlighted if it is the current chat
+  
+  // =========== STATE VARIABLES ==========================
+  const conversationPartner = chat.members.find((user) => user._id !== sessionUserID);
+  
+  // =========== FUNCTION TO SET CURRENT CHAT =================
   const handleClick = () => {
-    console.log(chatData._id)
-    setCurrentChat(chatData)
+    console.log(chat._id)
+    setCurrentChat(chat)
   }
   
+  // TODO this component gets a blue mark and is bolded if there is an unread message
+  // TODO show last message & time ago
+  
 
-  // =========== STATE VARIABLES ==========================
-  const conversationPartner = chatData.members.find((user) => user._id !== sessionUserID);
+  // ========== TW Styling =======================
 
+  const allCards = `
+    h-[5rem] w-full rounded-lg p-3 flex flex-row items-center
+    `
+  const currentChatCols = `
+    bg-blue-50`
+
+  const notCurrentChatCols = `
+    hover:bg-gray-50`
+
+  
 
   // ======================== JSX FOR COMPONENT =============================================
   return (
     <>
-        <div className="flex flex-col items-center " >
+    {/* MAIN CONTAINER */}
+    <div id={index} aria-label={`chat card for ${conversationPartner}`}
+    className={allCards + (isCurrentChat ? currentChatCols : notCurrentChatCols)}>
+      
+      {/* PROFILE PICTURE */}
+      <div className='w-[4.5rem'>
+
+
+      </div>
+      test
+
+    </div>
+        {/* <div className="flex flex-col items-center " >
           <div className='flex flex-row w-full rounded-2xl p-2 pr-6 my-2 hover:curser-pointer hover:bg-[#80808038] group'
             onClick={handleClick}
             >
@@ -38,7 +69,7 @@ export default function ChatCard({chatData, sessionUserID, online, setCurrentCha
                 </div>
             </div>
         <hr style={{width: '85%', border: '0.1px solid #ececec'}}/>
-        </div>
+        </div> */}
     </>
 )
 
