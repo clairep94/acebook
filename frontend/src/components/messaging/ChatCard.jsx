@@ -20,6 +20,19 @@ export default function ChatCard({chat, sessionUserID, online, isCurrentChat, se
   // function for determining if lastMessage is read -> blue dot & bold
 
   const lastMessage = chat.lastMessage
+
+  function shortenString(str, maxLength) {
+      if (str.length > maxLength) {
+          return str.substring(0, maxLength) + '...';
+      }
+      return str;
+  }
+
+  const lastMessageString = lastMessage && (lastMessage.author === sessionUserID ? (
+    `You: ${shortenString(lastMessage.body, 28)}`
+    ) : (
+      shortenString(lastMessage.body, 33)
+    ))
   
   // ============== TW Styling ====================================
 
@@ -66,19 +79,29 @@ export default function ChatCard({chat, sessionUserID, online, isCurrentChat, se
         
         {/* CONVERSATION PARTNER & LAST MESSAGE */}
         <div aria-label='partner and last message'>
+
+          {/* CONVERSATION PARTNER NAME */}
           <h4 className='font-semibold text-lg'>
             {conversationPartner.firstName} {conversationPartner.lastName}
           </h4>
+
+          {/* LAST MESSAGE */}
           <p className='text-sm'>
+
+            {/* LAST MESSAGE W/ STYLING FOR READ/UNREAD */}
             <span className={(lastMessage && (lastMessage.read === false)) ? unreadLastMessageStyle : lastMessageStyle}>
               {lastMessage ? (lastMessage.body) : ('Placeholder: Last message shorten...')}
             </span>
+            {/* RELATIVE DATE STRING */}
             <span className={relDate}>
               {' · 1d'}
             </span>
           </p>
         </div>
-        <div className={unreadMessageDot}></div>
+        
+        {/* LAST MESSAGE NOTIFCATION DOT */}
+        {lastMessage && (lastMessage.read === false) && (<div className={unreadMessageDot}/>)}
+        
       </div>
     </>
 )
