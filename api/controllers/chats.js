@@ -35,6 +35,10 @@ const ChatsController = {
             .populate({
                 path: 'members',
                 select: '_id firstName lastName profilePictureURL'})
+            .populate({
+                path: 'lastMessage',
+                select: 'body author createdAt read'            
+            })
             const token = TokenGenerator.jsonwebtoken(req.user_id); 
             res.status(201).json({ message: 'Successful Inbox In Chats Controller', token, chats: chats }); 
             // res.status(200).json({ message: 'Successful Inbox In Chats Controller', chats: chats });

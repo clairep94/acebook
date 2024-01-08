@@ -10,12 +10,28 @@ const MessagesController = {
         });
         try {
             const result = await newMessage.save()
+            // Populating the new message
             const populatedMessage = await Message.populate(result, {
                 path: 'author',
                 select: '_id firstName lastName profilePictureURL', 
             });
+
+            // TODO add last message to chatsList, this doesn't work for now
+            // Update the lastMessage property of the associated chat for the chatsList preview
+            // const updatedChat = await Chat.findByIdAndUpdate(
+            //     req.body.chatID,
+            //     { $set: { lastMessage: result._id } },
+            //     { new: true }
+            // )
+            // .populate({
+            //     path: 'lastMessage',
+            //     select: 'body author createdAt read'            
+            // });
+            
+
             const token = TokenGenerator.jsonwebtoken(req.user_id) 
-            res.status(201).json({ message: 'Successful New Message in Messages Controller', token:token, newMessage: populatedMessage, });
+            res.status(201).json({ message: 'Successful New Message in Messages Controller', token:token, newMessage: populatedMessage, })
+            // res.status(201).json({ message: 'Successful New Message in Messages Controller', token:token, newMessage: populatedMessage, updatedChat: updatedChat  });
             // res.status(201).json({ message: 'Successful New Message in Messages Controller', newMessage: result });
 
         } catch (error) {

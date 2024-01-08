@@ -2,43 +2,107 @@ import React, { useEffect, useState, useRef } from 'react'
 import ProfilePicture from '../user/ProfilePicture';
 
 
-export default function ChatCard({chatData, sessionUserID, online, setCurrentChat}) {
+export default function ChatCard({chat, sessionUserID, online, isCurrentChat, setCurrentChat, index}) {
 
-  const handleClick = () => {
-    console.log(chatData._id)
-    setCurrentChat(chatData)
-  }
+  // This component shows the full name, profile picture, and whether the user is online
+  // This component gets highlighted if it is the current chat
   
+  const conversationPartner = chat.members.find((user) => user._id !== sessionUserID);
+  
+  // =========== FUNCTION TO SET CURRENT CHAT =================
+  const handleClick = () => {
+    console.log(chat._id)
+    setCurrentChat(chat)
+  }
+  // TODO this component gets a blue mark and is bolded if there is an unread message
+  // TODO show last message & time ago
+  // function for determining relative time ago
+  // function for determining if lastMessage is read -> blue dot & bold
 
-  // =========== STATE VARIABLES ==========================
-  const conversationPartner = chatData.members.find((user) => user._id !== sessionUserID);
+  const lastMessage = chat.lastMessage
 
+  function shortenString(str, maxLength) {
+      if (str.length > maxLength) {
+          return str.substring(0, maxLength) + '...';
+      }
+      return str;
+  }
+
+  const lastMessageString = lastMessage && (lastMessage.author === sessionUserID ? (
+    `You: ${shortenString(lastMessage.body, 28)}`
+    ) : (
+      shortenString(lastMessage.body, 33)
+    ))
+  
+  // ============== TW Styling ====================================
+
+  const allCards = `
+    h-[5.5rem] w-full rounded-lg p-3 flex flex-row items-center
+    `
+  const currentChatCols = `
+    bg-blue-50`
+
+  const notCurrentChatCols = `
+    hover:bg-gray-100`
+
+  const profilePicture = `w-[4rem] h-[4rem] bg-zinc-300 rounded-full mr-3 
+  border border-white border-[0.2rem] shadow-md `
+
+  const notificationDot = `
+    absolute bottom-0 right-3 w-[1.2rem] h-[1.2rem] bg-lime-500 rounded-full border-white border-[0.2rem]
+  `;
+
+  const unreadMessageDot =`w-[0.8rem] h-[0.8rem] bg-blue-500 rounded-full translate-x-[21.8rem] absolute `
+  const lastMessageStyle = `text-[#8a8a8a]`
+  const unreadLastMessageStyle = `font-bold text-black`
+  const relDate = `text-[#8a8a8a]`
+  
 
   // ======================== JSX FOR COMPONENT =============================================
   return (
     <>
-        <div className="flex flex-col items-center " >
-          <div className='flex flex-row w-full rounded-2xl p-2 pr-6 my-2 hover:curser-pointer hover:bg-[#80808038] group'
-            onClick={handleClick}
-            >
-                <div className='w-[3.3rem] h-[3.3rem] mr-3 relative'>
-                  {online && 
-                  <div className='bg-lime-400 w-4 h-4 rounded-full absolute left-9 bottom-0 '
-                  />}
-                  <ProfilePicture id={conversationPartner._id} name={conversationPartner.firstName + ` ` + conversationPartner.lastName}/>
-                </div>
-                <div className='flex flex-col justify-center'>
-                    <span className='text-md font-medium translate-y-[0.35rem] text-#textDarkGrey'>
-                      {`${conversationPartner.firstName} ${conversationPartner.lastName}`}
-                    </span>
-                    <span className='text-[13px]'
-                      style={{color: "grey"}}>
-                      {online? "Active Now" : "Offline"}
-                    </span>
-                </div>
-            </div>
-        <hr style={{width: '85%', border: '0.1px solid #ececec'}}/>
+      {/* MAIN CONTAINER */}
+      <div id={index} onClick={() => {setCurrentChat(chat)}}
+      className={allCards + (isCurrentChat ? currentChatCols : notCurrentChatCols)}>
+        
+        <div className='relative'>
+          {/* ONLINE DOT */}
+          {online &&
+          <div className={notificationDot}/>
+          }
+          {/* PROFILE PICTURE */}
+          <img aria-label='profile picture' alt='profile'
+          src={`https://picsum.photos/seed/${conversationPartner._id}/300`}
+          className={profilePicture}>
+          </img>
         </div>
+        
+        {/* CONVERSATION PARTNER & LAST MESSAGE */}
+        <div aria-label='partner and last message'>
+
+          {/* CONVERSATION PARTNER NAME */}
+          <h4 className='font-semibold text-lg'>
+            {conversationPartner.firstName} {conversationPartner.lastName}
+          </h4>
+
+          {/* LAST MESSAGE */}
+          <p className='text-sm'>
+
+            {/* LAST MESSAGE W/ STYLING FOR READ/UNREAD */}
+            <span className={(lastMessage && (lastMessage.read === false)) ? unreadLastMessageStyle : lastMessageStyle}>
+              {lastMessage ? (lastMessage.body) : ('Placeholder: Last message shorten...')}
+            </span>
+            {/* RELATIVE DATE STRING */}
+            <span className={relDate}>
+              {' · 1d'}
+            </span>
+          </p>
+        </div>
+        
+        {/* LAST MESSAGE NOTIFCATION DOT */}
+        {lastMessage && (lastMessage.read === false) && (<div className={unreadMessageDot}/>)}
+        
+      </div>
     </>
 )
 

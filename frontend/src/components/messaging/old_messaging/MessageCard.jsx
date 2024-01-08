@@ -3,7 +3,7 @@ import ProfilePicture from '../user/ProfilePicture';
 import { convertRelativeDateTimeString, formatFullDateString } from '../../utilities/GetTimestamp';
 
 
-export default function MessageCard({message, sessionUserID, index}) {
+export default function MessageCard({message, sessionUserID}) {
   
   const isOwn = (message.author._id === sessionUserID)
   
@@ -26,7 +26,7 @@ export default function MessageCard({message, sessionUserID, index}) {
 
   // ======================== JSX FOR COMPONENT =============================================
   return (
-    <div className='flex flex-row p-0 mb-2 relative group' id={index}>
+    <div className='flex flex-row p-0 mb-2 relative group'>
       {/* PROFILE PICTURE - OTHER */}
       {!isOwn && (
         <div className={profilePicStyle + 'left-0 bottom-0'}>

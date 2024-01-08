@@ -1,19 +1,20 @@
 import React, {useState} from 'react'
-import SearchInput from './SearchInput';
-import SearchResultList from './SearchResultList';
-import { allUsers } from '../../api_calls/usersAPI';
+import ChatSearchInput from './ChatSearchInput';
+import ChatSearchResultList from './ChatSearchResultList';
+import { allUsers } from '../../../api_calls/usersAPI';
 
 
-export default function SearchBar({navigate, token, setToken}) {
+export default function ChatSearchBar({ 
+        navigate, token, setToken, sessionUserID,
+        chatSearchResults, setChatSearchResults,
+        setCurrentChat, setSendNewConversation,
+        chats, setChats 
+    }) {
+
+
     const [input, setInput] = useState('');
-    const [results, setResults] = useState([]);
 
-    // =========== GO TO SEARCH PAGE =========================
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // TODO: Search page and enter
-        console.log('Search submitted!');
-    };
+
 
     // =========== GET ALL USERS AS CLIENT TYPES INTO SEARCH BAR =========================
     // currently using allUsers method -> prefilter instead?
@@ -31,7 +32,7 @@ export default function SearchBar({navigate, token, setToken}) {
                     fullName.toLowerCase().includes(value.toLowerCase()) //search value is partially included in the user.fullName
                 )
             });
-            setResults(results);
+            setChatSearchResults(results);
             })
         }
 
@@ -48,16 +49,21 @@ export default function SearchBar({navigate, token, setToken}) {
 
     return (
         <div className='relative'>
-            <SearchInput 
+            <ChatSearchInput 
                 searchUsers={searchUsers}
                 handleChange={handleChange}
-                handleSubmit={handleSubmit}
                 input={input}
             />
             <div className='absolute w-full'>
-                <SearchResultList 
-                    navigate={navigate} 
-                    results={results}
+                <ChatSearchResultList
+                    token={token}
+                    setToken={setToken}
+                    sessionUserID={sessionUserID}
+                    setChats={setChats}
+                    chats={chats}
+                    setCurrentChat={setCurrentChat}
+                    setSendNewConversation={setSendNewConversation}
+                    results={chatSearchResults}
                 />
             </div>
         </div>

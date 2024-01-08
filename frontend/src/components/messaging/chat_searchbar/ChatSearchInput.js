@@ -2,14 +2,13 @@ import React, {useState} from 'react';
 import { FiSearch } from "react-icons/fi";
 
 
-export default function SearchInput({ searchUsers, input, handleChange, handleSubmit}) {
+export default function ChatSearchInput({ input, handleChange}) {
 
     // ========= JSX OF COMPONENT UI ==============================
     return (
         <div>
             <form aria-label='searchbar input'
-                className='relative'
-                onSubmit={handleSubmit}>
+                className='relative'>
                 {/* INPUT FIELD */}
                 <input
                     type='text'
@@ -31,7 +30,6 @@ export default function SearchInput({ searchUsers, input, handleChange, handleSu
                 <button type="submit"
                     aria-label="Submit search button"
                     id="submit-search-button"
-                    onClick={handleSubmit}
                     className='font-medium rounded-full text-lg p-[0.5rem] text-center
                     text-gray-400 hover:text-gray-500 hover:bg-slate-100
                     dark:text-gray-400 dark:hover:text-gray-500

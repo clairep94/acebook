@@ -16,6 +16,7 @@ import getSessionUserID from '../../utilities/GetSessionUserID';
 
 import ProfilePage from '../../pages/ProfilePage'
 import FriendsPage from '../../pages/FriendsPage';
+import MessagingPage from '../../pages/MessagingPage';
 
 
 
@@ -84,6 +85,11 @@ const ProtectedRoutes = ({navigate}) => {
         {/* ------  FRIENDS PAGE ------  */}
         <Route path="/friends"  element={ 
             <FriendsPage navigate={navigate} token={token} setToken={setToken} 
+          sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>}/>
+
+        {/* ------  MESSAGES PAGE ------  */}
+        <Route path="/messages"  element={ 
+          <MessagingPage navigate={navigate} token={token} setToken={setToken} 
           sessionUserID={sessionUserID} sessionUser={sessionUser} setSessionUser={setSessionUser}/>}/>
 
 
