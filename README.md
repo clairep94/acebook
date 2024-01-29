@@ -1,9 +1,39 @@
 # Acebook - Facebook Clone
 
-Acebook is a Facebook clone project, showcasing use of the MERN stack, Socket.io and Tailwind, created at Makers Academy.
-This version is a personal extension of [Acebook Team Griffins](https://github.com/clairep94/acebook-team-griffins). It adds real-time messaging and notifications through the use of websockets, as well as modern component design through Tailwind CSS.
+Acebook is a Facebook clone project, showcasing use of the MERN stack, Socket.io and Tailwind, created at Makers Academy. <br/>
+This version is a **WIP personal extension of [Acebook Team Griffins](https://github.com/clairep94/acebook-team-griffins)** with a focus on demonstrating modern UI principles and FE methods. <br/>
+It adds real-time messaging and notifications through the use of websockets, as well as modern component design through Tailwind CSS.
 
 Users can sign up, log in, create posts with images and/or text, interact with posts, add friends, send messages, and receive real-time notifications.
+All UI designs are responsive and aim to follow Facebook's early 2024 UI 1-to-1.
+
+## Screenshots:
+
+### ✅ Landing Page:
+![Screenshot 2024-01-06 at 21 51 10](https://github.com/clairep94/acebook/assets/128436909/fa2da83d-4d00-4c18-bca6-d6fa2d97e26c)
+
+![Screenshot 2024-01-06 at 21 51 10](https://github.com/clairep94/acebook/assets/128436909/cba523c5-0be1-49c9-96c2-d73adb737b56)
+
+
+### ✅ Navbar with Live Searchbar:
+
+![Screenshot 2024-01-06 at 21 51 23](https://github.com/clairep94/acebook/assets/128436909/e9f9ff91-c41a-4a1f-95e5-be6e14b3180f)
+
+![Screenshot 2024-01-06 at 21 51 30](https://github.com/clairep94/acebook/assets/128436909/07c78e19-cbba-4ddb-ae77-5c65f262c684)
+
+### ✅ Friends & Friend Requests Page:
+
+<img width="1552" alt="Screenshot 2024-01-07 at 20 59 03" src="https://github.com/clairep94/acebook/assets/128436909/75270f9f-3655-4095-8bdd-3f905b756126">
+
+<img width="1552" alt="Screenshot 2024-01-07 at 20 59 08" src="https://github.com/clairep94/acebook/assets/128436909/b6b43412-e125-4250-adb2-2005bd4746b8">
+
+
+### User Page - WIP:
+
+<img width="1552" alt="Screenshot 2024-01-07 at 11 04 21" src="https://github.com/clairep94/acebook/assets/128436909/6178f17b-fe46-4be5-bbf5-8523bf9fdbcd">
+
+
+<hr/>
 
 ## Installing Project Dependencies:
 
@@ -87,7 +117,7 @@ You should now be able to open your browser and go to `http://localhost:3000/`
 ```
 
 
-
+<!--
 # How to run automated tests
 
 The automated tests run by sending actual HTTP requests to the API. Therefore, before anything, you'll need to start the backend server in test mode (so that it connects to the test DB).
@@ -135,3 +165,4 @@ Then run the tests in a new terminal session
 
 ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm run test
 ```
+-->
