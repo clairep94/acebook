@@ -10,7 +10,7 @@ All UI designs are responsive and aim to follow Facebook's early 2024 UI 1-to-1.
 ## Screenshots:
 
 ### ✅ Landing Page:
-![Screenshot 2024-01-06 at 21 51 10](https://github.com/clairep94/acebook/assets/128436909/fa2da83d-4d00-4c18-bca6-d6fa2d97e26c)
+![Screenshot 2024-01-06 at 21 51 06 (1)](https://github.com/clairep94/acebook/assets/128436909/9e6d4f1d-3115-491f-8e1b-7fa1d38f7d74)
 
 ![Screenshot 2024-01-06 at 21 51 10](https://github.com/clairep94/acebook/assets/128436909/cba523c5-0be1-49c9-96c2-d73adb737b56)
 
